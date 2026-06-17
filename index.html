@@ -393,7 +393,7 @@
     <!-- JavaScript Execution Logic -->
     <script>
         /* ==================================================
-           SISTEM CONSTAT UTAMA (DIPINDAHKAN KE ATAS SKRIP)
+           SISTEM CONSTAT UTAMA (DIISYTIHARKAN SEKALI SAHAJA)
            ================================================== */
         const kidNames = ["Ali", "Siti", "Abu", "Raju", "Mei Ling", "Zamil", "Aminah", "Sarah", "Chong", "Suresh", "Kumar", "Fatimah", "Ahmad", "Aisha", "David", "Viknesh", "Hana", "Zul"];
         
@@ -912,7 +912,7 @@
                             text = `${a} sen + ${b} sen = ?`;
                             explanation = `${a} sen ditambah dengan ${b} sen bersamaan dengan ${rawAns} sen.`;
                         } else {
-                            text = `${name1} membeli gula-gula berharga ${a} sen dan pelekat berharga ${b} sen. Berapakah jumlah yang perlu dibayar?`;
+                            text = `${name1} membeli gula-gula berharga ${a} sen and pelekat berharga ${b} sen. Berapakah jumlah yang perlu dibayar?`;
                             explanation = `Tambahkan harga kedua-dua barang: ${a} sen + ${b} sen = ${rawAns} sen.`;
                         }
                         answer = `${rawAns} sen`;
@@ -1011,51 +1011,37 @@
                         text = `Hitung hasil bahagi ${prod} dengan ${sifir}.`;
                         explanation = `Apabila ${prod} dibahagikan dengan ${sifir}, hasilnya ialah ${rawAns}.`;
                     } else if (qPattern === 2) {
-                        text = `${name1} mempunyai ${prod} ${penjodoh} ${item} dan ingin berkongsi sama banyak dengan ${sifir} orang kawannya. Berapakah kuantiti bagi setiap kawan?`;
-                        explanation = `Operasi bahagi digunakan untuk perkongsian sama banyak: ${prod} ÷ ${sifir} = ${rawAns}.`;
+                        text = `Kongsi ${prod} biji guli sama rata kepada ${sifir} orang anak. Berapa guli setiap anak dapat?`;
+                        explanation = `Jumlah guli dibahagikan sama rata: ${prod} ÷ ${sifir} = ${rawAns}.`;
                     } else {
-                        text = `Apakah nombor yang tertinggal dalam kotak? \n\n ${prod} ÷ [ ] = ${sifir}`;
-                        answer = `${a}`;
-                        rawAns = a;
-                        explanation = `Gunakan hubungan songsang darab dan bahagi: ${prod} ÷ ${sifir} = ${a}.`;
+                        text = `Apakah nombor dalam petak kosong? ${prod} ÷ [ ] = ${sifir}`;
+                        explanation = `Untuk mengisi petak kosong pembahagian: ${prod} ÷ ${sifir} = ${rawAns}.`;
                     }
-                    if (answer === "") answer = `${rawAns}`;
+                    answer = `${rawAns}`;
                 } else if (topic === 'masa') {
                     let jam = randInt(1, 11);
-                    if (qPattern % 2 === 0) {
-                        text = `Jarum pendek berada di antara angka ${jam} dengan ${jam+1}, manakala jarum panjang menunjuk tepat ke angka 6. Apakah waktu itu?`;
-                        answer = `Pukul ${jam} setengah`;
-                        options = [`Pukul ${jam} setengah`, `Pukul ${jam} tepat`, `Pukul ${jam+1} tepat`, `Pukul ${jam+1} setengah`];
-                        explanation = `Jarum panjang menunjuk ke angka 6 mewakili 30 minit (setengah jam). Kerana jarum pendek berada di antara angka ${jam} dengan ${jam+1}, waktu tersebut ialah Pukul ${jam} setengah.`;
-                    } else {
-                        text = `Tulis waktu "Pukul ${jam} setengah" dalam bentuk digital.`;
-                        answer = `${jam}:30`;
-                        rawAns = jam;
-                        explanation = `Waktu setengah jam ditunjukkan dengan angka minit ':30'. Maka, ia ditulis ${jam}:30.`;
-                        options = [`${jam}:30`, `${jam}:00`, `${jam+1}:30`, `${jam}:15`];
-                    }
+                    text = `Jarum pendek berada di antara angka ${jam} dengan ${jam+1}, manakala jarum panjang menunjuk tepat ke angka 6. Apakah waktu itu?`;
+                    answer = `Pukul ${jam} setengah`;
+                    options = [`Pukul ${jam} setengah`, `Pukul ${jam} tepat`, `Pukul ${jam+1} tepat`, `Pukul ${jam+1} setengah`];
+                    explanation = `Jarum panjang di angka 6 bermakna setengah jam (30 minit). Jadi ia adalah Pukul ${jam} setengah.`;
                 } else if (topic === 'pecahan') {
-                    if (qPattern === 1) {
-                        text = `Nyatakan 'satu per dua' dalam bentuk pecahan.`;
-                        answer = "1/2";
-                        options = ["1/2", "1/4", "3/4", "2/3"];
-                    } else if (qPattern === 2) {
-                        text = `Tulis 'satu per empat' dalam bentuk pecahan.`;
-                        answer = "1/4";
-                        options = ["1/4", "1/2", "3/4", "1/3"];
-                    } else {
-                        text = `Nyatakan 'tiga per empat' dalam bentuk pecahan.`;
-                        answer = "3/4";
-                        options = ["3/4", "1/2", "1/4", "2/3"];
-                    }
+                    let opts = [
+                        { q: "Nyatakan 'satu per dua' dalam bentuk pecahan.", a: "1/2", o: ["1/2", "1/4", "3/4", "2/3"] },
+                        { q: "Nyatakan 'satu per empat' dalam bentuk pecahan.", a: "1/4", o: ["1/4", "1/2", "3/4", "1/3"] },
+                        { q: "Nyatakan 'tiga per empat' dalam bentuk pecahan.", a: "3/4", o: ["3/4", "1/2", "1/4", "2/3"] }
+                    ];
+                    let chosen = opts[randInt(0, opts.length - 1)];
+                    text = chosen.q;
+                    answer = chosen.a;
+                    options = chosen.o;
                     explanation = `Pecahan ditulis dengan meletakkan pengangka di atas dan penyebut di bawah.`;
                 } else if (topic === 'wang') {
-                    let a = randInt(20, 99);
-                    let b = randInt(5, a - 5);
+                    let a = randInt(10, 90);
+                    let b = randInt(5, a - 2);
                     rawAns = a - b;
-                    text = `${name1} mempunyai RM${a}. Dia membelanjakan RM${b} untuk membeli buku cerita. Hitung baki wang ${name1}.`;
+                    text = `Siti mempunyai RM${a}. Dia membelanjakan RM${b}. Hitung baki wang Siti.`;
                     answer = `RM${rawAns}`;
-                    explanation = `Operasi tolak baki wang: RM${a} - RM${b} = RM${rawAns}. Baki wang ${name1} ialah RM${rawAns}.`;
+                    explanation = `Selesaikan menggunakan operasi tolak: RM${a} - RM${b} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else {
@@ -1081,7 +1067,7 @@
                     answer = `${rawAns}`;
                     explanation = `Beza antara ${a} dengan ${b} ialah ${rawAns}.`;
                 } else if (topic === 'darab') {
-                    let a = randInt(10, 99);
+                    let a = randInt(12, 99);
                     let b = randInt(2, 9);
                     rawAns = a * b;
                     text = `Hitung: ${a} × ${b}`;
@@ -1100,7 +1086,7 @@
                     let a = randInt(1, b - 1);
                     text = `Nyatakan pecahan bagi ${a} bahagian daripada keseluruhan ${b} bahagian yang sama besar.`;
                     answer = `${a}/${b}`;
-                    explanation = `Bahagian terpilih mewakili pengangka (${a}) manakala keseluruhan bahagian mewakili penyebut (${b}). Maka, pecahannya ditulis sebagai ${a}/${b}.`;
+                    explanation = `Kawasan berlorek mewakili pengangka (${a}) manakala keseluruhan bahagian mewakili penyebut (${b}). Maka, pecahannya ialah ${a}/${b}.`;
                     options = [`${a}/${b}`, `${b - a}/${b}`, `1/${b}`, `${a}/${b + 1}`];
                 } else if (topic === 'wang') {
                     let a = randInt(50, 150);
