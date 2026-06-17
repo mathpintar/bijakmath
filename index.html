@@ -411,22 +411,7 @@
 
         // Senarai pembolehubah rawak untuk keunikan Penyelesaian Masalah secara infiniti
         const kidNames = ["Ali", "Siti", "Abu", "Raju", "Mei Ling", "Zamil", "Aminah", "Sarah", "Chong", "Suresh", "Kumar", "Fatimah"];
-        
-        // Memetakan barangan rawak berserta penjodoh bilangan (unit) yang tepat mengikut bahasa Melayu standard
-        const funItems = [
-            { name: "guli", unit: "biji" },
-            { name: "pemadam", unit: "ketul" },
-            { name: "pensel", unit: "batang" },
-            { name: "buku", unit: "buah" },
-            { name: "gula-gula", unit: "biji" },
-            { name: "biskut", unit: "keping" },
-            { name: "buah epal", unit: "biji" },
-            { name: "setem", unit: "keping" },
-            { name: "balon", unit: "biji" },
-            { name: "pelekat", unit: "keping" },
-            { name: "gasing", unit: "biji" }
-        ];
-        
+        const funItems = ["guli", "pemadam", "pensel", "buku", "gula-gula", "biskut", "buah epal", "setem", "balon", "pelekat", "gasing"];
         const funPlaces = ["kedai runcit", "kebun bapa", "bilik kelas", "perpustakaan sekolah", "kedai buku", "kantin sekolah"];
 
         window.onload = function() {
@@ -784,65 +769,49 @@
         function generateProblemSolvingText(year, type) {
             const name1 = kidNames[randInt(0, kidNames.length - 1)];
             const name2 = kidNames[(kidNames.indexOf(name1) + 1) % kidNames.length];
-            const itemObj = funItems[randInt(0, funItems.length - 1)];
-            const item = itemObj.name;
-            const penjodoh = itemObj.unit;
+            const item = funItems[randInt(0, funItems.length - 1)];
             const place = funPlaces[randInt(0, funPlaces.length - 1)];
 
             if (type === 'tambah') {
                 let a = randInt(5, 50);
                 let b = randInt(5, 40);
                 return {
-                    text: `${name1} membeli ${a} ${penjodoh} ${item} di ${place}. Kemudian, dia membeli ${b} ${penjodoh} ${item} lagi. Berapakah jumlah ${item} ${name1} semuanya?`,
+                    text: `${name1} membeli ${a} biji ${item} di ${place}. Kemudian, dia membeli lagi ${b} biji ${item}. Berapakah jumlah ${item} ${name1} sekarang?`,
                     answer: `${a + b}`,
                     rawAns: a + b,
-                    explanation: `Selesaikan dengan menggunakan operasi tambah: ${a} + ${b} = ${a + b}.`
+                    explanation: `Kita selesaikan dengan operasi tambah: ${a} + ${b} = ${a + b}.`
                 };
             } else if (type === 'tolak') {
                 let a = randInt(30, 99);
                 let b = randInt(5, a - 5);
                 return {
-                    text: `${name1} mempunyai ${a} ${penjodoh} ${item} di dalam kotak. Dia memberikan ${b} ${penjodoh} ${item} kepada ${name2}. Berapakah baki ${item} ${name1}?`,
+                    text: `${name1} mempunyai ${a} biji ${item} di dalam kotak. Dia memberikan ${b} biji ${item} kepada ${name2}. Berapakah baki ${item} ${name1}?`,
                     answer: `${a - b}`,
                     rawAns: a - b,
-                    explanation: `Selesaikan dengan operasi tolak untuk mencari baki barang yang tinggal: ${a} - ${b} = ${a - b}.`
+                    explanation: `Kita selesaikan dengan menolak barang yang diberikan: ${a} - ${b} = ${a - b}.`
                 };
             } else if (type === 'darab') {
                 let a = randInt(2, 9);
                 let b = randInt(2, 10);
                 return {
-                    text: Di ${place}, terdapat ${a} buah bekas. Setiap bekas mempunyai ${b} ${penjodoh} ${item}. Berapakah jumlah keseluruhan ${item}?`,
+                    text: `Di ${place}, terdapat ${a} buah bekas. Setiap bekas mempunyai ${b} biji ${item}. Berapakah jumlah ${item} semuanya?`,
                     answer: `${a * b}`,
                     rawAns: a * b,
-                    explanation: `Selesaikan dengan operasi darab bagi mengira kumpulan yang sama banyak: ${a} × ${b} = ${a * b}.`
+                    explanation: `Setiap bekas mengandungi bilangan yang sama, selesaikan secara pendaraban: ${a} × ${b} = ${a * b}.`
                 };
             } else if (type === 'bahagi') {
                 let b = randInt(2, 6);
                 let ans = randInt(2, 10);
                 let total = b * ans;
                 return {
-                    text: `${name1} ingin membahagikan ${total} ${penjodoh} ${item} sama rata kepada ${b} orang rakannya termasuk ${name2}. Berapakah ${penjodoh} ${item} yang akan diterima oleh setiap orang?`,
+                    text: `${name1} ingin membahagikan ${total} biji ${item} sama rata kepada ${b} orang rakannya termasuk ${name2}. Berapakah biji ${item} yang akan diterima oleh setiap orang?`,
                     answer: `${ans}`,
                     rawAns: ans,
-                    explanation: `Selesaikan dengan membahagikan kuantiti kepada bilangan kumpulan: ${total} ÷ ${b} = ${ans}.`
+                    explanation: `Jumlah guli dibahagikan sama rata: ${total} ÷ ${b} = ${ans}.`
                 };
             }
-            return { text: `Siti mempunyai 5 guli. Berapakah jumlahnya?`, answer: "5", rawAns: 5, explanation: "Tiada" };
+            return { text: `Siti ada 5 guli. Berapa jumlahnya?`, answer: "5", rawAns: 5, explanation: "Tiada" };
         }
-
-        const funItems = [
-            { name: "guli", unit: "biji" },
-            { name: "pemadam", unit: "biji" },
-            { name: "pensel", unit: "batang" },
-            { name: "buku", unit: "buah" },
-            { name: "gula-gula", unit: "biji" },
-            { name: "biskut", unit: "keping" },
-            { name: "buah epal", unit: "biji" },
-            { name: "setem", unit: "keping" },
-            { name: "balon", unit: "biji" },
-            { name: "pelekat", unit: "keping" },
-            { name: "gasing", unit: "biji" }
-        ];
 
         function getBaseQuestion(year, topic) {
             let text = "";
@@ -859,24 +828,24 @@
                     let a = randInt(1, 15);
                     let b = randInt(1, 20 - a);
                     rawAns = a + b;
-                    text = `Hitung: ${a} + ${b}`;
+                    text = `${a} + ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Apabila ${b} ditambah kepada ${a}, hasilnya ialah ${rawAns}.`;
+                    explanation = `Kira dari ${a} dan tambahkan ${b} menjadikannya ${rawAns}.`;
                 } else if (topic === 'tolak') {
                     let a = randInt(5, 20);
                     let b = randInt(1, a);
                     rawAns = a - b;
-                    text = `Hitung: ${a} - ${b}`;
+                    text = `${a} - ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Apabila ${b} ditolak daripada ${a}, bakinya ialah ${rawAns}.`;
+                    explanation = `Keluarkan ${b} daripada kumpulan ${a} meninggalkan baki ${rawAns}.`;
                 } else if (topic === 'wang') {
                     if (Math.random() > 0.5) {
                         let a = randInt(1, 10);
                         let b = randInt(1, 10);
                         rawAns = a + b;
-                        text = `RM${a} + RM${b} = ?`;
+                        text = `RM${a} + RM${b}`;
                         answer = `RM${rawAns}`;
-                        explanation = `Jumlah bagi RM${a} dan RM${b} ialah RM${rawAns}.`;
+                        explanation = `RM${a} ditambah RM${b} ialah RM${rawAns}.`;
                         unit = "RM";
                         unitPosition = "prefix";
                     } else {
@@ -884,18 +853,18 @@
                         let a = values[randInt(0, 4)];
                         let b = values[randInt(0, 4)];
                         rawAns = a + b;
-                        text = `${a} sen + ${b} sen = ?`;
+                        text = `${a} sen + ${b} sen`;
                         answer = `${rawAns} sen`;
-                        explanation = `${a} sen ditambah dengan ${b} sen bersamaan dengan ${rawAns} sen.`;
+                        explanation = `${a} sen tambah ${b} sen bersamaan ${rawAns} sen.`;
                         unit = " sen";
                         unitPosition = "suffix";
                     }
                 } else if (topic === 'masa') {
                     let jam = randInt(1, 12);
-                    text = `Jarum pendek menunjuk tepat ke angka ${jam} manakala jarum panjang menunjuk tepat ke angka 12. Pukul berapakah itu?`;
+                    text = `Apabila jarum pendek menunjuk ke angka ${jam} dan jarum panjang menunjuk tepat ke angka 12, waktu itu ditulis...`;
                     answer = `Pukul ${jam}`;
                     rawAns = jam;
-                    explanation = `Jarum pendek menunjukkan jam manakala jarum panjang di angka 12 menunjukkan waktu tepat. Maka, waktu tersebut ialah Pukul ${jam}.`;
+                    explanation = `Jarum pendek menandakan waktu jam. Kerana jarum panjang berada di 12, ia adalah waktu tepat iaitu Pukul ${jam}.`;
                     unit = "Pukul ";
                     unitPosition = "prefix";
                 } else {
@@ -911,42 +880,42 @@
                     let a = randInt(10, 60);
                     let b = randInt(10, 39);
                     rawAns = a + b;
-                    text = `Hitung: ${a} + ${b}`;
+                    text = `${a} + ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Hasil tambah bagi ${a} dan ${b} ialah ${rawAns}.`;
+                    explanation = `Jumlah nilai bagi ${a} ditambah ${b} ialah ${rawAns}.`;
                 } else if (topic === 'tolak') {
                     let a = randInt(40, 100);
                     let b = randInt(5, a - 5);
                     rawAns = a - b;
-                    text = `Hitung: ${a} - ${b}`;
+                    text = `${a} - ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Apabila ${b} ditolak daripada ${a}, bakinya ialah ${rawAns}.`;
+                    explanation = `Baki pengeluaran ${b} daripada ${a} ialah ${rawAns}.`;
                 } else if (topic === 'darab') {
                     let sifir = [2, 5, 10][randInt(0, 2)];
                     let a = randInt(1, 10);
                     rawAns = a * sifir;
-                    text = `Kira hasil darab ${a} dengan ${sifir}.`;
+                    text = `${a} × ${sifir}`;
                     answer = `${rawAns}`;
-                    explanation = `Apabila ${a} didarabkan dengan ${sifir}, hasilnya ialah ${rawAns}.`;
+                    explanation = `${a} kumpulan sifir ${sifir} memberikan ${rawAns}.`;
                 } else if (topic === 'bahagi') {
                     let sifir = [2, 5, 10][randInt(0, 2)];
                     let a = randInt(1, 10);
                     let prod = a * sifir;
                     rawAns = a;
-                    text = `Hitung hasil bahagi ${prod} dengan ${sifir}.`;
+                    text = `${prod} ÷ ${sifir}`;
                     answer = `${rawAns}`;
-                    explanation = `Apabila ${prod} dibahagikan dengan ${sifir}, hasilnya ialah ${rawAns}.`;
+                    explanation = `Jika ${prod} dibahagikan kepada kumpulan ${sifir}-sifir, jawapannya ialah ${rawAns}.`;
                 } else if (topic === 'masa') {
                     let jam = randInt(1, 11);
-                    text = `Jarum pendek berada di antara angka ${jam} dengan ${jam+1}, manakala jarum panjang menunjuk tepat ke angka 6. Apakah waktu itu?`;
+                    text = `Jarum pendek berada di antara angka ${jam} dan ${jam+1}. Jarum panjang menunjukkan angka 6. Waktu tersebut ialah...`;
                     answer = `Pukul ${jam} setengah`;
                     options = [`Pukul ${jam} setengah`, `Pukul ${jam} tepat`, `Pukul ${jam+1} tepat`, `Pukul ${jam+1} setengah`];
                     explanation = `Jarum panjang di angka 6 bermakna setengah jam (30 minit). Jadi ia adalah Pukul ${jam} setengah.`;
                 } else if (topic === 'pecahan') {
                     let opts = [
-                        { q: "Nyatakan 'satu per dua' dalam bentuk pecahan.", a: "1/2", o: ["1/2", "1/4", "3/4", "2/3"] },
-                        { q: "Nyatakan 'satu per empat' dalam bentuk pecahan.", a: "1/4", o: ["1/4", "1/2", "3/4", "1/3"] },
-                        { q: "Nyatakan 'tiga per dua' dalam bentuk pecahan.", a: "3/2", o: ["3/2", "2/3", "3/4", "1/2"] }
+                        { q: "Nyatakan pecahan satu per dua dalam bentuk nombor.", a: "1/2", o: ["1/2", "1/4", "3/4", "2/3"] },
+                        { q: "Apakah bentuk nombor bagi pecahan satu per empat?", a: "1/4", o: ["1/4", "1/2", "3/4", "1/3"] },
+                        { q: "Tiga perdua ditulis dalam bentuk pecahan ialah...", a: "3/2", o: ["3/2", "2/3", "3/4", "1/2"] }
                     ];
                     let chosen = opts[randInt(0, opts.length - 1)];
                     text = chosen.q;
@@ -957,9 +926,9 @@
                     let a = randInt(10, 90);
                     let b = randInt(5, a - 2);
                     rawAns = a - b;
-                    text = `Siti mempunyai RM${a}. Dia membelanjakan RM${b}. Hitung baki wang Siti.`;
+                    text = `Siti mempunyai RM${a} dan berbelanja sebanyak RM${b}. Kira baki wang Siti.`;
                     answer = `RM${rawAns}`;
-                    explanation = `Selesaikan menggunakan operasi tolak: RM${a} - RM${b} = RM${rawAns}.`;
+                    explanation = `RM${a} - RM${b} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else {
@@ -974,54 +943,54 @@
                     let a = randInt(100, 500);
                     let b = randInt(100, 499);
                     rawAns = a + b;
-                    text = `Hitung: ${a} + ${b}`;
+                    text = `${a} + ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Hasil tambah bagi ${a} dan ${b} ialah ${rawAns}.`;
+                    explanation = `Pengiraan ${a} tambah ${b} bersamaan dengan ${rawAns}.`;
                 } else if (topic === 'tolak') {
                     let a = randInt(500, 999);
                     let b = randInt(100, a - 50);
                     rawAns = a - b;
-                    text = `Hitung: ${a} - ${b}`;
+                    text = `${a} - ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Hasil tolak ${b} daripada ${a} ialah ${rawAns}.`;
+                    explanation = `Beza nilai ${a} dikurangkan sebanyak ${b} ialah ${rawAns}.`;
                 } else if (topic === 'darab') {
                     let a = randInt(12, 99);
                     let b = randInt(3, 9);
                     rawAns = a * b;
-                    text = `Hitung: ${a} × ${b}`;
+                    text = `${a} × ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Hasil darab ${a} dengan ${b} ialah ${rawAns}.`;
+                    explanation = `Hasil pendaraban bernilai ${rawAns}.`;
                 } else if (topic === 'bahagi') {
                     let b = randInt(3, 9);
                     let ans = randInt(11, 99);
                     let prod = ans * b;
                     rawAns = ans;
-                    text = `Hitung: ${prod} ÷ ${b}`;
+                    text = `${prod} ÷ ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Apabila ${prod} dibahagikan dengan ${b}, hasilnya ialah ${rawAns}.`;
+                    explanation = `Hasil bahagi ${prod} dibahagi ${b} ialah ${rawAns}.`;
                 } else if (topic === 'pecahan') {
                     let b = [3, 4, 5, 6, 8, 10][randInt(0, 5)];
                     let a = randInt(1, b - 1);
-                    text = `Nyatakan pecahan bagi ${a} bahagian daripada keseluruhan ${b} bahagian yang sama besar.`;
+                    text = `Nyatakan pecahan bagi ${a} bahagian daripada ${b} bahagian sama rata.`;
                     answer = `${a}/${b}`;
-                    explanation = `Kawasan berlorek mewakili pengangka (${a}) manakala keseluruhan bahagian mewakili penyebut (${b}). Maka, pecahannya ialah ${a}/${b}.`;
+                    explanation = `Bahagian terpilih ditulis di atas (pengangka) manakala jumlah bahagian di bawah (penyebut): ${a}/${b}.`;
                     options = [`${a}/${b}`, `${b - a}/${b}`, `1/${b}`, `${a}/${b + 1}`];
                 } else if (topic === 'wang') {
                     let a = randInt(50, 150);
                     let b = randInt(10, 49);
                     rawAns = a + b;
-                    text = `RM${a}.60 + RM${b}.30 = ?`;
+                    text = `RM${a}.60 + RM${b}.30`;
                     answer = `RM${rawAns}.90`;
-                    explanation = `Hitung hasil tambah mengikut nilai tempat Ringgit dan sen: RM${rawAns}.90.`;
+                    explanation = `Selesaikan penambahan mengikut nilai tempat sen dan Ringgit: RM${rawAns}.90.`;
                     options = [`RM${rawAns}.90`, `RM${rawAns + 1}.90`, `RM${rawAns - 1}.60`, `RM${rawAns}.30`];
                 } else if (topic === 'masa') {
                     let j = randInt(1, 12);
                     let m = [15, 30, 45][randInt(0, 2)];
                     let mText = { 15: "suku", 30: "setengah", 45: "tiga suku" };
-                    text = `Bagaimanakah 'Pukul ${j}:${m}' disebut dalam perkataan?`;
+                    text = `Bagaimanakah kita menyebut waktu digital "Pukul ${j}:${m}" dalam perkataan?`;
                     answer = `Pukul ${j} ${mText[m]}`;
                     options = [`Pukul ${j} ${mText[m]}`, `Pukul ${j} tepat`, `Pukul ${j+1} tepat`, `Pukul ${j} sepuluh`];
-                    explanation = `Dalam pembacaan jam tradisional, minit ${m} digantikan dengan perkataan ${mText[m]}.`;
+                    explanation = `Dalam jam tradisional, minit ${m} digantikan dengan perkataan ${mText[m]}.`;
                 } else {
                     let pb = generateProblemSolvingText(3, 'darab');
                     text = pb.text;
@@ -1034,47 +1003,47 @@
                     let a = randInt(15, 99);
                     let b = randInt(11, 29);
                     rawAns = a * b;
-                    text = `Hitung hasil darab ${a} dengan ${b}.`;
+                    text = `${a} × ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Hasil darab ${a} dengan ${b} ialah ${rawAns}.`;
+                    explanation = `Lakukan pendaraban 2-digit: ${a} × ${b} = ${rawAns}.`;
                 } else if (topic === 'bahagi') {
                     let b = randInt(4, 9);
                     let ans = randInt(100, 240);
                     let prod = ans * b;
                     rawAns = ans;
-                    text = `Hitung: ${prod} ÷ ${b}`;
+                    text = `${prod} ÷ ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `Apabila ${prod} dibahagikan dengan ${b}, hasilnya ialah ${rawAns}.`;
+                    explanation = `Lakukan pembahagian bentuk lazim: ${prod} ÷ ${b} = ${rawAns}.`;
                 } else if (topic === 'pecahan') {
                     let d = [5, 6, 8, 10][randInt(0, 3)];
                     let a = randInt(1, 2);
                     let b = randInt(1, 2);
-                    text = `Hitung: ${a}/${d} + ${b}/${d}`;
+                    text = `${a}/${d} + ${b}/${d} = ?`;
                     answer = `${a + b}/${d}`;
                     options = [`${a + b}/${d}`, `${a + b}/${d * 2}`, `${a}/${d}`, `1/${d}`];
-                    explanation = `Oleh sebab penyebutnya sama, tambahkan pengangka sahaja: ${a} + ${b} = ${a + b}. Maka, jawapannya ialah ${a + b}/${d}.`;
+                    explanation = `Memandangkan penyebutnya sama, tambahkan pengangka sahaja: ${a} + ${b} = ${a + b}. Jawapan: ${a + b}/${d}.`;
                 } else if (topic === 'peratus') {
                     let rates = [10, 20, 25, 50];
                     let prc = rates[randInt(0, 3)];
                     let val = [100, 200, 300, 400][randInt(0, 3)];
                     rawAns = (prc / 100) * val;
-                    text = `Hitung ${prc}% daripada ${val}.`;
+                    text = `Berapakah nilai bagi ${prc}% daripada ${val}?`;
                     answer = `${rawAns}`;
-                    explanation = `${prc}% bersamaan dengan ${prc}/100. Maka, ${prc}/100 × ${val} = ${rawAns}.`;
+                    explanation = `${prc}% bersamaan ${prc}/100. Maka, ${prc}/100 × ${val} = ${rawAns}.`;
                 } else if (topic === 'masa') {
                     let mula = randInt(1, 6);
                     let tempoh = randInt(1, 4);
-                    text = `Sebuah bas bertolak dari Kuala Lumpur pada pukul ${mula}:15 pagi. Jika perjalanan itu mengambil masa selama ${tempoh} jam, pada pukul berapakah bas itu akan tiba di destinasi?`;
+                    text = `Bas memulakan perjalanan dari Kuala Lumpur pada pukul ${mula}:15 pagi. Jika perjalanan mengambil masa selama ${tempoh} jam, pukul berapakah bas itu sampai?`;
                     answer = `Pukul ${mula + tempoh}:15 pagi`;
                     options = [`Pukul ${mula + tempoh}:15 pagi`, `Pukul ${mula + tempoh}:00 pagi`, `Pukul ${mula + tempoh + 1}:15 pagi`, `Pukul ${mula + tempoh - 1}:45 pagi`];
-                    explanation = `Waktu ketibaan dihitung dengan menambahkan tempoh perjalanan kepada waktu bertolak: ${mula}:15 pagi + ${tempoh} jam = Pukul ${mula + tempoh}:15 pagi.`;
+                    explanation = `Waktu mula ditambahkan tempoh perjalanan: ${mula}:15 pagi + ${tempoh} jam = ${mula + tempoh}:15 pagi.`;
                 } else if (topic === 'wang') {
                     let a = randInt(300, 900);
                     let b = randInt(50, 199);
                     rawAns = a - b;
-                    text = `Hitung: RM${a} - RM${b}`;
+                    text = `Kira RM${a} ditolak RM${b}.`;
                     answer = `RM${rawAns}`;
-                    explanation = `Hasil tolak RM${b} daripada RM${a} ialah RM${rawAns}.`;
+                    explanation = `Selesaikan operasi tolak: RM${a} - RM${b} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else {
@@ -1088,31 +1057,31 @@
                 if (topic === 'pecahan') {
                     let choice = randInt(1, 2);
                     if (choice === 1) {
-                        text = `Hitung: 1/2 + 1/4 = ?`;
+                        text = `1/2 + 1/4 = ?`;
                         answer = `3/4`;
                         options = [`3/4`, `2/4`, `2/6`, `1/2`];
-                        explanation = `Samakan penyebut pecahan terlebih dahulu: pecahan 1/2 didarabkan dengan 2 menjadi 2/4. Seterusnya, hitung hasil tambah: 2/4 + 1/4 = 3/4.`;
+                        explanation = `Samakan penyebut terlebih dahulu dengan mendarabkan 1/2 dengan 2: 2/4 + 1/4 = 3/4.`;
                     } else {
-                        text = `Hitung: 3/4 - 1/2 = ?`;
+                        text = `3/4 - 1/2 = ?`;
                         answer = `1/4`;
                         options = [`1/4`, `2/4`, `1/2`, `3/8`];
-                        explanation = `Samakan penyebut pecahan terlebih dahulu: pecahan 1/2 didarabkan dengan 2 menjadi 2/4. Seterusnya, hitung hasil tolak: 3/4 - 2/4 = 1/4.`;
+                        explanation = `Tukarkan 1/2 kepada penyebut 4: 3/4 - 2/4 = 1/4.`;
                     }
                 } else if (topic === 'peratus') {
                     let prc = [15, 30, 40, 60][randInt(0, 3)];
                     let val = [200, 300, 500][randInt(0, 2)];
                     rawAns = (prc / 100) * val;
-                    text = `Hitung ${prc}% daripada ${val} buah rumah.`;
+                    text = `Hitungkan ${prc}% daripada ${val} buah rumah.`;
                     answer = `${rawAns}`;
-                    explanation = `${prc}% daripada ${val} bersamaan dengan ${prc}/100 × ${val} = ${rawAns}.`;
+                    explanation = `${prc}/100 × ${val} = ${rawAns}.`;
                 } else if (topic === 'wang') {
                     let kos = [200, 400, 600, 1000][randInt(0, 3)];
                     let disc = [10, 20, 30][randInt(0, 2)];
                     let potongan = (disc / 100) * kos;
                     rawAns = kos - potongan;
-                    text = `Sebuah peranti berharga RM${kos} diberikan diskaun sebanyak ${disc}%. Hitung harga peranti tersebut selepas diskaun.`;
+                    text = `Sebuah peranti berharga RM${kos} diberikan diskaun sebanyak ${disc}%. Berapakah harga jualannya?`;
                     answer = `RM${rawAns}`;
-                    explanation = `Nilai diskaun ialah ${disc}% daripada RM${kos} iaitu RM${potongan}. Maka, harga selepas diskaun ialah RM${kos} - RM${potongan} = RM${rawAns}.`;
+                    explanation = `Potongan diskaun: RM${potongan}. Harga baharu: RM${kos} - RM${potongan} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else if (topic === 'penyelesaian') {
@@ -1125,50 +1094,50 @@
                     let hari = randInt(2, 5);
                     let jam = randInt(1, 23);
                     rawAns = (hari * 24) + jam;
-                    text = `Tukarkan ${hari} hari ${jam} jam kepada unit jam.`;
+                    text = `Tukarkan ${hari} hari ${jam} jam kepada unit jam sahaja.`;
                     answer = `${rawAns} jam`;
-                    explanation = `Memandangkan 1 hari bersamaan dengan 24 jam, maka (${hari} × 24) + ${jam} = ${rawAns} jam.`;
+                    explanation = `Satu hari mempunyai 24 jam. (${hari} × 24) + ${jam} = ${rawAns} jam.`;
                     unit = " jam";
                     unitPosition = "suffix";
                 } else {
                     let a = randInt(25, 99);
                     let b = randInt(15, 30);
                     rawAns = a * b;
-                    text = `Syarikat XYZ mengedarkan ${a} bungkusan makanan sehari. Hitung jumlah bungkusan makanan yang diedarkan dalam tempoh ${b} hari.`;
+                    text = `Syarikat XYZ mengedar ${a} bungkusan makanan sehari. Kira jumlah bungkusan makanan yang diedarkan dalam tempoh ${b} hari.`;
                     answer = `${rawAns}`;
-                    explanation = `Selesaikan menggunakan operasi darab: ${a} × ${b} = ${rawAns}.`;
+                    explanation = `Operasi darab: ${a} × ${b} = ${rawAns}.`;
                 }
             } else if (year === 6) {
                 if (topic === 'pecahan') {
-                    text = `Hitung: 1 1/2 + 1 1/4 = ?`;
+                    text = `1 1/2 + 1 1/4 = ?`;
                     answer = `2 3/4`;
                     options = [`2 3/4`, `2 1/2`, `3 1/4`, `2 2/3`];
-                    explanation = `Tambahkan nombor bulat: 1 + 1 = 2. Seterusnya, samakan penyebut pecahan: pecahan 1/2 menjadi 2/4. Hitung hasil tambah pecahan: 2/4 + 1/4 = 3/4. Gabungkan nombor bulat dan pecahan menjadi 2 3/4.`;
+                    explanation = `Tambahkan nombor bulat (1 + 1 = 2) dan samakan penyebut pecahan (2/4 + 1/4 = 3/4). Hasil gabungan: 2 3/4.`;
                 } else if (topic === 'peratus') {
                     let kos = [100, 150, 200, 300][randInt(0, 3)];
                     let taxRate = 6;
                     let taxVal = (taxRate / 100) * kos;
                     let total = kos + taxVal;
                     answer = `RM${total.toFixed(2)}`;
-                    text = `Harga sebuah meja komputer ialah RM${kos}. Berapakah harga meja tersebut selepas dikenakan cukai SST sebanyak ${taxRate}%?`;
+                    text = `Harga sebuah kerusi meja ialah RM${kos}. Berapakah harga baharu yang perlu dibayar selepas ditambah cukai SST sebanyak ${taxRate}%?`;
                     options = [`RM${total.toFixed(2)}`, `RM${(total + 5).toFixed(2)}`, `RM${(kos - taxVal).toFixed(2)}`, `RM${(kos + 10).toFixed(2)}`];
-                    explanation = `Nilai cukai SST ialah ${taxRate}% daripada RM${kos} iaitu RM${taxVal.toFixed(2)}. Maka, jumlah harga baharu ialah RM${kos} + RM${taxVal.toFixed(2)} = RM${total.toFixed(2)}.`;
+                    explanation = `Nilai Cukai SST: 6% daripada RM${kos} = RM${taxVal.toFixed(2)}. Jumlah bayaran: RM${kos} + RM${taxVal.toFixed(2)} = RM${total.toFixed(2)}.`;
                 } else if (topic === 'wang') {
                     let kos = [600, 800, 1000, 1200][randInt(0, 3)];
                     let untung = [10, 15, 20, 25][randInt(0, 3)];
                     let untungVal = (untung / 100) * kos;
                     rawAns = kos + untungVal;
-                    text = `Harga kos bagi sebuah komputer ialah RM${kos}. Kedai itu menjualnya semula untuk memperoleh keuntungan sebanyak ${untung}%. Hitung harga jualan komputer tersebut.`;
+                    text = `Harga kos bagi sebuah komputer ialah RM${kos}. Kedai menjualnya semula untuk memperoleh kadar untung sebanyak ${untung}%. Berapakah harga jualannya?`;
                     answer = `RM${rawAns}`;
-                    explanation = `Nilai keuntungan ialah ${untung}% daripada RM${kos} iaitu RM${untungVal}. Maka, harga jualan komputer tersebut ialah RM${kos} + RM${untungVal} = RM${rawAns}.`;
+                    explanation = `Keuntungan dikira: ${untung}% daripada RM${kos} = RM${untungVal}. Harga jualan: RM${kos} + RM${untungVal} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else if (topic === 'masa') {
                     let novel = randInt(3, 6);
                     let hari = novel * 7;
-                    text = `Encik Ahmad meluangkan masa selama ${novel} minggu untuk menyiapkan latihan fizikalnya. Hitung jumlah hari yang telah dilaluinya.`;
+                    text = `Encik Ahmad meluangkan tempoh masa selama ${novel} minggu untuk menyiapkan latihan fizikalnya. Berapakah jumlah HARI yang telah dilaluinya?`;
                     answer = `${hari} hari`;
-                    explanation = `Memandangkan 1 minggu bersamaan dengan 7 hari, maka ${novel} × 7 = ${hari} hari.`;
+                    explanation = `Kerana 1 minggu = 7 hari, kita lakukan operasi darab: ${novel} × 7 = ${hari} hari.`;
                     unit = " hari";
                     unitPosition = "suffix";
                 } else if (topic === 'penyelesaian') {
@@ -1177,9 +1146,9 @@
                     let mult = [3, 4, 6, 8][randInt(0, 3)];
                     let redCount = r * mult;
                     let totalCount = (r + b) * mult;
-                    text = `Nisbah bilangan belon merah kepada belon biru di sebuah taman permainan ialah 2:5. Jika terdapat ${redCount} biji belon merah, hitung jumlah keseluruhan belon di taman tersebut.`;
+                    text = `Nisbah belon merah kepada belon biru di taman permainan ialah 2:5. Sekiranya terdapat ${redCount} belon merah, berapakah JUMLAH keseluruhan belon di taman tersebut?`;
                     answer = `${totalCount}`;
-                    explanation = `Nisbah belon merah kepada belon biru ialah 2:5. Oleh sebab bilangan belon merah ialah ${redCount} (iaitu 2 × ${mult}), maka gandaan nisbah ialah ${mult}. Jumlah keseluruhan belon ialah (2 + 5) × ${mult} = ${totalCount}.`;
+                    explanation = `Nisbah Merah : Biru = 2 : 5. Merah = ${redCount} (iaitu 2 × ${mult}). Jadi, gandaan nisbah ialah ${mult}. Jumlah belon = (2 + 5) × ${mult} = ${totalCount}.`;
                 } else {
                     let pb = generateProblemSolvingText(6, 'darab');
                     text = pb.text;
