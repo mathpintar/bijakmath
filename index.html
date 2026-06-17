@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="ms" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bijak Matematik - Aplikasi Matematik Sekolah Rendah</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        fun: ['Fredoka', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Canvas Confetti CDN (Ganjaran animasi) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Custom Style & Glassmorphism -->
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+        }
+        h1, h2, h3, .font-fun {
+            font-family: 'Fredoka', sans-serif;
+        }
+        /* Bounce & Hover animations */
+        .btn-playful {
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-playful:hover {
+            transform: scale(1.05) translateY(-2px);
+        }
+        .btn-playful:active {
+            transform: scale(0.95) translateY(1px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-tr from-[#e0f2fe] via-[#f0fdf4] to-[#fae8ff] dark:from-[#0f172a] dark:via-[#1e1b4b] dark:to-[#111827] min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-300 pb-12">
+
+    <!-- Theme System & Top Utility Bar -->
+    <div class="max-w-6xl mx-auto px-4 pt-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-3xl">🧠</span>
+            <span class="text-xl font-bold font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-400">Bijak Matematik</span>
+        </div>
+        <button id="theme-toggle" class="p-3 rounded-full bg-white/80 dark:bg-slate-800/80 shadow-md hover:shadow-lg transition-all text-xl" onclick="toggleTheme()">
+            ☀️
+        </button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-4xl mx-auto px-4 mt-6">
+
+        <!-- Login Section -->
+        <section id="login-section" class="glass-card rounded-3xl p-8 shadow-2xl text-center max-w-md mx-auto my-12 animate-fade-in">
+            <div class="text-6xl mb-4 animate-bounce">✏️</div>
+            <h1 class="text-3xl font-bold mb-2 text-slate-800 dark:text-white">Selamat Datang!</h1>
+            <p class="text-slate-600 dark:text-slate-300 mb-6">Jom asah minda dan jadi pakar matematik bersama Bijak Matematik!</p>
+            
+            <div class="text-left mb-6">
+                <label class="block text-sm font-semibold mb-2 text-slate-700 dark:text-slate-200" for="user-name">Nama Penuh Anda:</label>
+                <input type="text" id="user-name" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-slate-900 dark:text-white font-semibold transition" placeholder="Contoh: Muhammad Ali">
+                <p id="login-error" class="text-red-500 text-xs mt-2 hidden">⚠️ Sila masukkan nama penuh anda untuk meneruskan.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="handleRegister()" class="btn-playful bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/30">
+                    <i class="fa-solid fa-user-plus mr-1"></i> Daftar Baru
+                </button>
+                <button onclick="handleLogin()" class="btn-playful bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-right-to-bracket mr-1"></i> Log Masuk
+                </button>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="hidden animate-fade-in">
+            <!-- User Stats Card -->
+            <div class="glass-card rounded-3xl p-6 shadow-xl mb-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-500 to-emerald-400 flex items-center justify-center text-3xl shadow-md">
+                        🧑‍🎓
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800 dark:text-white" id="dash-username">Nama Murid</h2>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Status: Murid Pintar Malaysia 🇲🇾</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-center w-full md:w-auto">
+                    <div class="p-3 bg-white/50 dark:bg-slate-800/50 rounded-2xl">
+                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Selesai</span>
+                        <span class="text-lg font-bold" id="stat-total">0</span>
+                    </div>
+                    <div class="p-3 bg-white/50 dark:bg-slate-800/50 rounded-2xl">
+                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Jumlah Skor</span>
+                        <span class="text-lg font-bold" id="stat-score">0</span>
+                    </div>
+                    <div class="p-3 bg-white/50 dark:bg-slate-800/50 rounded-2xl">
+                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Purata %</span>
+                        <span class="text-lg font-bold" id="stat-average">0%</span>
+                    </div>
+                </div>
+                <div>
+                    <button onclick="handleLogout()" class="px-4 py-2 bg-red-100 hover:bg-red-200 dark:bg-red-950/30 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-xl font-bold transition text-sm">
+                        <i class="fa-solid fa-power-off mr-1"></i> Log Keluar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Settings & History Setup -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Configurations -->
+                <div class="lg:col-span-2 glass-card rounded-3xl p-6 shadow-xl">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-blue-600 dark:text-blue-400 font-fun">
+                        <i class="fa-solid fa-sliders"></i> Tetapkan Kuiz Anda
+                    </h3>
+                    
+                    <!-- Year Picker -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-2">Pilih Tahun Pembelajaran:</label>
+                        <select id="config-year" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="1">Tahun 1 (Asas/Mudah)</option>
+                            <option value="2">Tahun 2</option>
+                            <option value="3">Tahun 3</option>
+                            <option value="4">Tahun 4</option>
+                            <option value="5">Tahun 5</option>
+                            <option value="6">Tahun 6 (Mencabar)</option>
+                        </select>
+                    </div>
+
+                    <!-- Question Count -->
+                    <div class="mb-5">
+                        <label class="block text-sm font-semibold mb-2">Bilangan Soalan:</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="config-count" value="10" checked class="sr-only peer">
+                                <div class="p-3 text-center rounded-xl border border-slate-300 dark:border-slate-700 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 font-bold transition">10 Soalan</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="config-count" value="20" class="sr-only peer">
+                                <div class="p-3 text-center rounded-xl border border-slate-300 dark:border-slate-700 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 font-bold transition">20 Soalan</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="config-count" value="50" class="sr-only peer">
+                                <div class="p-3 text-center rounded-xl border border-slate-300 dark:border-slate-700 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 font-bold transition">50 Soalan</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Topics Checkboxes -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-sm font-semibold">Pilih Topik Matematik:</label>
+                            <label class="inline-flex items-center gap-1 text-xs cursor-pointer text-blue-600 dark:text-blue-400 font-bold">
+                                <input type="checkbox" id="select-all-topics" onchange="toggleSelectAllTopics(this)" class="rounded text-blue-500">
+                                Pilih Semua Topik
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="topics-grid">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="tambah" checked class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">➕ Tambah</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="tolak" checked class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">➖ Tolak</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="darab" class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">✖️ Darab</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="bahagi" class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">➗ Bahagi</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="pecahan" class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">🍰 Pecahan</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="wang" class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">💵 Wang</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="peratus" class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">📈 Peratus</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="masa" class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">⏰ Masa</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                                <input type="checkbox" name="topic" value="penyelesaian" class="rounded text-blue-500 focus:ring-0">
+                                <span class="text-sm font-semibold">🧩 Soalan Berayat</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button onclick="startQuiz()" class="btn-playful w-full py-4 bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white text-xl font-bold rounded-2xl shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2">
+                        🚀 Mula Kuiz Sekarang!
+                    </button>
+                </div>
+
+                <!-- Performance Chart Widget -->
+                <div class="glass-card rounded-3xl p-6 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold mb-3 flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-fun">
+                            <i class="fa-solid fa-chart-line"></i> Carta Prestasi
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Grafik pencapaian markah kuiz anda dari semasa ke semasa.</p>
+                        <div class="relative min-h-[180px] w-full">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-center">
+                        <button onclick="toggleHistoryView()" class="text-sm font-bold text-blue-500 hover:underline">
+                            <i class="fa-solid fa-clock-rotate-left mr-1"></i> Lihat Rekod Terperinci
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Section Inside Dashboard -->
+            <div id="history-container" class="mt-8 glass-card rounded-3xl p-6 shadow-xl hidden animate-fade-in">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold font-fun flex items-center gap-2 text-slate-800 dark:text-white">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Rekod Prestasi Lepas
+                    </h3>
+                    <button onclick="clearHistory()" class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg text-xs font-bold transition">
+                        <i class="fa-solid fa-trash mr-1"></i> Padam Rekod
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-500 text-sm">
+                                <th class="py-2">Tarikh</th>
+                                <th class="py-2">Tahun</th>
+                                <th class="py-2">Topik</th>
+                                <th class="py-2">Skor (Betul/Jumlah)</th>
+                                <th class="py-2">Peratus</th>
+                                <th class="py-2">Masa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body" class="text-sm">
+                            <!-- JS injected rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="hidden animate-fade-in">
+            <div class="glass-card rounded-3xl p-6 shadow-xl mb-4">
+                <!-- Status bar -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
+                    <div class="flex items-center gap-2 bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 px-4 py-1.5 rounded-full font-bold text-sm">
+                        <span>Soalan <span id="quiz-current-num">1</span> daripada <span id="quiz-total-num">10</span></span>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <div class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                            <i class="fa-solid fa-check"></i> Skor: <span id="quiz-score">0</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-bold text-sm">
+                            <i class="fa-solid fa-clock"></i> Masa: <span id="quiz-timer">00:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress bar -->
+                <div class="w-full bg-slate-200 dark:bg-slate-800 h-3 rounded-full overflow-hidden mb-8">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-blue-500 to-emerald-400 h-full transition-all duration-300" style="width: 10%"></div>
+                </div>
+
+                <!-- Active Question Space -->
+                <div id="question-box" class="mb-8">
+                    <div class="bg-slate-50 dark:bg-slate-900/50 p-6 md:p-8 rounded-2xl mb-6 text-center shadow-inner relative overflow-hidden">
+                        <div class="absolute top-2 left-2 text-xs bg-slate-200 dark:bg-slate-800 px-2.5 py-1 rounded-full text-slate-500 uppercase tracking-wider font-bold" id="question-topic-badge">TAMBAH</div>
+                        <p class="text-2xl md:text-3xl font-fun font-semibold mt-4 text-slate-800 dark:text-white" id="question-text">Siti mempunyai 15 gula-gula...</p>
+                    </div>
+
+                    <!-- Answers Grid -->
+                    <div id="answer-container" class="space-y-3">
+                        <!-- Dynamically filled by JS: either buttons, true/false, or input field -->
+                    </div>
+                </div>
+
+                <!-- Feedback Display overlay -->
+                <div id="feedback-alert" class="hidden p-4 rounded-2xl mb-4 text-center text-lg font-bold animate-bounce transition-all">
+                    <!-- Text and icon filled dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Result Section -->
+        <section id="result-section" class="hidden text-center max-w-2xl mx-auto animate-fade-in">
+            <div class="glass-card rounded-3xl p-8 shadow-2xl mb-6 relative overflow-hidden">
+                <div id="badge-animation-container" class="absolute inset-0 pointer-events-none z-10"></div>
+                
+                <h2 class="text-4xl font-bold font-fun mb-2 text-slate-800 dark:text-white">🎉 Keputusan Kuiz Anda!</h2>
+                <p class="text-slate-500 dark:text-slate-400 mb-6">Tahniah, anda telah berjaya menamatkan sesi pembelajaran!</p>
+
+                <!-- Badge Awarded Widget -->
+                <div class="my-6 p-4 inline-flex flex-col items-center bg-white/50 dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md">
+                    <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">Lencana Diperoleh</span>
+                    <div id="reward-badge-emoji" class="text-7xl mb-1 drop-shadow-lg">🥈</div>
+                    <span id="reward-badge-name" class="font-fun font-bold text-lg">Lencana Perak</span>
+                    <span id="reward-badge-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Skor hebat, usaha anda dihargai!</span>
+                </div>
+
+                <!-- Statistics Summary -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                    <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                        <span class="block text-xs font-semibold text-slate-400">Markah</span>
+                        <span class="text-xl font-bold" id="res-score">0/10</span>
+                    </div>
+                    <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                        <span class="block text-xs font-semibold text-slate-400">Pencapaian</span>
+                        <span class="text-xl font-bold" id="res-percentage">0%</span>
+                    </div>
+                    <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                        <span class="block text-xs font-semibold text-slate-400">Gred</span>
+                        <span class="text-2xl font-black" id="res-grade">E</span>
+                    </div>
+                    <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+                        <span class="block text-xs font-semibold text-slate-400">Masa Diambil</span>
+                        <span class="text-xl font-bold" id="res-time">00:00</span>
+                    </div>
+                </div>
+
+                <!-- Detailed Info -->
+                <div class="text-left bg-slate-50 dark:bg-slate-950/40 rounded-2xl p-4 text-sm space-y-2 mb-8 border border-slate-200 dark:border-slate-800">
+                    <div>👤 <span class="font-bold text-slate-500">Pemain:</span> <span id="res-username" class="font-bold">--</span></div>
+                    <div>📅 <span class="font-bold text-slate-500">Tarikh Kuiz:</span> <span id="res-date">--</span></div>
+                    <div>🎓 <span class="font-bold text-slate-500">Tahap Akademik:</span> Tahun <span id="res-year">1</span></div>
+                    <div>🎯 <span class="font-bold text-slate-500">Topik Terlibat:</span> <span id="res-topics">--</span></div>
+                </div>
+
+                <!-- Actions Button Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button onclick="restartQuizWithSameSettings()" class="btn-playful py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Cuba Lagi
+                    </button>
+                    <button onclick="goToDashboard()" class="btn-playful py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-house mr-1"></i> Dashboard
+                    </button>
+                    <button onclick="resetToNewQuiz()" class="btn-playful py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/20">
+                        <i class="fa-solid fa-plus-circle mr-1"></i> Set Kuiz Baru
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JavaScript Execution Logic -->
+    <script>
+        /* ==================================================
+           LOCAL STORAGE & STATE MANAGEMENT
+           ================================================== */
+        let state = {
+            currentUser: null,
+            users: JSON.parse(localStorage.getItem('bijak_mat_users')) || [],
+            history: JSON.parse(localStorage.getItem('bijak_mat_history')) || [],
+            quizSession: null
+        };
+
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        let elapsedSeconds = 0;
+        let timerInterval = null;
+        let currentQuestionsList = [];
+        let performanceChartInstance = null;
+
+        window.onload = function() {
+            // Check active theme
+            const savedTheme = localStorage.getItem('bijak_mat_theme') || 'light';
+            document.documentElement.className = savedTheme;
+            updateThemeButtonText(savedTheme);
+
+            // Check active session
+            const savedUser = localStorage.getItem('bijak_mat_active_user');
+            if (savedUser) {
+                state.currentUser = savedUser;
+                showDashboard();
+            } else {
+                showSection('login-section');
+            }
+        };
+
+        function showSection(sectionId) {
+            ['login-section', 'dashboard-section', 'quiz-section', 'result-section'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        /* ==================================================
+           THEME SYSTEM
+           ================================================== */
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            document.documentElement.className = newTheme;
+            localStorage.setItem('bijak_mat_theme', newTheme);
+            updateThemeButtonText(newTheme);
+            if (performanceChartInstance) {
+                renderPerformanceChart(); // redraw with adapted text colors
+            }
+        }
+
+        function updateThemeButtonText(theme) {
+            const toggleBtn = document.getElementById('theme-toggle');
+            toggleBtn.innerText = theme === 'dark' ? '🌙' : '☀️';
+        }
+
+        /* ==================================================
+           LOGIN / SIGN UP SYSTEM
+           ================================================== */
+        function handleRegister() {
+            const nameInput = document.getElementById('user-name').value.trim();
+            const errorElement = document.getElementById('login-error');
+
+            if (!nameInput) {
+                errorElement.innerText = "⚠️ Sila masukkan nama penuh anda untuk mendaftar.";
+                errorElement.classList.remove('hidden');
+                return;
+            }
+
+            // check if user already exists
+            const existingUser = state.users.find(u => u.name.toLowerCase() === nameInput.toLowerCase());
+            if (existingUser) {
+                errorElement.innerText = "⚠️ Nama ini telah didaftarkan. Sila gunakan nama lain atau klik Log Masuk.";
+                errorElement.classList.remove('hidden');
+                return;
+            }
+
+            const newUser = { name: nameInput, registeredAt: new Date().toISOString() };
+            state.users.push(newUser);
+            localStorage.setItem('bijak_mat_users', JSON.stringify(state.users));
+
+            loginUser(nameInput);
+        }
+
+        function handleLogin() {
+            const nameInput = document.getElementById('user-name').value.trim();
+            const errorElement = document.getElementById('login-error');
+
+            if (!nameInput) {
+                errorElement.innerText = "⚠️ Sila masukkan nama anda untuk Log Masuk.";
+                errorElement.classList.remove('hidden');
+                return;
+            }
+
+            const existingUser = state.users.find(u => u.name.toLowerCase() === nameInput.toLowerCase());
+            if (!existingUser) {
+                errorElement.innerText = "⚠️ Pengguna tidak dijumpai. Sila Daftar Baru terlebih dahulu.";
+                errorElement.classList.remove('hidden');
+                return;
+            }
+
+            loginUser(existingUser.name);
+        }
+
+        function loginUser(userName) {
+            state.currentUser = userName;
+            localStorage.setItem('bijak_mat_active_user', userName);
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('user-name').value = '';
+            showDashboard();
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('bijak_mat_active_user');
+            state.currentUser = null;
+            showSection('login-section');
+        }
+
+        /* ==================================================
+           DASHBOARD UTAMA & STATISTIK
+           ================================================== */
+        function showDashboard() {
+            document.getElementById('dash-username').innerText = state.currentUser;
+            calculateDashboardStats();
+            renderPerformanceChart();
+            showSection('dashboard-section');
+        }
+
+        function calculateDashboardStats() {
+            const userHistory = state.history.filter(h => h.name.toLowerCase() === state.currentUser.toLowerCase());
+            const totalQuizzes = userHistory.length;
+            
+            let totalScore = 0;
+            let totalCorrect = 0;
+            let totalQs = 0;
+
+            userHistory.forEach(h => {
+                totalCorrect += h.correct;
+                totalQs += h.totalQs;
+            });
+
+            const averagePercentage = totalQs > 0 ? Math.round((totalCorrect / totalQs) * 100) : 0;
+
+            document.getElementById('stat-total').innerText = totalQuizzes;
+            document.getElementById('stat-score').innerText = totalCorrect;
+            document.getElementById('stat-average').innerText = averagePercentage + '%';
+        }
+
+        function toggleSelectAllTopics(masterCheckbox) {
+            const checkboxes = document.querySelectorAll('input[name="topic"]');
+            checkboxes.forEach(cb => {
+                cb.checked = masterCheckbox.checked;
+            });
+        }
+
+        function toggleHistoryView() {
+            const container = document.getElementById('history-container');
+            container.classList.toggle('hidden');
+            if (!container.classList.contains('hidden')) {
+                renderHistoryTable();
+            }
+        }
+
+        function renderHistoryTable() {
+            const userHistory = state.history.filter(h => h.name.toLowerCase() === state.currentUser.toLowerCase()).reverse();
+            const tableBody = document.getElementById('history-table-body');
+            tableBody.innerHTML = '';
+
+            if (userHistory.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="py-4 text-center text-slate-400">Tiada rekod kuiz lagi. Jom bermain kuiz pertama anda!</td></tr>`;
+                return;
+            }
+
+            userHistory.forEach(record => {
+                const dateObj = new Date(record.date);
+                const formattedDate = dateObj.toLocaleDateString('ms-MY', { day: '2-digit', month: 'short', year: 'numeric' });
+                
+                tableBody.innerHTML += `
+                    <tr class="border-b border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-50/20">
+                        <td class="py-2.5">${formattedDate}</td>
+                        <td class="py-2.5">Tahun ${record.year}</td>
+                        <td class="py-2.5 max-w-[150px] truncate" title="${record.topics.join(', ')}">${record.topics.join(', ')}</td>
+                        <td class="py-2.5 font-bold">${record.correct}/${record.totalQs}</td>
+                        <td class="py-2.5 font-semibold text-emerald-500">${record.percentage}%</td>
+                        <td class="py-2.5 text-slate-500">${record.elapsed}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function clearHistory() {
+            if (confirm("Adakah anda pasti mahu memadam semua sejarah prestasi anda?")) {
+                // Keep only other users history
+                state.history = state.history.filter(h => h.name.toLowerCase() !== state.currentUser.toLowerCase());
+                localStorage.setItem('bijak_mat_history', JSON.stringify(state.history));
+                calculateDashboardStats();
+                renderPerformanceChart();
+                renderHistoryTable();
+            }
+        }
+
+        /* ==================================================
+           CARTA PRESTASI (CHART.JS)
+           ================================================== */
+        function renderPerformanceChart() {
+            const userHistory = state.history.filter(h => h.name.toLowerCase() === state.currentUser.toLowerCase());
+            const scores = userHistory.map(h => h.percentage);
+            const labels = userHistory.map((h, index) => `Kuiz ${index + 1}`);
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#cbd5e1' : '#475569';
+            const gridColor = isDark ? '#334155' : '#e2e8f0';
+
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            if (performanceChartInstance) {
+                performanceChartInstance.destroy();
+            }
+
+            performanceChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels.length > 0 ? labels : ['Mula'],
+                    datasets: [{
+                        label: 'Skor (%)',
+                        data: scores.length > 0 ? scores : [0],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#3b82f6',
+                        pointBorderColor: '#ffffff',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'Nunito' } }
+                        },
+                        x: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'Nunito' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        /* ==================================================
+           PENJANAAN SOALAN DINAMIK & CURRICULUM MATH
+           ================================================== */
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getBaseQuestion(year, topic) {
+            let text = "";
+            let answer = "";
+            let explanation = "";
+            let rawAns = 0;
+            let unit = "";
+            let options = null;
+
+            if (year === 1) {
+                if (topic === 'tambah') {
+                    let a = randInt(1, 10);
+                    let b = randInt(1, 10);
+                    rawAns = a + b;
+                    text = `${a} + ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Tambah ${b} kepada ${a} mendapat ${rawAns}.`;
+                } else if (topic === 'tolak') {
+                    let a = randInt(5, 20);
+                    let b = randInt(1, a);
+                    rawAns = a - b;
+                    text = `${a} - ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Keluarkan ${b} daripada ${a} baki tinggal ${rawAns}.`;
+                } else if (topic === 'wang') {
+                    if (Math.random() > 0.5) {
+                        let a = randInt(1, 10);
+                        let b = randInt(1, 10);
+                        rawAns = a + b;
+                        text = `RM${a} + RM${b}`;
+                        answer = `RM${rawAns}`;
+                        explanation = `RM${a} ditambah dengan RM${b} menghasilkan RM${rawAns}.`;
+                        unit = "RM";
+                    } else {
+                        let values = [10, 20, 30, 40, 50];
+                        let a = values[randInt(0, 4)];
+                        let b = values[randInt(0, 4)];
+                        rawAns = a + b;
+                        text = `${a} sen + ${b} sen`;
+                        answer = `${rawAns} sen`;
+                        explanation = `${a} sen tambah ${b} sen bersamaan ${rawAns} sen.`;
+                        unit = " sen";
+                    }
+                } else if (topic === 'masa') {
+                    let jam = randInt(1, 12);
+                    text = `Jarum pendek menunjuk tepat ke angka ${jam} dan jarum panjang tepat ke 12. Pukul berapakah itu?`;
+                    answer = `Pukul ${jam}`;
+                    rawAns = jam;
+                    explanation = `Jarum pendek menunjuk jam manakala jarum panjang di 12 menandakan waktu tepat. Jadi ia adalah Pukul ${jam}.`;
+                    unit = "Pukul ";
+                } else {
+                    // Fallback Year 1
+                    let a = randInt(1, 10);
+                    let b = randInt(1, 5);
+                    rawAns = a + b;
+                    text = `Terdapat ${a} epal. Ibu beli ${b} lagi epal. Berapakah jumlahnya?`;
+                    answer = `${rawAns}`;
+                    explanation = `${a} + ${b} bersamaan ${rawAns}.`;
+                }
+            } else if (year === 2) {
+                if (topic === 'tambah') {
+                    let a = randInt(10, 50);
+                    let b = randInt(10, 45);
+                    rawAns = a + b;
+                    text = `${a} + ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Hasil tambah bagi ${a} dan ${b} ialah ${rawAns}.`;
+                } else if (topic === 'tolak') {
+                    let a = randInt(50, 99);
+                    let b = randInt(10, a - 1);
+                    rawAns = a - b;
+                    text = `${a} - ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Beza antara ${a} ditolak ${b} ialah ${rawAns}.`;
+                } else if (topic === 'darab') {
+                    let sifir = [2, 5, 10][randInt(0, 2)];
+                    let a = randInt(1, 10);
+                    rawAns = a * sifir;
+                    text = `${a} × ${sifir}`;
+                    answer = `${rawAns}`;
+                    explanation = `${a} kumpulan ${sifir}-sifir memberikan hasil darab ${rawAns}.`;
+                } else if (topic === 'bahagi') {
+                    let sifir = [2, 5, 10][randInt(0, 2)];
+                    let a = randInt(1, 10);
+                    let prod = a * sifir;
+                    rawAns = a;
+                    text = `${prod} ÷ ${sifir}`;
+                    answer = `${rawAns}`;
+                    explanation = `${prod} dibahagi kepada ${sifir} bahagian sama banyak ialah ${rawAns}.`;
+                } else if (topic === 'masa') {
+                    let jam = randInt(1, 11);
+                    text = `Jarum pendek terletak di antara angka ${jam} dan ${jam+1}. Jarum panjang tepat pada angka 6. Apakah waktu ini?`;
+                    answer = `Pukul ${jam} setengah`;
+                    options = [`Pukul ${jam} setengah`, `Pukul ${jam} tepat`, `Pukul ${jam+1} tepat`, `Pukul ${jam+1} setengah`];
+                    explanation = `Jarum panjang di angka 6 menunjukkan "setengah jam" (30 minit). Jadi ia adalah Pukul ${jam} setengah.`;
+                } else if (topic === 'pecahan') {
+                    text = `Satu per empat daripada sebiji kek diasingkan. Pecahan yang diasingkan disebut juga...`;
+                    answer = `Suku`;
+                    options = [`Suku`, `Setengah`, `Separuh`, `Tiga suku`];
+                    explanation = `Satu per empat (1/4) juga dikenali dengan istilah suku.`;
+                } else if (topic === 'wang') {
+                    let a = randInt(20, 80);
+                    let b = randInt(5, 15);
+                    rawAns = a - b;
+                    text = `Ibu memberikan RM${a} kepada Ali. Ali membeli buku berharga RM${b}. Berapakah baki wangnya?`;
+                    answer = `RM${rawAns}`;
+                    explanation = `RM${a} - RM${b} = RM${rawAns}. Baki wang ialah RM${rawAns}.`;
+                    unit = "RM";
+                } else {
+                    // Fallback Year 2
+                    let a = randInt(5, 9);
+                    let b = randInt(2, 5);
+                    rawAns = a * b;
+                    text = `Ada ${b} bekas guli. Setiap bekas ada ${a} guli. Berapakah jumlah guli?`;
+                    answer = `${rawAns}`;
+                    explanation = `${b} kumpulan ${a} = ${b} × ${a} = ${rawAns}.`;
+                }
+            } else if (year === 3) {
+                if (topic === 'tambah') {
+                    let a = randInt(100, 500);
+                    let b = randInt(100, 490);
+                    rawAns = a + b;
+                    text = `${a} + ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Jumlah bagi ${a} dan ${b} ialah ${rawAns}.`;
+                } else if (topic === 'tolak') {
+                    let a = randInt(500, 999);
+                    let b = randInt(100, a - 10);
+                    rawAns = a - b;
+                    text = `${a} - ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Baki bagi ${a} dikurangkan sebanyak ${b} ialah ${rawAns}.`;
+                } else if (topic === 'darab') {
+                    let a = randInt(10, 99);
+                    let b = randInt(2, 9);
+                    rawAns = a * b;
+                    text = `${a} × ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Hasil pendaraban ${a} dengan ${b} ialah ${rawAns}.`;
+                } else if (topic === 'bahagi') {
+                    let b = randInt(3, 9);
+                    let rawAns_temp = randInt(10, 99);
+                    let prod = rawAns_temp * b;
+                    rawAns = rawAns_temp;
+                    text = `${prod} ÷ ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `${prod} dibahagi ${b} memberikan nilai ${rawAns}.`;
+                } else if (topic === 'pecahan') {
+                    let choices = [
+                        { text: "Tiga per empat ditulis dalam angka ialah...", ans: "3/4" },
+                        { text: "Nyatakan pecahan satu per tiga dalam bentuk simbol.", ans: "1/3" },
+                        { text: "Apakah nama pecahan bagi '1/2'?", ans: "Satu per dua" }
+                    ];
+                    let chosen = choices[randInt(0, choices.length - 1)];
+                    text = chosen.text;
+                    answer = chosen.ans;
+                    options = ["1/2", "1/3", "1/4", "3/4", "Satu per dua", "Satu per tiga", "Dua per tiga"].filter(o => (o.includes('/') === answer.includes('/')));
+                    if (!options.includes(answer)) options.push(answer);
+                    options = options.slice(0, 4);
+                    explanation = `Simbol atau perkataan bagi pecahan ini ialah ${answer}.`;
+                } else if (topic === 'wang') {
+                    let a = randInt(20, 70);
+                    let b = randInt(5, 20);
+                    rawAns = a + b;
+                    text = `RM${a}.50 + RM${b}.20`;
+                    answer = `RM${rawAns}.70`;
+                    explanation = `Jumlah penambahan wang ini ialah RM${rawAns}.70.`;
+                    options = [`RM${rawAns}.70`, `RM${rawAns + 1}.70`, `RM${rawAns - 1}.50`, `RM${rawAns}.20`];
+                } else if (topic === 'masa') {
+                    let j = randInt(1, 12);
+                    let m = [15, 30, 45][randInt(0, 2)];
+                    let mText = { 15: "suku", 30: "setengah", 45: "tiga suku" };
+                    text = `Pukul ${j}:${m} disebut juga sebagai...`;
+                    answer = `Pukul ${j} ${mText[m]}`;
+                    options = [`Pukul ${j} ${mText[m]}`, `Pukul ${j} tepat`, `Pukul ${j+1} tepat`, `Pukul ${j} sepuluh`];
+                    explanation = `Dalam sebutan jam, minit ${m} dirujuk sebagai ${mText[m]}. Jadi ia adalah Pukul ${j} ${mText[m]}.`;
+                } else {
+                    // Fallback Year 3
+                    let a = randInt(100, 200);
+                    let b = randInt(1, 9);
+                    rawAns = a * b;
+                    text = `${a} darab dengan ${b} ialah...`;
+                    answer = `${rawAns}`;
+                    explanation = `${a} × ${b} = ${rawAns}.`;
+                }
+            } else if (year === 4) {
+                if (topic === 'darab') {
+                    let a = randInt(10, 99);
+                    let b = randInt(10, 25);
+                    rawAns = a * b;
+                    text = `${a} × ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Hasil darab 2-digit dengan 2-digit ${a} × ${b} ialah ${rawAns}.`;
+                } else if (topic === 'bahagi') {
+                    let b = randInt(3, 9);
+                    let rawAns_temp = randInt(100, 250);
+                    let prod = rawAns_temp * b;
+                    rawAns = rawAns_temp;
+                    text = `${prod} ÷ ${b}`;
+                    answer = `${rawAns}`;
+                    explanation = `Hasil bahagi ${prod} dibahagi ${b} ialah ${rawAns}.`;
+                } else if (topic === 'pecahan') {
+                    text = `1/4 + 2/4 = ?`;
+                    answer = `3/4`;
+                    options = [`3/4`, `1/2`, `3/8`, `1/3`];
+                    explanation = `Kerana penyebutnya sama (4), kita cuma perlu menambah pengangka di atas: 1 + 2 = 3. Jawapannya 3/4.`;
+                } else if (topic === 'peratus') {
+                    let prc = [10, 20, 25, 50][randInt(0, 3)];
+                    let val = [100, 200, 400][randInt(0, 2)];
+                    rawAns = (prc / 100) * val;
+                    text = `${prc}% daripada ${val} ialah...`;
+                    answer = `${rawAns}`;
+                    explanation = `${prc}% bersamaan ${prc}/100. Jadi, ${prc}/100 × ${val} = ${rawAns}.`;
+                } else if (topic === 'masa') {
+                    let mula = randInt(1, 4);
+                    let tempoh = randInt(2, 4);
+                    text = `Perjalanan sebuah bas bermula jam ${mula}:00 petang dan tamat jam ${mula + tempoh}:45 petang. Berapakah tempoh masa perjalanan itu?`;
+                    answer = `${tempoh} jam 45 minit`;
+                    options = [`${tempoh} jam 45 minit`, `${tempoh} jam 30 minit`, `${tempoh + 1} jam`, `${tempoh - 1} jam 45 minit`];
+                    explanation = `Masa tamat ditolak masa mula memberikan tempoh perjalanan iaitu ${tempoh} jam 45 minit.`;
+                } else if (topic === 'wang') {
+                    let a = randInt(200, 800);
+                    let b = randInt(50, 150);
+                    rawAns = a - b;
+                    text = `RM${a} - RM${b} = ?`;
+                    answer = `RM${rawAns}`;
+                    explanation = `Pengurangan wang memberikan hasil baki RM${rawAns}.`;
+                    unit = "RM";
+                } else {
+                    // Fallback Year 4
+                    let a = randInt(10, 30);
+                    text = `Nyatakan pecahan 1/4 kepada peratus.`;
+                    answer = `25%`;
+                    options = [`25%`, `50%`, `10%`, `75%`];
+                    explanation = `1/4 × 100% = 25%.`;
+                }
+            } else if (year === 5) {
+                if (topic === 'pecahan') {
+                    let choice = randInt(1, 2);
+                    if (choice === 1) {
+                        text = `1/2 + 1/3 = ?`;
+                        answer = `5/6`;
+                        options = [`5/6`, `2/5`, `2/3`, `3/5`];
+                        explanation = `Samakan penyebut dengan mencari gandaan sepunya terkecil (6): 3/6 + 2/6 = 5/6.`;
+                    } else {
+                        text = `3/4 - 1/2 = ?`;
+                        answer = `1/4`;
+                        options = [`1/4`, `2/4`, `1/2`, `1/3`];
+                        explanation = `Samakan penyebut (4): 3/4 - 2/4 = 1/4.`;
+                    }
+                } else if (topic === 'peratus') {
+                    let prc = [15, 35, 40, 60][randInt(0, 3)];
+                    let val = [200, 300, 500][randInt(0, 2)];
+                    rawAns = (prc / 100) * val;
+                    text = `Kira ${prc}% daripada ${val}.`;
+                    answer = `${rawAns}`;
+                    explanation = `${prc}/100 × ${val} = ${rawAns}.`;
+                } else if (topic === 'wang') {
+                    let kos = [100, 200, 300][randInt(0, 2)];
+                    let disc = [10, 20][randInt(0, 1)];
+                    let potongan = (disc / 100) * kos;
+                    rawAns = kos - potongan;
+                    text = `Sebuah beg berharga RM${kos} dijual dengan diskaun sebanyak ${disc}%. Berapakah harga beg selepas potongan diskaun?`;
+                    answer = `RM${rawAns}`;
+                    explanation = `Diskaun: ${disc}% daripada RM${kos} = RM${potongan}. Harga baharu: RM${kos} - RM${potongan} = RM${rawAns}.`;
+                    unit = "RM";
+                } else if (topic === 'penyelesaian') {
+                    let guli = [120, 150, 200][randInt(0, 2)];
+                    let redPercent = [20, 30, 40][randInt(0, 2)];
+                    let redCount = (redPercent / 100) * guli;
+                    rawAns = guli - redCount;
+                    text = `Siti ada ${guli} biji guli. ${redPercent}% daripada guli itu berwarna merah, manakala bakinya berwarna biru. Berapakah guli biru?`;
+                    answer = `${rawAns}`;
+                    explanation = `Guli Merah: ${redPercent}% daripada ${guli} = ${redCount} biji. Maka, guli biru ialah ${guli} - ${redCount} = ${rawAns} biji.`;
+                } else if (topic === 'masa') {
+                    let hari = randInt(2, 4);
+                    let jam = randInt(2, 10);
+                    rawAns = (hari * 24) + jam;
+                    text = `Tukarkan ${hari} hari ${jam} jam kepada jam sahaja.`;
+                    answer = `${rawAns} jam`;
+                    explanation = `1 hari = 24 jam. Jadi, ${hari} hari = ${hari * 24} jam. Tambah ${jam} jam menjadi ${rawAns} jam.`;
+                    unit = " jam";
+                } else {
+                    // Fallback Year 5
+                    let a = randInt(200, 400);
+                    let b = randInt(11, 15);
+                    rawAns = a * b;
+                    text = `Sebuah kilang menghasilkan ${a} kotak sehari. Berapakah kotak yang dihasilkan dalam ${b} hari?`;
+                    answer = `${rawAns}`;
+                    explanation = `${a} × ${b} = ${rawAns}.`;
+                }
+            } else if (year === 6) {
+                if (topic === 'pecahan') {
+                    text = `1 1/2 + 2 1/4 = ?`;
+                    answer = `3 3/4`;
+                    options = [`3 3/4`, `3 1/2`, `4 1/4`, `3 2/3`];
+                    explanation = `Tambahkan nombor bulat: 1 + 2 = 3. Tambahkan pecahan: 1/2 + 1/4 = 2/4 + 1/4 = 3/4. Keputusan: 3 3/4.`;
+                } else if (topic === 'peratus') {
+                    let kos = [50, 80, 100, 150][randInt(0, 3)];
+                    let sst = 6;
+                    let tax = (sst / 100) * kos;
+                    let total = kos + tax;
+                    answer = `RM${total.toFixed(2)}`;
+                    text = `Harga sehelai baju ialah RM${kos} sebelum cukai SST. Kedai mengenakan cukai perkhidmatan (SST) sebanyak ${sst}%. Berapakah bayaran keseluruhan baju tersebut?`;
+                    options = [`RM${total.toFixed(2)}`, `RM${(total + 5).toFixed(2)}`, `RM${(kos - tax).toFixed(2)}`, `RM${(kos + 10).toFixed(2)}`];
+                    explanation = `Cukai SST: 6% daripada RM${kos} = RM${tax.toFixed(2)}. Jumlah harga baru: RM${kos} + RM${tax.toFixed(2)} = RM${total.toFixed(2)}.`;
+                } else if (topic === 'wang') {
+                    let kos = [400, 500, 800][randInt(0, 2)];
+                    let untungPercent = [10, 15, 20][randInt(0, 2)];
+                    let margin = (untungPercent / 100) * kos;
+                    rawAns = kos + margin;
+                    text = `Seorang peniaga membeli telefon pintar dengan harga kos RM${kos} dan menjualnya semula dengan kadar untung ${untungPercent}%. Berapakah harga jual bagi telefon pintar tersebut?`;
+                    answer = `RM${rawAns}`;
+                    explanation = `Keuntungan diperoleh: ${untungPercent}% daripada RM${kos} = RM${margin}. Harga jualan: RM${kos} + RM${margin} = RM${rawAns}.`;
+                    unit = "RM";
+                } else if (topic === 'masa') {
+                    let novel = randInt(2, 4);
+                    let hari = novel * 7;
+                    text = `Siti mengambil masa selama ${novel} minggu untuk menamatkan bacaan novelnya. Berapakah jumlah HARI yang diambil oleh Siti?`;
+                    answer = `${hari} hari`;
+                    explanation = `1 minggu mengandungi 7 hari. Maka, ${novel} minggu bersamaan ${novel} × 7 = ${hari} hari.`;
+                    unit = " hari";
+                } else if (topic === 'penyelesaian') {
+                    let rRatio = 2;
+                    let bRatio = 3;
+                    let multiplier = [4, 5, 8][randInt(0, 2)];
+                    let redCount = rRatio * multiplier;
+                    let totalCount = (rRatio + bRatio) * multiplier;
+                    text = `Nisbah guli merah kepada guli biru di dalam bekas ialah 2:3. Jika guli merah adalah sebanyak ${redCount} biji, berapakah JUMLAH keseluruhan guli di dalam bekas?`;
+                    answer = `${totalCount}`;
+                    explanation = `Nisbah 2:3 bermakna jika Merah = ${redCount} (2 × ${multiplier}), Biru = 3 × ${multiplier} = ${bRatio * multiplier}. Jumlah keseluruhan: ${redCount} + ${bRatio * multiplier} = ${totalCount}.`;
+                } else {
+                    // Fallback Year 6
+                    let a = randInt(10, 20);
+                    let b = randInt(2, 5);
+                    rawAns = a * b;
+                    text = `Cari nilai bagi ${a} kumpulan masing-masing mempunyai ${b} bahagian.`;
+                    answer = `${rawAns}`;
+                    explanation = `${a} × ${b} = ${rawAns}.`;
+                }
+            }
+
+            return {
+                text,
+                answer,
+                explanation,
+                rawAns,
+                unit,
+                options,
+                id: `${year}_${topic}_${text.substring(0, 20).replace(/\s+/g, '')}`
+            };
+        }
+
+        function formatQuestionToSession(baseQ, formatType) {
+            let q = {
+                id: baseQ.id,
+                type: formatType,
+                questionText: baseQ.text,
+                correctAnswer: baseQ.answer,
+                explanation: baseQ.explanation,
+                options: []
+            };
+
+            if (formatType === 'mcq') {
+                let optionsSet = new Set();
+                optionsSet.add(baseQ.answer);
+
+                if (baseQ.options) {
+                    baseQ.options.forEach(o => optionsSet.add(o));
+                } else {
+                    let raw = baseQ.rawAns;
+                    let unit = baseQ.unit || "";
+                    let isRM = unit === "RM";
+
+                    let attempts = 0;
+                    while (optionsSet.size < 4 && attempts < 100) {
+                        attempts++;
+                        let diff = randInt(1, 10);
+                        let sign = Math.random() > 0.5 ? 1 : -1;
+                        let fakeVal = raw + (sign * diff);
+                        if (fakeVal <= 0) fakeVal = raw + diff + 2;
+
+                        let fakeStr = isRM ? `RM${fakeVal}` : `${fakeVal}${unit}`;
+                        optionsSet.add(fakeStr);
+                    }
+                }
+                q.options = Array.from(optionsSet).sort(() => Math.random() - 0.5);
+            } else if (formatType === 'tf') {
+                let isTrue = Math.random() > 0.5;
+                let displayAns = baseQ.answer;
+
+                if (!isTrue) {
+                    if (baseQ.options) {
+                        let wrongOptions = baseQ.options.filter(o => o !== baseQ.answer);
+                        displayAns = wrongOptions[randInt(0, wrongOptions.length - 1)] || "Salah";
+                    } else {
+                        let raw = baseQ.rawAns;
+                        let unit = baseQ.unit || "";
+                        let isRM = unit === "RM";
+                        let diff = randInt(1, 5);
+                        let fakeVal = raw + (Math.random() > 0.5 ? diff : -diff);
+                        if (fakeVal <= 0) fakeVal = raw + diff + 1;
+                        displayAns = isRM ? `RM${fakeVal}` : `${fakeVal}${unit}`;
+                    }
+                }
+
+                q.questionText = `Adakah penyataan matematik ini betul?\n\n"${baseQ.text} = ${displayAns}"`;
+                q.correctAnswer = isTrue ? "Benar" : "Palsu";
+                q.options = ["Benar", "Palsu"];
+            } else {
+                q.options = [];
+            }
+
+            return q;
+        }
+
+        /* ==================================================
+           SISTEM PENJANAAN SESI KUIZ (TIADA ULANGAN)
+           ================================================== */
+        function startQuiz() {
+            const year = parseInt(document.getElementById('config-year').value);
+            const countRadio = document.querySelector('input[name="config-count"]:checked');
+            const totalQs = parseInt(countRadio ? countRadio.value : 10);
+
+            // get selected topics
+            const selectedTopics = [];
+            document.querySelectorAll('input[name="topic"]:checked').forEach(cb => {
+                selectedTopics.push(cb.value);
+            });
+
+            if (selectedTopics.length === 0) {
+                alert("Sila pilih sekurang-kurangnya SATU topik matematik untuk memulakan kuiz!");
+                return;
+            }
+
+            currentQuestionsList = [];
+            let uniqueIds = new Set();
+            let attempts = 0;
+
+            while (currentQuestionsList.length < totalQs && attempts < 200) {
+                attempts++;
+                let randomTopic = selectedTopics[randInt(0, selectedTopics.length - 1)];
+                let baseQ = getBaseQuestion(year, randomTopic);
+
+                if (!uniqueIds.has(baseQ.id)) {
+                    uniqueIds.add(baseQ.id);
+
+                    // Randomize question format: Objective (mcq), Fill Blank (fill), True-False (tf)
+                    let formats = ['mcq', 'fill', 'tf'];
+                    let chosenFormat = formats[randInt(0, formats.length - 1)];
+
+                    let formattedQ = formatQuestionToSession(baseQ, chosenFormat);
+                    formattedQ.topic = randomTopic;
+                    currentQuestionsList.push(formattedQ);
+                }
+            }
+
+            // Fallback if unique generator failed to reach target due to limits
+            if (currentQuestionsList.length < totalQs) {
+                let diff = totalQs - currentQuestionsList.length;
+                for (let i = 0; i < diff; i++) {
+                    let randomTopic = selectedTopics[randInt(0, selectedTopics.length - 1)];
+                    let baseQ = getBaseQuestion(year, randomTopic);
+                    let formattedQ = formatQuestionToSession(baseQ, 'mcq');
+                    formattedQ.topic = randomTopic;
+                    currentQuestionsList.push(formattedQ);
+                }
+            }
+
+            // Init quiz parameters
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            elapsedSeconds = 0;
+
+            state.quizSession = {
+                year: year,
+                topics: selectedTopics,
+                totalQs: totalQs
+            };
+
+            startTimer();
+            showSection('quiz-section');
+            renderQuestion();
+        }
+
+        /* ==================================================
+           PEMASA (TIMER)
+           ================================================== */
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            document.getElementById('quiz-timer').innerText = "00:00";
+            
+            timerInterval = setInterval(() => {
+                elapsedSeconds++;
+                let min = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
+                let sec = String(elapsedSeconds % 60).padStart(2, '0');
+                document.getElementById('quiz-timer').innerText = `${min}:${sec}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+        }
+
+        /* ==================================================
+           ANTARAMUKA KUIZ & PAPARAN SOALAN
+           ================================================== */
+        function renderQuestion() {
+            const currentQ = currentQuestionsList[currentQuestionIndex];
+            
+            // Hide feedback alert
+            const feedbackAlert = document.getElementById('feedback-alert');
+            feedbackAlert.classList.add('hidden');
+
+            // Set general headers
+            document.getElementById('quiz-current-num').innerText = currentQuestionIndex + 1;
+            document.getElementById('quiz-total-num').innerText = currentQuestionsList.length;
+            document.getElementById('quiz-score').innerText = quizScore;
+            
+            // Progress Bar
+            let progress = ((currentQuestionIndex) / currentQuestionsList.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
+
+            // Topic Badge
+            const badge = document.getElementById('question-topic-badge');
+            badge.innerText = currentQ.topic.toUpperCase();
+
+            // Text
+            document.getElementById('question-text').innerText = currentQ.questionText;
+
+            // Render Inputs
+            const answerContainer = document.getElementById('answer-container');
+            answerContainer.innerHTML = '';
+
+            if (currentQ.type === 'mcq' || currentQ.type === 'tf') {
+                const gridClass = currentQ.type === 'tf' ? 'grid grid-cols-2 gap-4' : 'grid grid-cols-1 sm:grid-cols-2 gap-3';
+                let html = `<div class="${gridClass}">`;
+                
+                currentQ.options.forEach((opt, idx) => {
+                    html += `
+                        <button onclick="checkAnswer('${opt}', this)" class="btn-playful py-4 px-6 bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 text-left font-semibold text-lg rounded-2xl border-2 border-slate-200 dark:border-slate-700 shadow-sm transition">
+                            <span class="inline-block w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 text-center leading-8 mr-2 text-sm text-slate-500 font-bold">${String.fromCharCode(65 + idx)}</span>
+                            <span>${opt}</span>
+                        </button>
+                    `;
+                });
+                html += '</div>';
+                answerContainer.innerHTML = html;
+            } else if (currentQ.type === 'fill') {
+                answerContainer.innerHTML = `
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="fill-answer" class="flex-1 px-5 py-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg font-bold focus:outline-none focus:border-blue-500" placeholder="Tulis jawapan anda di sini...">
+                        <button onclick="checkFillAnswer()" class="btn-playful px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-fun font-bold text-lg rounded-2xl shadow-md">
+                            Hantar 🚀
+                        </button>
+                    </div>
+                `;
+                // Add event listener for Enter key
+                document.getElementById('fill-answer').addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkFillAnswer();
+                    }
+                });
+            }
+        }
+
+        /* ==================================================
+           SEMAKAN JAWAPAN & MAKLUMBALAS
+           ================================================== */
+        function cleanString(str) {
+            return str.toString().toLowerCase().replace(/[^a-z0-9]/g, '').trim();
+        }
+
+        function checkFillAnswer() {
+            const userInp = document.getElementById('fill-answer').value.trim();
+            if (!userInp) return; // Prevent empty submission
+            checkAnswer(userInp, null);
+        }
+
+        function checkAnswer(userAnswer, buttonElement) {
+            const currentQ = currentQuestionsList[currentQuestionIndex];
+            const isCorrect = cleanString(userAnswer) === cleanString(currentQ.correctAnswer);
+
+            // Disable all option buttons/inputs to prevent multi-clicks
+            const buttons = document.querySelectorAll('#answer-container button');
+            buttons.forEach(btn => btn.disabled = true);
+            const fillInp = document.getElementById('fill-answer');
+            if (fillInp) fillInp.disabled = true;
+
+            const feedbackAlert = document.getElementById('feedback-alert');
+            feedbackAlert.classList.remove('hidden');
+
+            if (isCorrect) {
+                quizScore++;
+                document.getElementById('quiz-score').innerText = quizScore;
+                
+                feedbackAlert.className = "p-4 rounded-2xl mb-4 text-center text-lg font-bold animate-bounce bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800";
+                feedbackAlert.innerHTML = `🎉 BETUL! Hebat sekali. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
+                
+                if (buttonElement) {
+                    buttonElement.classList.add('bg-emerald-100', 'dark:bg-emerald-950/60', 'border-emerald-500', 'text-emerald-700', 'dark:text-emerald-300');
+                }
+            } else {
+                feedbackAlert.className = "p-4 rounded-2xl mb-4 text-center text-lg font-bold animate-shake bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800";
+                feedbackAlert.innerHTML = `❌ SALAH. Jawapan betul ialah <strong>${currentQ.correctAnswer}</strong>. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
+                
+                if (buttonElement) {
+                    buttonElement.classList.add('bg-red-100', 'dark:bg-red-950/60', 'border-red-500', 'text-red-700', 'dark:text-red-300');
+                }
+            }
+
+            // Move to next question automatically after 2 seconds (giving time to read explanation)
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < currentQuestionsList.length) {
+                    renderQuestion();
+                } else {
+                    finishQuiz();
+                }
+            }, 2200);
+        }
+
+        /* ==================================================
+           HALAMAN KEPUTUSAN & GANJARAN (GAMIFIKASI)
+           ================================================== */
+        function finishQuiz() {
+            stopTimer();
+            
+            const totalQs = currentQuestionsList.length;
+            const percentage = Math.round((quizScore / totalQs) * 100);
+            
+            // Determine Grade & Theme Color
+            let gred = "E";
+            let gredColorClass = "text-red-500";
+            if (percentage >= 90) { gred = "A+"; gredColorClass = "text-yellow-500 drop-shadow"; }
+            else if (percentage >= 80) { gred = "A"; gredColorClass = "text-emerald-500"; }
+            else if (percentage >= 70) { gred = "B"; gredColorClass = "text-blue-500"; }
+            else if (percentage >= 60) { gred = "C"; gredColorClass = "text-amber-500"; }
+            else if (percentage >= 50) { gred = "D"; gredColorClass = "text-orange-600"; }
+
+            // Determine Gamification Badges
+            let badgeEmoji = "❌";
+            let badgeName = "Tiada Lencana";
+            let badgeDesc = "Belajar lagi untuk dapatkan lencana kelulusan!";
+            
+            if (percentage >= 90) {
+                badgeEmoji = "🥇";
+                badgeName = "Lencana Emas";
+                badgeDesc = "Sangat Pintar! Anda seorang pakar matematik!";
+                triggerConfetti();
+            } else if (percentage >= 70) {
+                badgeEmoji = "🥈";
+                badgeName = "Lencana Perak";
+                badgeDesc = "Hebat! Teruskan usaha gemilang anda!";
+                triggerConfetti();
+            } else if (percentage >= 50) {
+                badgeEmoji = "🥉";
+                badgeName = "Lencana Gangsa";
+                badgeDesc = "Syabas! Anda berjaya melepasi tahap kelulusan!";
+            }
+
+            // Save results into memory and storage
+            const elapsedMin = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
+            const elapsedSec = String(elapsedSeconds % 60).padStart(2, '0');
+            const timeStr = `${elapsedMin}:${elapsedSec}`;
+
+            const record = {
+                name: state.currentUser,
+                date: new Date().toISOString(),
+                year: state.quizSession.year,
+                topics: state.quizSession.topics,
+                totalQs: totalQs,
+                correct: quizScore,
+                percentage: percentage,
+                elapsed: timeStr
+            };
+
+            state.history.push(record);
+            localStorage.setItem('bijak_mat_history', JSON.stringify(state.history));
+
+            // Populate DOM Results
+            document.getElementById('res-score').innerText = `${quizScore}/${totalQs}`;
+            document.getElementById('res-percentage').innerText = `${percentage}%`;
+            document.getElementById('res-grade').innerText = gred;
+            document.getElementById('res-grade').className = `text-4xl font-black ${gredColorClass}`;
+            document.getElementById('res-time').innerText = timeStr;
+            
+            document.getElementById('res-username').innerText = state.currentUser;
+            document.getElementById('res-date').innerText = new Date().toLocaleDateString('ms-MY', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('res-year').innerText = state.quizSession.year;
+            document.getElementById('res-topics').innerText = state.quizSession.topics.map(t => t.toUpperCase()).join(', ');
+
+            // Set badge details
+            document.getElementById('reward-badge-emoji').innerText = badgeEmoji;
+            document.getElementById('reward-badge-name').innerText = badgeName;
+            document.getElementById('reward-badge-desc').innerText = badgeDesc;
+
+            showSection('result-section');
+        }
+
+        function triggerConfetti() {
+            const duration = 2 * 1000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 4,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 4,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        /* ==================================================
+           BUTANG INTERAKTIF SELEPAS KUIZ
+           ================================================== */
+        function restartQuizWithSameSettings() {
+            startQuiz();
+        }
+
+        function goToDashboard() {
+            showDashboard();
+        }
+
+        function resetToNewQuiz() {
+            showDashboard();
+        }
+    </script>
+</body>
+</html>
