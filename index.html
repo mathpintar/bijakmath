@@ -32,7 +32,7 @@
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- Canvas Confetti CDN (Ganjaran animasi) -->
+    <!-- Canvas Confetti CDN -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <!-- Custom Style & Glassmorphism -->
@@ -55,7 +55,6 @@
         h1, h2, h3, .font-fun {
             font-family: 'Fredoka', sans-serif;
         }
-        /* Bounce & Hover animations */
         .btn-playful {
             transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -150,7 +149,7 @@
                     <!-- Year Picker -->
                     <div class="mb-4">
                         <label class="block text-sm font-semibold mb-2">Pilih Tahun Pembelajaran:</label>
-                        <select id="config-year" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <select id="config-year" onchange="triggerClickSound()" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400">
                             <option value="1">Tahun 1 (Asas/Mudah)</option>
                             <option value="2">Tahun 2</option>
                             <option value="3">Tahun 3</option>
@@ -164,15 +163,15 @@
                     <div class="mb-5">
                         <label class="block text-sm font-semibold mb-2">Bilangan Soalan:</label>
                         <div class="grid grid-cols-3 gap-3">
-                            <label class="cursor-pointer">
+                            <label class="cursor-pointer" onclick="triggerClickSound()">
                                 <input type="radio" name="config-count" value="10" checked class="sr-only peer">
                                 <div class="p-3 text-center rounded-xl border border-slate-300 dark:border-slate-700 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 font-bold transition">10 Soalan</div>
                             </label>
-                            <label class="cursor-pointer">
+                            <label class="cursor-pointer" onclick="triggerClickSound()">
                                 <input type="radio" name="config-count" value="20" class="sr-only peer">
                                 <div class="p-3 text-center rounded-xl border border-slate-300 dark:border-slate-700 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 font-bold transition">20 Soalan</div>
                             </label>
-                            <label class="cursor-pointer">
+                            <label class="cursor-pointer" onclick="triggerClickSound()">
                                 <input type="radio" name="config-count" value="50" class="sr-only peer">
                                 <div class="p-3 text-center rounded-xl border border-slate-300 dark:border-slate-700 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 font-bold transition">50 Soalan</div>
                             </label>
@@ -189,41 +188,41 @@
                             </label>
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="topics-grid">
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="tambah" checked class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">➕ Tambah</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="tolak" checked class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">➖ Tolak</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="darab" class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">✖️ Darab</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="bahagi" class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">➗ Bahagi</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="pecahan" class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">🍰 Pecahan</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="wang" class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">💵 Wang</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="peratus" class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">📈 Peratus</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="masa" class="rounded text-blue-500 focus:ring-0">
                                 <span class="text-sm font-semibold">⏰ Masa</span>
                             </label>
-                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition">
+                            <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="penyelesaian" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">🧩 Soalan Berayat</span>
+                                <span class="text-sm font-semibold">🧩 Penyelesaian Masalah</span>
                             </label>
                         </div>
                     </div>
@@ -287,8 +286,13 @@
             <div class="glass-card rounded-3xl p-6 shadow-xl mb-4">
                 <!-- Status bar -->
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
-                    <div class="flex items-center gap-2 bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 px-4 py-1.5 rounded-full font-bold text-sm">
-                        <span>Soalan <span id="quiz-current-num">1</span> daripada <span id="quiz-total-num">10</span></span>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="flex items-center gap-2 bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 px-4 py-1.5 rounded-full font-bold text-sm">
+                            <span>Soalan <span id="quiz-current-num">1</span> daripada <span id="quiz-total-num">10</span></span>
+                        </div>
+                        <button onclick="exitQuizMidway()" class="px-3 py-1.5 bg-red-100 hover:bg-red-200 dark:bg-red-950/40 dark:hover:bg-red-900/60 text-red-600 dark:text-red-400 font-bold rounded-xl text-xs transition duration-150 flex items-center gap-1 shadow-sm">
+                            <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                        </button>
                     </div>
                     <div class="flex gap-4 items-center">
                         <div class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
@@ -429,16 +433,119 @@
         }
 
         /* ==================================================
+           SISTEM BUNYI DINAMIK (WEB AUDIO API)
+           ================================================== */
+        let audioCtx = null;
+        
+        function initAudio() {
+            if (!audioCtx) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) {
+                    console.warn("Web Audio API tidak disokong pada pelayar ini.");
+                }
+            }
+        }
+
+        function playSound(type) {
+            initAudio();
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                // Bunyi klik ringkas (Subtle pop)
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.frequency.setValueAtTime(450, now);
+                osc.frequency.exponentialRampToValueAtTime(100, now + 0.06);
+                
+                gain.gain.setValueAtTime(0.04, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.06);
+                
+                osc.start(now);
+                osc.stop(now + 0.06);
+            } 
+            else if (type === 'correct') {
+                // Bunyi betul ceria (Rising major chord)
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5 -> E5 -> G5 -> C6
+                notes.forEach((freq, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.frequency.setValueAtTime(freq, now + index * 0.08);
+                    
+                    gain.gain.setValueAtTime(0.06, now + index * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.08 + 0.15);
+                    
+                    osc.start(now + index * 0.08);
+                    osc.stop(now + index * 0.08 + 0.15);
+                });
+            } 
+            else if (type === 'wrong') {
+                // Bunyi salah (Retro low buzz)
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.frequency.setValueAtTime(140, now);
+                osc.frequency.linearRampToValueAtTime(80, now + 0.28);
+                
+                gain.gain.setValueAtTime(0.08, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.28);
+                
+                osc.start(now);
+                osc.stop(now + 0.28);
+            } 
+            else if (type === 'fanfare') {
+                // Bunyi menang gemilang (Cheerful fanfare)
+                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5 -> E5 -> G5 -> C6 -> E6
+                notes.forEach((freq, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.frequency.setValueAtTime(freq, now + index * 0.12);
+                    
+                    gain.gain.setValueAtTime(0.08, now + index * 0.12);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.12 + 0.35);
+                    
+                    osc.start(now + index * 0.12);
+                    osc.stop(now + index * 0.12 + 0.35);
+                });
+            }
+        }
+
+        function triggerClickSound() {
+            playSound('click');
+        }
+
+        /* ==================================================
            THEME SYSTEM
            ================================================== */
         function toggleTheme() {
+            playSound('click');
             const isDark = document.documentElement.classList.contains('dark');
             const newTheme = isDark ? 'light' : 'dark';
             document.documentElement.className = newTheme;
             localStorage.setItem('bijak_mat_theme', newTheme);
             updateThemeButtonText(newTheme);
             if (performanceChartInstance) {
-                renderPerformanceChart(); // redraw with adapted text colors
+                renderPerformanceChart();
             }
         }
 
@@ -451,6 +558,7 @@
            LOGIN / SIGN UP SYSTEM
            ================================================== */
         function handleRegister() {
+            playSound('click');
             const nameInput = document.getElementById('user-name').value.trim();
             const errorElement = document.getElementById('login-error');
 
@@ -460,7 +568,6 @@
                 return;
             }
 
-            // check if user already exists
             const existingUser = state.users.find(u => u.name.toLowerCase() === nameInput.toLowerCase());
             if (existingUser) {
                 errorElement.innerText = "⚠️ Nama ini telah didaftarkan. Sila gunakan nama lain atau klik Log Masuk.";
@@ -476,6 +583,7 @@
         }
 
         function handleLogin() {
+            playSound('click');
             const nameInput = document.getElementById('user-name').value.trim();
             const errorElement = document.getElementById('login-error');
 
@@ -504,6 +612,7 @@
         }
 
         function handleLogout() {
+            playSound('click');
             localStorage.removeItem('bijak_mat_active_user');
             state.currentUser = null;
             showSection('login-section');
@@ -523,7 +632,6 @@
             const userHistory = state.history.filter(h => h.name.toLowerCase() === state.currentUser.toLowerCase());
             const totalQuizzes = userHistory.length;
             
-            let totalScore = 0;
             let totalCorrect = 0;
             let totalQs = 0;
 
@@ -540,6 +648,7 @@
         }
 
         function toggleSelectAllTopics(masterCheckbox) {
+            playSound('click');
             const checkboxes = document.querySelectorAll('input[name="topic"]');
             checkboxes.forEach(cb => {
                 cb.checked = masterCheckbox.checked;
@@ -547,6 +656,7 @@
         }
 
         function toggleHistoryView() {
+            playSound('click');
             const container = document.getElementById('history-container');
             container.classList.toggle('hidden');
             if (!container.classList.contains('hidden')) {
@@ -582,8 +692,8 @@
         }
 
         function clearHistory() {
+            playSound('click');
             if (confirm("Adakah anda pasti mahu memadam semua sejarah prestasi anda?")) {
-                // Keep only other users history
                 state.history = state.history.filter(h => h.name.toLowerCase() !== state.currentUser.toLowerCase());
                 localStorage.setItem('bijak_mat_history', JSON.stringify(state.history));
                 calculateDashboardStats();
@@ -662,6 +772,7 @@
             let explanation = "";
             let rawAns = 0;
             let unit = "";
+            let unitPosition = "suffix"; // 'prefix' (eg. RM) atau 'suffix' (eg. sen)
             let options = null;
 
             if (year === 1) {
@@ -688,6 +799,7 @@
                         answer = `RM${rawAns}`;
                         explanation = `RM${a} ditambah dengan RM${b} menghasilkan RM${rawAns}.`;
                         unit = "RM";
+                        unitPosition = "prefix";
                     } else {
                         let values = [10, 20, 30, 40, 50];
                         let a = values[randInt(0, 4)];
@@ -697,6 +809,7 @@
                         answer = `${rawAns} sen`;
                         explanation = `${a} sen tambah ${b} sen bersamaan ${rawAns} sen.`;
                         unit = " sen";
+                        unitPosition = "suffix";
                     }
                 } else if (topic === 'masa') {
                     let jam = randInt(1, 12);
@@ -705,8 +818,9 @@
                     rawAns = jam;
                     explanation = `Jarum pendek menunjuk jam manakala jarum panjang di 12 menandakan waktu tepat. Jadi ia adalah Pukul ${jam}.`;
                     unit = "Pukul ";
+                    unitPosition = "prefix";
                 } else {
-                    // Fallback Year 1
+                    // Fallback Year 1 (Penyelesaian Masalah)
                     let a = randInt(1, 10);
                     let b = randInt(1, 5);
                     rawAns = a + b;
@@ -763,8 +877,9 @@
                     answer = `RM${rawAns}`;
                     explanation = `RM${a} - RM${b} = RM${rawAns}. Baki wang ialah RM${rawAns}.`;
                     unit = "RM";
+                    unitPosition = "prefix";
                 } else {
-                    // Fallback Year 2
+                    // Fallback Year 2 (Penyelesaian Masalah)
                     let a = randInt(5, 9);
                     let b = randInt(2, 5);
                     rawAns = a * b;
@@ -811,9 +926,11 @@
                     let chosen = choices[randInt(0, choices.length - 1)];
                     text = chosen.text;
                     answer = chosen.ans;
-                    options = ["1/2", "1/3", "1/4", "3/4", "Satu per dua", "Satu per tiga", "Dua per tiga"].filter(o => (o.includes('/') === answer.includes('/')));
-                    if (!options.includes(answer)) options.push(answer);
-                    options = options.slice(0, 4);
+                    if (chosen.ans.includes('/')) {
+                        options = ["1/2", "1/3", "1/4", "3/4"];
+                    } else {
+                        options = ["Satu per dua", "Satu per tiga", "Satu per empat", "Tiga per empat"];
+                    }
                     explanation = `Simbol atau perkataan bagi pecahan ini ialah ${answer}.`;
                 } else if (topic === 'wang') {
                     let a = randInt(20, 70);
@@ -832,11 +949,11 @@
                     options = [`Pukul ${j} ${mText[m]}`, `Pukul ${j} tepat`, `Pukul ${j+1} tepat`, `Pukul ${j} sepuluh`];
                     explanation = `Dalam sebutan jam, minit ${m} dirujuk sebagai ${mText[m]}. Jadi ia adalah Pukul ${j} ${mText[m]}.`;
                 } else {
-                    // Fallback Year 3
+                    // Fallback Year 3 (Penyelesaian Masalah)
                     let a = randInt(100, 200);
                     let b = randInt(1, 9);
                     rawAns = a * b;
-                    text = `${a} darab dengan ${b} ialah...`;
+                    text = `Bapa membeli ${b} buah kotak yang mengandungi ${a} batang pensel setiap satu. Berapakah jumlah pensel kesemuanya?`;
                     answer = `${rawAns}`;
                     explanation = `${a} × ${b} = ${rawAns}.`;
                 }
@@ -883,10 +1000,10 @@
                     answer = `RM${rawAns}`;
                     explanation = `Pengurangan wang memberikan hasil baki RM${rawAns}.`;
                     unit = "RM";
+                    unitPosition = "prefix";
                 } else {
-                    // Fallback Year 4
-                    let a = randInt(10, 30);
-                    text = `Nyatakan pecahan 1/4 kepada peratus.`;
+                    // Fallback Year 4 (Penyelesaian Masalah)
+                    text = `Tukarkan pecahan 1/4 kepada peratus.`;
                     answer = `25%`;
                     options = [`25%`, `50%`, `10%`, `75%`];
                     explanation = `1/4 × 100% = 25%.`;
@@ -921,6 +1038,7 @@
                     answer = `RM${rawAns}`;
                     explanation = `Diskaun: ${disc}% daripada RM${kos} = RM${potongan}. Harga baharu: RM${kos} - RM${potongan} = RM${rawAns}.`;
                     unit = "RM";
+                    unitPosition = "prefix";
                 } else if (topic === 'penyelesaian') {
                     let guli = [120, 150, 200][randInt(0, 2)];
                     let redPercent = [20, 30, 40][randInt(0, 2)];
@@ -937,12 +1055,13 @@
                     answer = `${rawAns} jam`;
                     explanation = `1 hari = 24 jam. Jadi, ${hari} hari = ${hari * 24} jam. Tambah ${jam} jam menjadi ${rawAns} jam.`;
                     unit = " jam";
+                    unitPosition = "suffix";
                 } else {
-                    // Fallback Year 5
+                    // Fallback Year 5 (Penyelesaian Masalah)
                     let a = randInt(200, 400);
                     let b = randInt(11, 15);
                     rawAns = a * b;
-                    text = `Sebuah kilang menghasilkan ${a} kotak sehari. Berapakah kotak yang dihasilkan dalam ${b} hari?`;
+                    text = `Sebuah kilang menghasilkan ${a} buah kotak sehari. Berapakah kotak yang dihasilkan dalam masa ${b} hari?`;
                     answer = `${rawAns}`;
                     explanation = `${a} × ${b} = ${rawAns}.`;
                 }
@@ -970,6 +1089,7 @@
                     answer = `RM${rawAns}`;
                     explanation = `Keuntungan diperoleh: ${untungPercent}% daripada RM${kos} = RM${margin}. Harga jualan: RM${kos} + RM${margin} = RM${rawAns}.`;
                     unit = "RM";
+                    unitPosition = "prefix";
                 } else if (topic === 'masa') {
                     let novel = randInt(2, 4);
                     let hari = novel * 7;
@@ -977,6 +1097,7 @@
                     answer = `${hari} hari`;
                     explanation = `1 minggu mengandungi 7 hari. Maka, ${novel} minggu bersamaan ${novel} × 7 = ${hari} hari.`;
                     unit = " hari";
+                    unitPosition = "suffix";
                 } else if (topic === 'penyelesaian') {
                     let rRatio = 2;
                     let bRatio = 3;
@@ -987,11 +1108,11 @@
                     answer = `${totalCount}`;
                     explanation = `Nisbah 2:3 bermakna jika Merah = ${redCount} (2 × ${multiplier}), Biru = 3 × ${multiplier} = ${bRatio * multiplier}. Jumlah keseluruhan: ${redCount} + ${bRatio * multiplier} = ${totalCount}.`;
                 } else {
-                    // Fallback Year 6
+                    // Fallback Year 6 (Penyelesaian Masalah)
                     let a = randInt(10, 20);
                     let b = randInt(2, 5);
                     rawAns = a * b;
-                    text = `Cari nilai bagi ${a} kumpulan masing-masing mempunyai ${b} bahagian.`;
+                    text = `Sebuah kilang mempunyai ${a} buah lorong. Setiap lorong memuatkan ${b} buah jentera janaan. Berapakah jumlah keseluruhan jentera?`;
                     answer = `${rawAns}`;
                     explanation = `${a} × ${b} = ${rawAns}.`;
                 }
@@ -1003,6 +1124,7 @@
                 explanation,
                 rawAns,
                 unit,
+                unitPosition,
                 options,
                 id: `${year}_${topic}_${text.substring(0, 20).replace(/\s+/g, '')}`
             };
@@ -1027,7 +1149,7 @@
                 } else {
                     let raw = baseQ.rawAns;
                     let unit = baseQ.unit || "";
-                    let isRM = unit === "RM";
+                    let unitPos = baseQ.unitPosition || "suffix";
 
                     let attempts = 0;
                     while (optionsSet.size < 4 && attempts < 100) {
@@ -1037,7 +1159,12 @@
                         let fakeVal = raw + (sign * diff);
                         if (fakeVal <= 0) fakeVal = raw + diff + 2;
 
-                        let fakeStr = isRM ? `RM${fakeVal}` : `${fakeVal}${unit}`;
+                        let fakeStr = "";
+                        if (unitPos === 'prefix') {
+                            fakeStr = `${unit}${fakeVal}`;
+                        } else {
+                            fakeStr = `${fakeVal}${unit}`;
+                        }
                         optionsSet.add(fakeStr);
                     }
                 }
@@ -1053,17 +1180,22 @@
                     } else {
                         let raw = baseQ.rawAns;
                         let unit = baseQ.unit || "";
-                        let isRM = unit === "RM";
+                        let unitPos = baseQ.unitPosition || "suffix";
                         let diff = randInt(1, 5);
                         let fakeVal = raw + (Math.random() > 0.5 ? diff : -diff);
                         if (fakeVal <= 0) fakeVal = raw + diff + 1;
-                        displayAns = isRM ? `RM${fakeVal}` : `${fakeVal}${unit}`;
+                        
+                        if (unitPos === 'prefix') {
+                            displayAns = `${unit}${fakeVal}`;
+                        } else {
+                            displayAns = `${fakeVal}${unit}`;
+                        }
                     }
                 }
 
                 q.questionText = `Adakah penyataan matematik ini betul?\n\n"${baseQ.text} = ${displayAns}"`;
-                q.correctAnswer = isTrue ? "Benar" : "Palsu";
-                q.options = ["Benar", "Palsu"];
+                q.correctAnswer = isTrue ? "Benar" : "Salah";
+                q.options = ["Benar", "Salah"];
             } else {
                 q.options = [];
             }
@@ -1075,11 +1207,11 @@
            SISTEM PENJANAAN SESI KUIZ (TIADA ULANGAN)
            ================================================== */
         function startQuiz() {
+            playSound('click');
             const year = parseInt(document.getElementById('config-year').value);
             const countRadio = document.querySelector('input[name="config-count"]:checked');
             const totalQs = parseInt(countRadio ? countRadio.value : 10);
 
-            // get selected topics
             const selectedTopics = [];
             document.querySelectorAll('input[name="topic"]:checked').forEach(cb => {
                 selectedTopics.push(cb.value);
@@ -1102,42 +1234,49 @@
                 if (!uniqueIds.has(baseQ.id)) {
                     uniqueIds.add(baseQ.id);
 
-                    // Randomize question format: Objective (mcq), Fill Blank (fill), True-False (tf)
+                    // Pilihan format rawak: Objektif (mcq), Isi Tempat Kosong (fill), Benar/Salah (tf)
                     let formats = ['mcq', 'fill', 'tf'];
                     let chosenFormat = formats[randInt(0, formats.length - 1)];
 
                     let formattedQ = formatQuestionToSession(baseQ, chosenFormat);
-                    formattedQ.topic = randomTopic;
+                    formattedQ.topic = randomTopic === 'penyelesaian' ? 'Penyelesaian Masalah' : randomTopic;
                     currentQuestionsList.push(formattedQ);
                 }
             }
 
-            // Fallback if unique generator failed to reach target due to limits
+            // Fallback sekiranya cubaan menjana keunikan kurang memuaskan
             if (currentQuestionsList.length < totalQs) {
                 let diff = totalQs - currentQuestionsList.length;
                 for (let i = 0; i < diff; i++) {
                     let randomTopic = selectedTopics[randInt(0, selectedTopics.length - 1)];
                     let baseQ = getBaseQuestion(year, randomTopic);
                     let formattedQ = formatQuestionToSession(baseQ, 'mcq');
-                    formattedQ.topic = randomTopic;
+                    formattedQ.topic = randomTopic === 'penyelesaian' ? 'Penyelesaian Masalah' : randomTopic;
                     currentQuestionsList.push(formattedQ);
                 }
             }
 
-            // Init quiz parameters
             currentQuestionIndex = 0;
             quizScore = 0;
             elapsedSeconds = 0;
 
             state.quizSession = {
                 year: year,
-                topics: selectedTopics,
+                topics: selectedTopics.map(t => t === 'penyelesaian' ? 'Penyelesaian Masalah' : t),
                 totalQs: totalQs
             };
 
             startTimer();
             showSection('quiz-section');
             renderQuestion();
+        }
+
+        function exitQuizMidway() {
+            playSound('click');
+            if (confirm("Adakah anda pasti mahu keluar dari kuiz ini? Kemajuan semasa anda tidak akan disimpan.")) {
+                stopTimer();
+                showDashboard();
+            }
         }
 
         /* ==================================================
@@ -1165,27 +1304,21 @@
         function renderQuestion() {
             const currentQ = currentQuestionsList[currentQuestionIndex];
             
-            // Hide feedback alert
             const feedbackAlert = document.getElementById('feedback-alert');
             feedbackAlert.classList.add('hidden');
 
-            // Set general headers
             document.getElementById('quiz-current-num').innerText = currentQuestionIndex + 1;
             document.getElementById('quiz-total-num').innerText = currentQuestionsList.length;
             document.getElementById('quiz-score').innerText = quizScore;
             
-            // Progress Bar
             let progress = ((currentQuestionIndex) / currentQuestionsList.length) * 100;
             document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
 
-            // Topic Badge
             const badge = document.getElementById('question-topic-badge');
             badge.innerText = currentQ.topic.toUpperCase();
 
-            // Text
             document.getElementById('question-text').innerText = currentQ.questionText;
 
-            // Render Inputs
             const answerContainer = document.getElementById('answer-container');
             answerContainer.innerHTML = '';
 
@@ -1212,7 +1345,6 @@
                         </button>
                     </div>
                 `;
-                // Add event listener for Enter key
                 document.getElementById('fill-answer').addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
                         checkFillAnswer();
@@ -1230,7 +1362,7 @@
 
         function checkFillAnswer() {
             const userInp = document.getElementById('fill-answer').value.trim();
-            if (!userInp) return; // Prevent empty submission
+            if (!userInp) return;
             checkAnswer(userInp, null);
         }
 
@@ -1238,7 +1370,6 @@
             const currentQ = currentQuestionsList[currentQuestionIndex];
             const isCorrect = cleanString(userAnswer) === cleanString(currentQ.correctAnswer);
 
-            // Disable all option buttons/inputs to prevent multi-clicks
             const buttons = document.querySelectorAll('#answer-container button');
             buttons.forEach(btn => btn.disabled = true);
             const fillInp = document.getElementById('fill-answer');
@@ -1250,23 +1381,24 @@
             if (isCorrect) {
                 quizScore++;
                 document.getElementById('quiz-score').innerText = quizScore;
+                playSound('correct');
                 
                 feedbackAlert.className = "p-4 rounded-2xl mb-4 text-center text-lg font-bold animate-bounce bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800";
                 feedbackAlert.innerHTML = `🎉 BETUL! Hebat sekali. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
                 
                 if (buttonElement) {
-                    buttonElement.classList.add('bg-emerald-100', 'dark:bg-emerald-950/60', 'border-emerald-500', 'text-emerald-700', 'dark:text-emerald-300');
+                    buttonElement.className = "btn-playful py-4 px-6 bg-emerald-100 dark:bg-emerald-950/60 border-2 border-emerald-500 text-emerald-700 dark:text-emerald-300 text-left font-semibold text-lg rounded-2xl shadow-sm transition";
                 }
             } else {
+                playSound('wrong');
                 feedbackAlert.className = "p-4 rounded-2xl mb-4 text-center text-lg font-bold animate-shake bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800";
                 feedbackAlert.innerHTML = `❌ SALAH. Jawapan betul ialah <strong>${currentQ.correctAnswer}</strong>. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
                 
                 if (buttonElement) {
-                    buttonElement.classList.add('bg-red-100', 'dark:bg-red-950/60', 'border-red-500', 'text-red-700', 'dark:text-red-300');
+                    buttonElement.className = "btn-playful py-4 px-6 bg-red-100 dark:bg-red-950/60 border-2 border-red-500 text-red-700 dark:text-red-300 text-left font-semibold text-lg rounded-2xl shadow-sm transition";
                 }
             }
 
-            // Move to next question automatically after 2 seconds (giving time to read explanation)
             setTimeout(() => {
                 currentQuestionIndex++;
                 if (currentQuestionIndex < currentQuestionsList.length) {
@@ -1286,7 +1418,6 @@
             const totalQs = currentQuestionsList.length;
             const percentage = Math.round((quizScore / totalQs) * 100);
             
-            // Determine Grade & Theme Color
             let gred = "E";
             let gredColorClass = "text-red-500";
             if (percentage >= 90) { gred = "A+"; gredColorClass = "text-yellow-500 drop-shadow"; }
@@ -1295,7 +1426,6 @@
             else if (percentage >= 60) { gred = "C"; gredColorClass = "text-amber-500"; }
             else if (percentage >= 50) { gred = "D"; gredColorClass = "text-orange-600"; }
 
-            // Determine Gamification Badges
             let badgeEmoji = "❌";
             let badgeName = "Tiada Lencana";
             let badgeDesc = "Belajar lagi untuk dapatkan lencana kelulusan!";
@@ -1304,19 +1434,23 @@
                 badgeEmoji = "🥇";
                 badgeName = "Lencana Emas";
                 badgeDesc = "Sangat Pintar! Anda seorang pakar matematik!";
+                playSound('fanfare');
                 triggerConfetti();
             } else if (percentage >= 70) {
                 badgeEmoji = "🥈";
                 badgeName = "Lencana Perak";
                 badgeDesc = "Hebat! Teruskan usaha gemilang anda!";
+                playSound('fanfare');
                 triggerConfetti();
             } else if (percentage >= 50) {
                 badgeEmoji = "🥉";
                 badgeName = "Lencana Gangsa";
                 badgeDesc = "Syabas! Anda berjaya melepasi tahap kelulusan!";
+                playSound('correct');
+            } else {
+                playSound('wrong');
             }
 
-            // Save results into memory and storage
             const elapsedMin = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
             const elapsedSec = String(elapsedSeconds % 60).padStart(2, '0');
             const timeStr = `${elapsedMin}:${elapsedSec}`;
@@ -1335,7 +1469,6 @@
             state.history.push(record);
             localStorage.setItem('bijak_mat_history', JSON.stringify(state.history));
 
-            // Populate DOM Results
             document.getElementById('res-score').innerText = `${quizScore}/${totalQs}`;
             document.getElementById('res-percentage').innerText = `${percentage}%`;
             document.getElementById('res-grade').innerText = gred;
@@ -1347,7 +1480,6 @@
             document.getElementById('res-year').innerText = state.quizSession.year;
             document.getElementById('res-topics').innerText = state.quizSession.topics.map(t => t.toUpperCase()).join(', ');
 
-            // Set badge details
             document.getElementById('reward-badge-emoji').innerText = badgeEmoji;
             document.getElementById('reward-badge-name').innerText = badgeName;
             document.getElementById('reward-badge-desc').innerText = badgeDesc;
@@ -1383,14 +1515,17 @@
            BUTANG INTERAKTIF SELEPAS KUIZ
            ================================================== */
         function restartQuizWithSameSettings() {
+            playSound('click');
             startQuiz();
         }
 
         function goToDashboard() {
+            playSound('click');
             showDashboard();
         }
 
         function resetToNewQuiz() {
+            playSound('click');
             showDashboard();
         }
     </script>
