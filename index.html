@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ms" class="light">
 <head>
@@ -69,23 +68,15 @@
 </head>
 <body class="bg-gradient-to-tr from-[#e0f2fe] via-[#f0fdf4] to-[#fae8ff] dark:from-[#0f172a] dark:via-[#1e1b4b] dark:to-[#111827] min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-300 pb-12">
 
-    <!-- Theme System, Language Selection & Top Utility Bar -->
+    <!-- Theme System & Top Utility Bar -->
     <div class="max-w-6xl mx-auto px-4 pt-4 flex justify-between items-center">
         <div class="flex items-center gap-2">
             <span class="text-3xl">🧠</span>
             <span class="text-xl font-bold font-fun tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-500 dark:from-blue-400 dark:to-emerald-400">Bijak Matematik</span>
         </div>
-        <div class="flex items-center gap-3">
-            <!-- Language Toggle Dropdown -->
-            <select id="lang-toggle" onchange="changeLanguage(this.value)" class="px-3 py-1.5 rounded-xl bg-white/80 dark:bg-slate-800/80 shadow-md hover:shadow-lg transition-all font-bold text-sm border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="ms">Bahasa Melayu</option>
-                <option value="en">English (DLP)</option>
-            </select>
-            <!-- Dark Mode Toggle Button -->
-            <button id="theme-toggle" class="p-2.5 rounded-xl bg-white/80 dark:bg-slate-800/80 shadow-md hover:shadow-lg transition-all text-lg" onclick="toggleTheme()">
-                ☀️
-            </button>
-        </div>
+        <button id="theme-toggle" class="p-3 rounded-full bg-white/80 dark:bg-slate-800/80 shadow-md hover:shadow-lg transition-all text-xl" onclick="toggleTheme()">
+            ☀️
+        </button>
     </div>
 
     <!-- MAIN CONTAINER -->
@@ -94,21 +85,21 @@
         <!-- Login Section -->
         <section id="login-section" class="glass-card rounded-3xl p-8 shadow-2xl text-center max-w-md mx-auto my-12 animate-fade-in">
             <div class="text-6xl mb-4 animate-bounce">✏️</div>
-            <h1 class="text-3xl font-bold mb-2 text-slate-800 dark:text-white" data-i18n="title">Selamat Datang!</h1>
-            <p class="text-slate-600 dark:text-slate-300 mb-6" data-i18n="sub">Jom asah minda dan jadi pakar matematik bersama Bijak Matematik!</p>
+            <h1 class="text-3xl font-bold mb-2 text-slate-800 dark:text-white">Selamat Datang!</h1>
+            <p class="text-slate-600 dark:text-slate-300 mb-6">Jom asah minda dan jadi pakar matematik bersama Bijak Matematik!</p>
             
             <div class="text-left mb-6">
-                <label class="block text-sm font-semibold mb-2 text-slate-700 dark:text-slate-200" data-i18n="name_label" for="user-name">Nama Penuh Anda:</label>
-                <input type="text" id="user-name" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-slate-900 dark:text-white font-semibold transition" data-i18n-placeholder="name_placeholder" placeholder="Contoh: Muhammad Ali">
-                <p id="login-error" class="text-red-500 text-xs mt-2 hidden">⚠️</p>
+                <label class="block text-sm font-semibold mb-2 text-slate-700 dark:text-slate-200" for="user-name">Nama Penuh Anda:</label>
+                <input type="text" id="user-name" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-slate-900 dark:text-white font-semibold transition" placeholder="Contoh: Muhammad Ali">
+                <p id="login-error" class="text-red-500 text-xs mt-2 hidden">⚠️ Sila masukkan nama penuh anda untuk meneruskan.</p>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-                <button onclick="handleRegister()" class="btn-playful bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/30" data-i18n="btn_register">
-                    Daftar Baru
+                <button onclick="handleRegister()" class="btn-playful bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/30">
+                    <i class="fa-solid fa-user-plus mr-1"></i> Daftar Baru
                 </button>
-                <button onclick="handleLogin()" class="btn-playful bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30" data-i18n="btn_login">
-                    Log Masuk
+                <button onclick="handleLogin()" class="btn-playful bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-right-to-bracket mr-1"></i> Log Masuk
                 </button>
             </div>
         </section>
@@ -123,26 +114,26 @@
                     </div>
                     <div>
                         <h2 class="text-2xl font-bold text-slate-800 dark:text-white" id="dash-username">Nama Murid</h2>
-                        <p class="text-sm text-slate-500 dark:text-slate-400" id="user-status-desc">Status: Murid Pintar Malaysia 🇲🇾</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Status: Murid Pintar Malaysia 🇲🇾</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-3 gap-4 text-center w-full md:w-auto">
                     <div class="p-3 bg-white/50 dark:bg-slate-800/50 rounded-2xl">
-                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400" data-i18n="completed">Selesai</span>
+                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Selesai</span>
                         <span class="text-lg font-bold" id="stat-total">0</span>
                     </div>
                     <div class="p-3 bg-white/50 dark:bg-slate-800/50 rounded-2xl">
-                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400" data-i18n="total_score">Jumlah Skor</span>
+                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Jumlah Skor</span>
                         <span class="text-lg font-bold" id="stat-score">0</span>
                     </div>
                     <div class="p-3 bg-white/50 dark:bg-slate-800/50 rounded-2xl">
-                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400" data-i18n="average">Purata %</span>
+                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400">Purata %</span>
                         <span class="text-lg font-bold" id="stat-average">0%</span>
                     </div>
                 </div>
                 <div>
-                    <button onclick="handleLogout()" class="px-4 py-2 bg-red-100 hover:bg-red-200 dark:bg-red-950/30 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-xl font-bold transition text-sm" data-i18n="logout">
-                        Log Keluar
+                    <button onclick="handleLogout()" class="px-4 py-2 bg-red-100 hover:bg-red-200 dark:bg-red-950/30 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 rounded-xl font-bold transition text-sm">
+                        <i class="fa-solid fa-power-off mr-1"></i> Log Keluar
                     </button>
                 </div>
             </div>
@@ -151,13 +142,13 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Configurations -->
                 <div class="lg:col-span-2 glass-card rounded-3xl p-6 shadow-xl">
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-blue-600 dark:text-blue-400 font-fun" data-i18n="config_title">
-                        Tetapkan Kuiz Anda
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-blue-600 dark:text-blue-400 font-fun">
+                        <i class="fa-solid fa-sliders"></i> Tetapkan Kuiz Anda
                     </h3>
                     
                     <!-- Year Picker -->
                     <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-2" data-i18n="year_label">Pilih Tahun Pembelajaran:</label>
+                        <label class="block text-sm font-semibold mb-2">Pilih Tahun Pembelajaran:</label>
                         <select id="config-year" onchange="triggerClickSound()" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400">
                             <option value="1">Tahun 1 (Asas/Mudah)</option>
                             <option value="2">Tahun 2</option>
@@ -170,7 +161,7 @@
 
                     <!-- Question Count -->
                     <div class="mb-5">
-                        <label class="block text-sm font-semibold mb-2" data-i18n="count_label">Bilangan Soalan:</label>
+                        <label class="block text-sm font-semibold mb-2">Bilangan Soalan:</label>
                         <div class="grid grid-cols-3 gap-3">
                             <label class="cursor-pointer" onclick="triggerClickSound()">
                                 <input type="radio" name="config-count" value="10" checked class="sr-only peer">
@@ -190,71 +181,71 @@
                     <!-- Topics Checkboxes -->
                     <div class="mb-6">
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-sm font-semibold" data-i18n="topics_label">Pilih Topik Matematik:</label>
+                            <label class="text-sm font-semibold">Pilih Topik Matematik:</label>
                             <label class="inline-flex items-center gap-1 text-xs cursor-pointer text-blue-600 dark:text-blue-400 font-bold">
                                 <input type="checkbox" id="select-all-topics" onchange="toggleSelectAllTopics(this)" class="rounded text-blue-500">
-                                <span data-i18n="select_all">Pilih Semua Topik</span>
+                                Pilih Semua Topik
                             </label>
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="topics-grid">
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="tambah" checked class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">➕ <span data-i18n="topic_tambah">Tambah</span></span>
+                                <span class="text-sm font-semibold">➕ Tambah</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="tolak" checked class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">➖ <span data-i18n="topic_tolak">Tolak</span></span>
+                                <span class="text-sm font-semibold">➖ Tolak</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="darab" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">✖️ <span data-i18n="topic_darab">Darab</span></span>
+                                <span class="text-sm font-semibold">✖️ Darab</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="bahagi" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">➗ <span data-i18n="topic_bahagi">Bahagi</span></span>
+                                <span class="text-sm font-semibold">➗ Bahagi</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="pecahan" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">🍰 <span data-i18n="topic_pecahan">Pecahan</span></span>
+                                <span class="text-sm font-semibold">🍰 Pecahan</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="wang" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">💵 <span data-i18n="topic_wang">Wang</span></span>
+                                <span class="text-sm font-semibold">💵 Wang</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="peratus" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">📈 <span data-i18n="topic_peratus">Peratus</span></span>
+                                <span class="text-sm font-semibold">📈 Peratus</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="masa" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">⏰ <span data-i18n="topic_masa">Masa</span></span>
+                                <span class="text-sm font-semibold">⏰ Masa</span>
                             </label>
                             <label class="flex items-center gap-2 p-3 bg-white/40 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-850 transition" onclick="triggerClickSound()">
                                 <input type="checkbox" name="topic" value="penyelesaian" class="rounded text-blue-500 focus:ring-0">
-                                <span class="text-sm font-semibold">🧩 <span data-i18n="topic_penyelesaian">Penyelesaian Masalah</span></span>
+                                <span class="text-sm font-semibold">🧩 Penyelesaian Masalah</span>
                             </label>
                         </div>
                     </div>
 
-                    <button onclick="startQuiz()" class="btn-playful w-full py-4 bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white text-xl font-bold rounded-2xl shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2" data-i18n="start_btn">
-                        Mula Kuiz Sekarang!
+                    <button onclick="startQuiz()" class="btn-playful w-full py-4 bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600 text-white text-xl font-bold rounded-2xl shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2">
+                        🚀 Mula Kuiz Sekarang!
                     </button>
                 </div>
 
                 <!-- Performance Chart Widget -->
                 <div class="glass-card rounded-3xl p-6 shadow-xl flex flex-col justify-between">
                     <div>
-                        <h3 class="text-xl font-bold mb-3 flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-fun" data-i18n="chart_title">
-                            Carta Prestasi
+                        <h3 class="text-xl font-bold mb-3 flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-fun">
+                            <i class="fa-solid fa-chart-line"></i> Carta Prestasi
                         </h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4" data-i18n="chart_sub">Grafik pencapaian markah kuiz anda dari semasa ke semasa.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Grafik pencapaian markah kuiz anda dari semasa ke semasa.</p>
                         <div class="relative min-h-[180px] w-full">
                             <canvas id="performanceChart"></canvas>
                         </div>
                     </div>
                     <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-center">
-                        <button onclick="toggleHistoryView()" class="text-sm font-bold text-blue-500 hover:underline" data-i18n="past_records">
-                            Lihat Rekod Terperinci
+                        <button onclick="toggleHistoryView()" class="text-sm font-bold text-blue-500 hover:underline">
+                            <i class="fa-solid fa-clock-rotate-left mr-1"></i> Lihat Rekod Terperinci
                         </button>
                     </div>
                 </div>
@@ -263,23 +254,23 @@
             <!-- History Section Inside Dashboard -->
             <div id="history-container" class="mt-8 glass-card rounded-3xl p-6 shadow-xl hidden animate-fade-in">
                 <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold font-fun flex items-center gap-2 text-slate-800 dark:text-white" data-i18n="history_title">
-                        Rekod Prestasi Lepas
+                    <h3 class="text-xl font-bold font-fun flex items-center gap-2 text-slate-800 dark:text-white">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Rekod Prestasi Lepas
                     </h3>
-                    <button onclick="clearHistory()" class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg text-xs font-bold transition" data-i18n="delete_records">
-                        Padam Rekod
+                    <button onclick="clearHistory()" class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg text-xs font-bold transition">
+                        <i class="fa-solid fa-trash mr-1"></i> Padam Rekod
                     </button>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-500 text-sm">
-                                <th class="py-2" data-i18n="th_date">Tarikh</th>
-                                <th class="py-2" data-i18n="th_year">Tahun</th>
-                                <th class="py-2" data-i18n="th_topics">Topik</th>
-                                <th class="py-2" data-i18n="th_score">Skor</th>
-                                <th class="py-2" data-i18n="th_percentage">Peratus</th>
-                                <th class="py-2" data-i18n="th_time">Masa</th>
+                                <th class="py-2">Tarikh</th>
+                                <th class="py-2">Tahun</th>
+                                <th class="py-2">Topik</th>
+                                <th class="py-2">Skor (Betul/Jumlah)</th>
+                                <th class="py-2">Peratus</th>
+                                <th class="py-2">Masa</th>
                             </tr>
                         </thead>
                         <tbody id="history-table-body" class="text-sm">
@@ -297,18 +288,18 @@
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-4">
                     <div class="flex flex-wrap items-center gap-2">
                         <div class="flex items-center gap-2 bg-blue-100 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 px-4 py-1.5 rounded-full font-bold text-sm">
-                            <span><span data-i18n="soalan">Soalan</span> <span id="quiz-current-num">1</span> <span data-i18n="daripada">daripada</span> <span id="quiz-total-num">10</span></span>
+                            <span>Soalan <span id="quiz-current-num">1</span> daripada <span id="quiz-total-num">10</span></span>
                         </div>
                         <button onclick="exitQuizMidway()" class="px-3 py-1.5 bg-red-100 hover:bg-red-200 dark:bg-red-950/40 dark:hover:bg-red-900/60 text-red-600 dark:text-red-400 font-bold rounded-xl text-xs transition duration-150 flex items-center gap-1 shadow-sm">
-                            <i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="keluar">Keluar</span>
+                            <i class="fa-solid fa-right-from-bracket"></i> Keluar
                         </button>
                     </div>
                     <div class="flex gap-4 items-center">
                         <div class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold text-sm">
-                            <i class="fa-solid fa-check"></i> <span data-i18n="skor">Skor</span>: <span id="quiz-score">0</span>
+                            <i class="fa-solid fa-check"></i> Skor: <span id="quiz-score">0</span>
                         </div>
                         <div class="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-bold text-sm">
-                            <i class="fa-solid fa-clock"></i> <span data-i18n="masa">Masa</span>: <span id="quiz-timer">00:00</span>
+                            <i class="fa-solid fa-clock"></i> Masa: <span id="quiz-timer">00:00</span>
                         </div>
                     </div>
                 </div>
@@ -327,7 +318,7 @@
 
                     <!-- Answers Grid -->
                     <div id="answer-container" class="space-y-3">
-                        <!-- Dynamically filled by JS -->
+                        <!-- Dynamically filled by JS: either buttons, true/false, or input field -->
                     </div>
                 </div>
 
@@ -343,12 +334,12 @@
             <div class="glass-card rounded-3xl p-8 shadow-2xl mb-6 relative overflow-hidden">
                 <div id="badge-animation-container" class="absolute inset-0 pointer-events-none z-10"></div>
                 
-                <h2 class="text-4xl font-bold font-fun mb-2 text-slate-800 dark:text-white" data-i18n="res-title">Keputusan Kuiz Anda!</h2>
-                <p class="text-slate-500 dark:text-slate-400 mb-6" data-i18n="res-sub">Tahniah, anda telah berjaya menamatkan sesi pembelajaran!</p>
+                <h2 class="text-4xl font-bold font-fun mb-2 text-slate-800 dark:text-white">🎉 Keputusan Kuiz Anda!</h2>
+                <p class="text-slate-500 dark:text-slate-400 mb-6">Tahniah, anda telah berjaya menamatkan sesi pembelajaran!</p>
 
                 <!-- Badge Awarded Widget -->
                 <div class="my-6 p-4 inline-flex flex-col items-center bg-white/50 dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md">
-                    <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1" data-i18n="res-badge">Lencana Diperoleh</span>
+                    <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">Lencana Diperoleh</span>
                     <div id="reward-badge-emoji" class="text-7xl mb-1 drop-shadow-lg">🥈</div>
                     <span id="reward-badge-name" class="font-fun font-bold text-lg">Lencana Perak</span>
                     <span id="reward-badge-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Skor hebat, usaha anda dihargai!</span>
@@ -357,41 +348,41 @@
                 <!-- Statistics Summary -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
                     <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
-                        <span class="block text-xs font-semibold text-slate-400" data-i18n="res-score">Markah</span>
-                        <span class="text-xl font-bold" id="res-score-val">0/10</span>
+                        <span class="block text-xs font-semibold text-slate-400">Markah</span>
+                        <span class="text-xl font-bold" id="res-score">0/10</span>
                     </div>
                     <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
-                        <span class="block text-xs font-semibold text-slate-400" data-i18n="res-percentage">Pencapaian</span>
-                        <span class="text-xl font-bold" id="res-percentage-val">0%</span>
+                        <span class="block text-xs font-semibold text-slate-400">Pencapaian</span>
+                        <span class="text-xl font-bold" id="res-percentage">0%</span>
                     </div>
                     <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
-                        <span class="block text-xs font-semibold text-slate-400" data-i18n="res-gred">Gred</span>
+                        <span class="block text-xs font-semibold text-slate-400">Gred</span>
                         <span class="text-2xl font-black" id="res-grade">E</span>
                     </div>
                     <div class="p-4 bg-white/40 dark:bg-slate-900/40 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
-                        <span class="block text-xs font-semibold text-slate-400" data-i18n="res-time-taken">Masa Diambil</span>
+                        <span class="block text-xs font-semibold text-slate-400">Masa Diambil</span>
                         <span class="text-xl font-bold" id="res-time">00:00</span>
                     </div>
                 </div>
 
                 <!-- Detailed Info -->
                 <div class="text-left bg-slate-50 dark:bg-slate-950/40 rounded-2xl p-4 text-sm space-y-2 mb-8 border border-slate-200 dark:border-slate-800">
-                    <div>👤 <span class="font-bold text-slate-500" data-i18n="res-player">Pemain:</span> <span id="res-username" class="font-bold">--</span></div>
-                    <div>📅 <span class="font-bold text-slate-500" data-i18n="res-date-label">Tarikh Kuiz:</span> <span id="res-date">--</span></div>
-                    <div>🎓 <span class="font-bold text-slate-500" data-i18n="res-year-label">Tahap Akademik:</span> <span id="res-year-val">Tahun 1</span></div>
-                    <div>🎯 <span class="font-bold text-slate-500" data-i18n="res-topics-label">Topik Terlibat:</span> <span id="res-topics">--</span></div>
+                    <div>👤 <span class="font-bold text-slate-500">Pemain:</span> <span id="res-username" class="font-bold">--</span></div>
+                    <div>📅 <span class="font-bold text-slate-500">Tarikh Kuiz:</span> <span id="res-date">--</span></div>
+                    <div>🎓 <span class="font-bold text-slate-500">Tahap Akademik:</span> Tahun <span id="res-year">1</span></div>
+                    <div>🎯 <span class="font-bold text-slate-500">Topik Terlibat:</span> <span id="res-topics">--</span></div>
                 </div>
 
                 <!-- Actions Button Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <button onclick="restartQuizWithSameSettings()" class="btn-playful py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20" data-i18n="btn_try_again">
-                        Cuba Lagi
+                    <button onclick="restartQuizWithSameSettings()" class="btn-playful py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-500/20">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Cuba Lagi
                     </button>
-                    <button onclick="goToDashboard()" class="btn-playful py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/20" data-i18n="btn_dashboard">
-                        Dashboard
+                    <button onclick="goToDashboard()" class="btn-playful py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-house mr-1"></i> Dashboard
                     </button>
-                    <button onclick="resetToNewQuiz()" class="btn-playful py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/20" data-i18n="btn_new_quiz">
-                        Set Kuiz Baru
+                    <button onclick="resetToNewQuiz()" class="btn-playful py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/20">
+                        <i class="fa-solid fa-plus-circle mr-1"></i> Set Kuiz Baru
                     </button>
                 </div>
             </div>
@@ -402,147 +393,13 @@
     <!-- JavaScript Execution Logic -->
     <script>
         /* ==================================================
-           DWIBAHASA (DUAL LANGUAGE) TRANSLATIONS
+           LOCAL STORAGE & STATE MANAGEMENT
            ================================================== */
-        const translations = {
-            ms: {
-                title: "Selamat Datang!",
-                sub: "Jom asah minda dan jadi pakar matematik bersama Bijak Matematik!",
-                name_label: "Nama Penuh Anda:",
-                name_placeholder: "Contoh: Muhammad Ali",
-                err_empty: "⚠️ Sila masukkan nama penuh anda untuk mendaftar.",
-                err_exists: "⚠️ Nama ini telah didaftarkan. Sila gunakan nama lain atau klik Log Masuk.",
-                err_login: "⚠️ Pengguna tidak dijumpai. Sila mendaftar dahulu.",
-                btn_register: "Daftar Baru",
-                btn_login: "Log Masuk",
-                completed: "Selesai",
-                total_score: "Jumlah Skor",
-                average: "Purata %",
-                logout: "Log Keluar",
-                config_title: "Tetapkan Kuiz Anda",
-                year_label: "Pilih Tahun Pembelajaran:",
-                count_label: "Bilangan Soalan:",
-                topics_label: "Pilih Topik Matematik:",
-                select_all: "Pilih Semua Topik",
-                start_btn: "🚀 Mula Kuiz Sekarang!",
-                chart_title: "Carta Prestasi",
-                chart_sub: "Grafik pencapaian markah kuiz anda dari semasa ke semasa.",
-                past_records: "Lihat Rekod Terperinci",
-                history_title: "Rekod Prestasi Lepas",
-                delete_records: "Padam Rekod",
-                th_date: "Tarikh",
-                th_year: "Tahun",
-                th_topics: "Topik",
-                th_score: "Skor",
-                th_percentage: "Peratus",
-                th_time: "Masa",
-                soalan: "Soalan",
-                daripada: "daripada",
-                keluar: "Keluar",
-                skor: "Skor",
-                masa: "Masa",
-                hantar: "Hantar 🚀",
-                placeholder_ans: "Tulis jawapan anda di sini...",
-                res-title: "Keputusan Kuiz Anda!",
-                res-sub: "Tahniah, anda telah berjaya menamatkan sesi pembelajaran!",
-                res-badge: "Lencana Diperoleh",
-                res-score: "Markah",
-                res-percentage: "Pencapaian",
-                res-gred: "Gred",
-                res-time-taken: "Masa Diambil",
-                res-player: "Pemain",
-                res-date-label: "Tarikh Kuiz",
-                res-year-label: "Tahap Akademik",
-                res-topics-label: "Topik Terlibat",
-                btn_try_again: "Cuba Lagi",
-                btn_dashboard: "Dashboard",
-                btn_new_quiz: "Set Kuiz Baru",
-                topic_tambah: "Tambah",
-                topic_tolak: "Tolak",
-                topic_darab: "Darab",
-                topic_bahagi: "Bahagi",
-                topic_pecahan: "Pecahan",
-                topic_wang: "Wang",
-                topic_peratus: "Peratus",
-                topic_masa: "Masa",
-                topic_penyelesaian: "Penyelesaian Masalah",
-                all_topics_alert: "Sila pilih sekurang-kurangnya SATU topik matematik untuk memulakan kuiz!",
-                exit_confirm: "Adakah anda pasti mahu keluar dari kuiz ini? Kemajuan semasa anda tidak akan disimpan.",
-                status_desc: "Status: Murid Pintar Malaysia 🇲🇾"
-            },
-            en: {
-                title: "Welcome!",
-                sub: "Let's sharpen our minds and become math experts with Bijak Matematik!",
-                name_label: "Your Full Name:",
-                name_placeholder: "Example: Muhammad Ali",
-                err_empty: "⚠️ Please enter your full name to register.",
-                err_exists: "⚠️ This name is already registered. Please use another name or log in.",
-                err_login: "⚠️ User not found. Please click Register first.",
-                btn_register: "Register",
-                btn_login: "Log In",
-                completed: "Completed",
-                total_score: "Total Score",
-                average: "Average %",
-                logout: "Log Out",
-                config_title: "Configure Your Quiz",
-                year_label: "Select Academic Year:",
-                count_label: "Number of Questions:",
-                topics_label: "Select Math Topics:",
-                select_all: "Select All Topics",
-                start_btn: "🚀 Start Quiz Now!",
-                chart_title: "Performance Chart",
-                chart_sub: "Graph of your quiz scores over time.",
-                past_records: "View Detailed History",
-                history_title: "Past Performance History",
-                delete_records: "Delete Records",
-                th_date: "Date",
-                th_year: "Year",
-                th_topics: "Topics",
-                th_score: "Score",
-                th_percentage: "Percentage",
-                th_time: "Time",
-                soalan: "Question",
-                daripada: "of",
-                keluar: "Exit",
-                skor: "Score",
-                masa: "Time",
-                hantar: "Submit 🚀",
-                placeholder_ans: "Type your answer here...",
-                res-title: "Your Quiz Results!",
-                res-sub: "Congratulations, you have successfully completed the learning session!",
-                res-badge: "Badge Earned",
-                res-score: "Score",
-                res-percentage: "Achievement",
-                res-gred: "Grade",
-                res-time-taken: "Time Taken",
-                res-player: "Player",
-                res-date-label: "Quiz Date",
-                res-year-label: "Academic Year",
-                res-topics-label: "Topics Involved",
-                btn_try_again: "Try Again",
-                btn_dashboard: "Dashboard",
-                btn_new_quiz: "New Quiz Set",
-                topic_tambah: "Addition",
-                topic_tolak: "Subtraction",
-                topic_darab: "Multiplication",
-                topic_bahagi: "Division",
-                topic_pecahan: "Fractions",
-                topic_wang: "Money",
-                topic_peratus: "Percentages",
-                topic_masa: "Time",
-                topic_penyelesaian: "Problem Solving",
-                all_topics_alert: "Please select at least ONE math topic to start the quiz!",
-                exit_confirm: "Are you sure you want to exit this quiz? Your current progress will not be saved.",
-                status_desc: "Status: Malaysian Math Star 🇲🇾"
-            }
-        };
-
         let state = {
             currentUser: null,
             users: JSON.parse(localStorage.getItem('bijak_mat_users')) || [],
             history: JSON.parse(localStorage.getItem('bijak_mat_history')) || [],
-            quizSession: null,
-            language: localStorage.getItem('bijak_mat_lang') || 'ms'
+            quizSession: null
         };
 
         let currentQuestionIndex = 0;
@@ -552,22 +409,16 @@
         let currentQuestionsList = [];
         let performanceChartInstance = null;
 
-        // Dynamic Problem-Solving variables
+        // Senarai pembolehubah rawak untuk keunikan Penyelesaian Masalah secara infiniti
         const kidNames = ["Ali", "Siti", "Abu", "Raju", "Mei Ling", "Zamil", "Aminah", "Sarah", "Chong", "Suresh", "Kumar", "Fatimah"];
         const funItems = ["guli", "pemadam", "pensel", "buku", "gula-gula", "biskut", "buah epal", "setem", "balon", "pelekat", "gasing"];
         const funPlaces = ["kedai runcit", "kebun bapa", "bilik kelas", "perpustakaan sekolah", "kedai buku", "kantin sekolah"];
 
         window.onload = function() {
-            // Apply theme
             const savedTheme = localStorage.getItem('bijak_mat_theme') || 'light';
             document.documentElement.className = savedTheme;
             updateThemeButtonText(savedTheme);
 
-            // Apply Language Selection on Select Tag
-            document.getElementById('lang-toggle').value = state.language;
-            translateUI();
-
-            // Check active session
             const savedUser = localStorage.getItem('bijak_mat_active_user');
             if (savedUser) {
                 state.currentUser = savedUser;
@@ -582,63 +433,6 @@
                 document.getElementById(id).classList.add('hidden');
             });
             document.getElementById(sectionId).classList.remove('hidden');
-        }
-
-        /* ==================================================
-           SISTEM TERJEMAHAN BAHASA (DWIBAHASA)
-           ================================================== */
-        function changeLanguage(lang) {
-            playSound('click');
-            state.language = lang;
-            localStorage.setItem('bijak_mat_lang', lang);
-            translateUI();
-            if (performanceChartInstance) {
-                renderPerformanceChart();
-            }
-        }
-
-        function translateUI() {
-            const lang = state.language;
-            const trans = translations[lang];
-
-            // Localize standard text elements
-            document.querySelectorAll('[data-i18n]').forEach(elem => {
-                const key = elem.getAttribute('data-i18n');
-                if (trans[key]) {
-                    elem.innerText = trans[key];
-                }
-            });
-
-            // Localize input placeholders
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
-                const key = elem.getAttribute('data-i18n-placeholder');
-                if (trans[key]) {
-                    elem.setAttribute('placeholder', trans[key]);
-                }
-            });
-
-            // Localize Year dropdown option values
-            const yearSelect = document.getElementById('config-year');
-            if (yearSelect) {
-                yearSelect.options[0].text = lang === 'ms' ? "Tahun 1 (Asas/Mudah)" : "Year 1 (Basic/Easy)";
-                yearSelect.options[1].text = lang === 'ms' ? "Tahun 2" : "Year 2";
-                yearSelect.options[2].text = lang === 'ms' ? "Tahun 3" : "Year 3";
-                yearSelect.options[3].text = lang === 'ms' ? "Tahun 4" : "Year 4";
-                yearSelect.options[4].text = lang === 'ms' ? "Tahun 5" : "Year 5";
-                yearSelect.options[5].text = lang === 'ms' ? "Tahun 6 (Mencabar)" : "Year 6 (Challenging)";
-            }
-
-            // Adjust status badge
-            document.getElementById('user-status-desc').innerText = trans['status_desc'];
-
-            // Adjust dynamic question count labels
-            const counts = document.getElementsByName('config-count');
-            counts.forEach(c => {
-                const div = c.nextElementSibling;
-                if (div) {
-                    div.innerText = `${c.value} ${lang === 'ms' ? 'Soalan' : 'Questions'}`;
-                }
-            });
         }
 
         /* ==================================================
@@ -689,9 +483,12 @@
                     osc.type = 'sine';
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
+                    
                     osc.frequency.setValueAtTime(freq, now + index * 0.08);
+                    
                     gain.gain.setValueAtTime(0.06, now + index * 0.08);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.08 + 0.15);
+                    
                     osc.start(now + index * 0.08);
                     osc.stop(now + index * 0.08 + 0.15);
                 });
@@ -720,9 +517,12 @@
                     osc.type = 'triangle';
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
+                    
                     osc.frequency.setValueAtTime(freq, now + index * 0.12);
+                    
                     gain.gain.setValueAtTime(0.08, now + index * 0.12);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.12 + 0.35);
+                    
                     osc.start(now + index * 0.12);
                     osc.stop(now + index * 0.12 + 0.35);
                 });
@@ -760,17 +560,16 @@
             playSound('click');
             const nameInput = document.getElementById('user-name').value.trim();
             const errorElement = document.getElementById('login-error');
-            const lang = state.language;
 
             if (!nameInput) {
-                errorElement.innerText = translations[lang]['err_empty'];
+                errorElement.innerText = "⚠️ Sila masukkan nama penuh anda untuk mendaftar.";
                 errorElement.classList.remove('hidden');
                 return;
             }
 
             const existingUser = state.users.find(u => u.name.toLowerCase() === nameInput.toLowerCase());
             if (existingUser) {
-                errorElement.innerText = translations[lang]['err_exists'];
+                errorElement.innerText = "⚠️ Nama ini telah didaftarkan. Sila gunakan nama lain atau klik Log Masuk.";
                 errorElement.classList.remove('hidden');
                 return;
             }
@@ -786,17 +585,16 @@
             playSound('click');
             const nameInput = document.getElementById('user-name').value.trim();
             const errorElement = document.getElementById('login-error');
-            const lang = state.language;
 
             if (!nameInput) {
-                errorElement.innerText = translations[lang]['err_empty'];
+                errorElement.innerText = "⚠️ Sila masukkan nama anda untuk Log Masuk.";
                 errorElement.classList.remove('hidden');
                 return;
             }
 
             const existingUser = state.users.find(u => u.name.toLowerCase() === nameInput.toLowerCase());
             if (!existingUser) {
-                errorElement.innerText = translations[lang]['err_login'];
+                errorElement.innerText = "⚠️ Pengguna tidak dijumpai. Sila Daftar Baru terlebih dahulu.";
                 errorElement.classList.remove('hidden');
                 return;
             }
@@ -877,12 +675,12 @@
 
             userHistory.forEach(record => {
                 const dateObj = new Date(record.date);
-                const formattedDate = dateObj.toLocaleDateString(state.language === 'ms' ? 'ms-MY' : 'en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+                const formattedDate = dateObj.toLocaleDateString('ms-MY', { day: '2-digit', month: 'short', year: 'numeric' });
                 
                 tableBody.innerHTML += `
                     <tr class="border-b border-slate-200/50 dark:border-slate-800/50 hover:bg-slate-50/20">
                         <td class="py-2.5">${formattedDate}</td>
-                        <td class="py-2.5">${state.language === 'ms' ? 'Tahun' : 'Year'} ${record.year}</td>
+                        <td class="py-2.5">Tahun ${record.year}</td>
                         <td class="py-2.5 max-w-[150px] truncate" title="${record.topics.join(', ')}">${record.topics.join(', ')}</td>
                         <td class="py-2.5 font-bold">${record.correct}/${record.totalQs}</td>
                         <td class="py-2.5 font-semibold text-emerald-500">${record.percentage}%</td>
@@ -894,7 +692,7 @@
 
         function clearHistory() {
             playSound('click');
-            if (confirm(state.language === 'ms' ? "Adakah anda pasti mahu memadam sejarah prestasi anda?" : "Are you sure you want to delete your past records?")) {
+            if (confirm("Adakah anda pasti mahu pemadam sejarah prestasi anda?")) {
                 state.history = state.history.filter(h => h.name.toLowerCase() !== state.currentUser.toLowerCase());
                 localStorage.setItem('bijak_mat_history', JSON.stringify(state.history));
                 calculateDashboardStats();
@@ -909,7 +707,7 @@
         function renderPerformanceChart() {
             const userHistory = state.history.filter(h => h.name.toLowerCase() === state.currentUser.toLowerCase());
             const scores = userHistory.map(h => h.percentage);
-            const labels = userHistory.map((h, index) => state.language === 'ms' ? `Kuiz ${index + 1}` : `Quiz ${index + 1}`);
+            const labels = userHistory.map((h, index) => `Kuiz ${index + 1}`);
 
             const isDark = document.documentElement.classList.contains('dark');
             const textColor = isDark ? '#cbd5e1' : '#475569';
@@ -926,7 +724,7 @@
                 data: {
                     labels: labels.length > 0 ? labels : ['Mula'],
                     datasets: [{
-                        label: state.language === 'ms' ? 'Skor (%)' : 'Score (%)',
+                        label: 'Skor (%)',
                         data: scores.length > 0 ? scores : [0],
                         borderColor: '#10b981',
                         backgroundColor: 'rgba(16, 185, 129, 0.15)',
@@ -961,13 +759,14 @@
         }
 
         /* ==================================================
-           PENJANAAN SOALAN DINAMIK & CURRICULUM MATH (DWIBAHASA)
+           PENJANAAN SOALAN DINAMIK & CURRICULUM MATH
            ================================================== */
         function randInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        function generateProblemSolvingText(year, type, lang) {
+        // Pembina ayat penyelesaian masalah secara rawak untuk keunikan infiniti
+        function generateProblemSolvingText(year, type) {
             const name1 = kidNames[randInt(0, kidNames.length - 1)];
             const name2 = kidNames[(kidNames.indexOf(name1) + 1) % kidNames.length];
             const item = funItems[randInt(0, funItems.length - 1)];
@@ -977,60 +776,44 @@
                 let a = randInt(5, 50);
                 let b = randInt(5, 40);
                 return {
-                    text: lang === 'ms' 
-                        ? `${name1} membeli ${a} biji ${item} di ${place}. Kemudian, dia membeli lagi ${b} biji ${item}. Berapakah jumlah ${item} ${name1} sekarang?`
-                        : `${name1} bought ${a} ${item} at the ${place}. Then, he bought another ${b} ${item}. How many ${item} does ${name1} have now?`,
+                    text: `${name1} membeli ${a} biji ${item} di ${place}. Kemudian, dia membeli lagi ${b} biji ${item}. Berapakah jumlah ${item} ${name1} sekarang?`,
                     answer: `${a + b}`,
                     rawAns: a + b,
-                    explanation: lang === 'ms'
-                        ? `Kita selesaikan dengan operasi tambah: ${a} + ${b} = ${a + b}.`
-                        : `We solve this using addition: ${a} + ${b} = ${a + b}.`
+                    explanation: `Kita selesaikan dengan operasi tambah: ${a} + ${b} = ${a + b}.`
                 };
             } else if (type === 'tolak') {
                 let a = randInt(30, 99);
                 let b = randInt(5, a - 5);
                 return {
-                    text: lang === 'ms'
-                        ? `${name1} mempunyai ${a} biji ${item} di dalam kotak. Dia memberikan ${b} biji ${item} kepada ${name2}. Berapakah baki ${item} ${name1}?`
-                        : `${name1} has ${a} ${item} inside a box. He gives ${b} ${item} to ${name2}. How many ${item} are left for ${name1}?`,
+                    text: `${name1} mempunyai ${a} biji ${item} di dalam kotak. Dia memberikan ${b} biji ${item} kepada ${name2}. Berapakah baki ${item} ${name1}?`,
                     answer: `${a - b}`,
                     rawAns: a - b,
-                    explanation: lang === 'ms'
-                        ? `Kita selesaikan dengan menolak barang yang diberikan: ${a} - ${b} = ${a - b}.`
-                        : `We solve this using subtraction: ${a} - ${b} = ${a - b}.`
+                    explanation: `Kita selesaikan dengan menolak barang yang diberikan: ${a} - ${b} = ${a - b}.`
                 };
             } else if (type === 'darab') {
                 let a = randInt(2, 9);
                 let b = randInt(2, 10);
                 return {
-                    text: lang === 'ms'
-                        ? `Di ${place}, terdapat ${a} buah bekas. Setiap bekas mengandungi ${b} biji ${item}. Berapakah jumlah keseluruhan ${item}?`
-                        : `At the ${place}, there are ${a} containers. Each container holds ${b} ${item}. What is the total number of ${item}?`,
+                    text: `Di ${place}, terdapat ${a} buah bekas. Setiap bekas mempunyai ${b} biji ${item}. Berapakah jumlah ${item} semuanya?`,
                     answer: `${a * b}`,
                     rawAns: a * b,
-                    explanation: lang === 'ms'
-                        ? `Kita selesaikan dengan operasi darab: ${a} × ${b} = ${a * b}.`
-                        : `We solve this using multiplication: ${a} × ${b} = ${a * b}.`
+                    explanation: `Setiap bekas mengandungi bilangan yang sama, selesaikan secara pendaraban: ${a} × ${b} = ${a * b}.`
                 };
             } else if (type === 'bahagi') {
                 let b = randInt(2, 6);
                 let ans = randInt(2, 10);
                 let total = b * ans;
                 return {
-                    text: lang === 'ms'
-                        ? `${name1} ingin membahagikan ${total} biji ${item} sama rata kepada ${b} orang rakannya. Berapakah bilangan ${item} yang akan diterima oleh setiap orang?`
-                        : `${name1} wants to share ${total} ${item} equally among ${b} friends. How many ${item} does each friend get?`,
+                    text: `${name1} ingin membahagikan ${total} biji ${item} sama rata kepada ${b} orang rakannya termasuk ${name2}. Berapakah biji ${item} yang akan diterima oleh setiap orang?`,
                     answer: `${ans}`,
                     rawAns: ans,
-                    explanation: lang === 'ms'
-                        ? `Kita selesaikan dengan operasi bahagi: ${total} ÷ ${b} = ${ans}.`
-                        : `We solve this using division: ${total} ÷ ${b} = ${ans}.`
+                    explanation: `Jumlah guli dibahagikan sama rata: ${total} ÷ ${b} = ${ans}.`
                 };
             }
-            return { text: "Error", answer: "0", rawAns: 0, explanation: "Error" };
+            return { text: `Siti ada 5 guli. Berapa jumlahnya?`, answer: "5", rawAns: 5, explanation: "Tiada" };
         }
 
-        function getBaseQuestion(year, topic, lang) {
+        function getBaseQuestion(year, topic) {
             let text = "";
             let answer = "";
             let explanation = "";
@@ -1039,29 +822,30 @@
             let unitPosition = "suffix"; 
             let options = null;
 
+            // Memastikan kepelbagaian mutlak mengikut Tahap Akademik
             if (year === 1) {
                 if (topic === 'tambah') {
                     let a = randInt(1, 15);
                     let b = randInt(1, 20 - a);
                     rawAns = a + b;
-                    text = lang === 'ms' ? `Hitung hasil tambah ${a} dan ${b}.` : `Find the sum of ${a} and ${b}.`;
+                    text = `${a} + ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Apabila ${b} ditambah kepada ${a}, hasilnya ialah ${rawAns}.` : `When ${b} is added to ${a}, the result is ${rawAns}.`;
+                    explanation = `Kira dari ${a} dan tambahkan ${b} menjadikannya ${rawAns}.`;
                 } else if (topic === 'tolak') {
                     let a = randInt(5, 20);
                     let b = randInt(1, a);
                     rawAns = a - b;
-                    text = lang === 'ms' ? `Hitung beza antara ${a} dengan ${b}.` : `Find the difference between ${a} and ${b}.`;
+                    text = `${a} - ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Apabila ${b} ditolak daripada ${a}, bakinya ialah ${rawAns}.` : `When ${b} is subtracted from ${a}, the remaining is ${rawAns}.`;
+                    explanation = `Keluarkan ${b} daripada kumpulan ${a} meninggalkan baki ${rawAns}.`;
                 } else if (topic === 'wang') {
                     if (Math.random() > 0.5) {
                         let a = randInt(1, 10);
                         let b = randInt(1, 10);
                         rawAns = a + b;
-                        text = `RM${a} + RM${b} = ?`;
+                        text = `RM${a} + RM${b}`;
                         answer = `RM${rawAns}`;
-                        explanation = lang === 'ms' ? `RM${a} ditambah dengan RM${b} menghasilkan RM${rawAns}.` : `RM${a} added to RM${b} makes RM${rawAns}.`;
+                        explanation = `RM${a} ditambah RM${b} ialah RM${rawAns}.`;
                         unit = "RM";
                         unitPosition = "prefix";
                     } else {
@@ -1069,29 +853,23 @@
                         let a = values[randInt(0, 4)];
                         let b = values[randInt(0, 4)];
                         rawAns = a + b;
-                        text = `${a} sen + ${b} sen = ?`;
+                        text = `${a} sen + ${b} sen`;
                         answer = `${rawAns} sen`;
-                        explanation = lang === 'ms' ? `${a} sen tambah ${b} sen bersamaan ${rawAns} sen.` : `${a} sen plus ${b} sen equals ${rawAns} sen.`;
-                        unit = lang === 'ms' ? " sen" : " sen";
+                        explanation = `${a} sen tambah ${b} sen bersamaan ${rawAns} sen.`;
+                        unit = " sen";
                         unitPosition = "suffix";
                     }
                 } else if (topic === 'masa') {
                     let jam = randInt(1, 12);
-                    text = lang === 'ms' 
-                        ? `Jarum pendek menunjuk ke angka ${jam} manakala jarum panjang menunjuk tepat ke angka 12. Pukul berapakah itu?`
-                        : `The short hand points exactly to ${jam} and the long hand points exactly to 12. What time is it?`;
-                    answer = lang === 'ms' ? `Pukul ${jam}` : `${jam} o'clock`;
+                    text = `Apabila jarum pendek menunjuk ke angka ${jam} dan jarum panjang menunjuk tepat ke angka 12, waktu itu ditulis...`;
+                    answer = `Pukul ${jam}`;
                     rawAns = jam;
-                    explanation = lang === 'ms' 
-                        ? `Jarum pendek menunjukkan jam. Jika jarum panjang di 12, ia bermakna jam tepat, iaitu Pukul ${jam}.`
-                        : `The short hand shows the hour. When the long hand points to 12, it is an exact hour, which is ${jam} o'clock.`;
-                    unit = lang === 'ms' ? "Pukul " : "";
-                    unitPosition = lang === 'ms' ? "prefix" : "suffix";
-                    if (lang === 'en') {
-                        options = [`${jam} o'clock`, `${jam === 12 ? 1 : jam + 1} o'clock`, `${jam}:30`, `${jam === 1 ? 12 : jam - 1} o'clock`];
-                    }
+                    explanation = `Jarum pendek menandakan waktu jam. Kerana jarum panjang berada di 12, ia adalah waktu tepat iaitu Pukul ${jam}.`;
+                    unit = "Pukul ";
+                    unitPosition = "prefix";
                 } else {
-                    let pb = generateProblemSolvingText(1, 'tambah', lang);
+                    // Semua topik lain (Darab, Bahagi, Pecahan, Peratus, Penyelesaian Masalah) dipadankan dengan aras Tahun 1
+                    let pb = generateProblemSolvingText(1, 'tambah');
                     text = pb.text;
                     answer = pb.answer;
                     rawAns = pb.rawAns;
@@ -1102,67 +880,59 @@
                     let a = randInt(10, 60);
                     let b = randInt(10, 39);
                     rawAns = a + b;
-                    text = lang === 'ms' ? `Hitung hasil tambah ${a} dan ${b}.` : `Calculate the sum of ${a} and ${b}.`;
+                    text = `${a} + ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Hasil tambah bagi ${a} dan ${b} ialah ${rawAns}.` : `The sum of ${a} and ${b} is ${rawAns}.`;
+                    explanation = `Jumlah nilai bagi ${a} ditambah ${b} ialah ${rawAns}.`;
                 } else if (topic === 'tolak') {
                     let a = randInt(40, 100);
                     let b = randInt(5, a - 5);
                     rawAns = a - b;
-                    text = lang === 'ms' ? `Hitung beza antara ${a} dengan ${b}.` : `Calculate the difference between ${a} and ${b}.`;
+                    text = `${a} - ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Hasil tolak ${b} daripada ${a} ialah ${rawAns}.` : `The result of subtracting ${b} from ${a} is ${rawAns}.`;
+                    explanation = `Baki pengeluaran ${b} daripada ${a} ialah ${rawAns}.`;
                 } else if (topic === 'darab') {
                     let sifir = [2, 5, 10][randInt(0, 2)];
                     let a = randInt(1, 10);
                     rawAns = a * sifir;
-                    text = lang === 'ms' ? `Hasil darab ${a} dengan ${sifir} ialah...` : `The product of ${a} multiplied by ${sifir} is...`;
+                    text = `${a} × ${sifir}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `${a} kumpulan ${sifir} bersamaan dengan ${rawAns}.` : `${a} groups of ${sifir} equal ${rawAns}.`;
+                    explanation = `${a} kumpulan sifir ${sifir} memberikan ${rawAns}.`;
                 } else if (topic === 'bahagi') {
                     let sifir = [2, 5, 10][randInt(0, 2)];
                     let a = randInt(1, 10);
                     let prod = a * sifir;
                     rawAns = a;
-                    text = lang === 'ms' ? `Hitung hasil bahagi ${prod} dengan ${sifir}.` : `Find the quotient when ${prod} is divided by ${sifir}.`;
+                    text = `${prod} ÷ ${sifir}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `${prod} dibahagi kepada ${sifir} kumpulan ialah ${rawAns}.` : `${prod} divided into ${sifir} groups is ${rawAns}.`;
+                    explanation = `Jika ${prod} dibahagikan kepada kumpulan ${sifir}-sifir, jawapannya ialah ${rawAns}.`;
                 } else if (topic === 'masa') {
                     let jam = randInt(1, 11);
-                    text = lang === 'ms' 
-                        ? `Jarum pendek berada di antara angka ${jam} dan ${jam+1}, manakala jarum panjang menunjuk tepat ke angka 6. Apakah waktu itu?`
-                        : `The short hand is between ${jam} and ${jam+1}, and the long hand points exactly to 6. What time is it?`;
-                    answer = lang === 'ms' ? `Pukul ${jam} setengah` : `Half past ${jam}`;
-                    options = lang === 'ms' 
-                        ? [`Pukul ${jam} setengah`, `Pukul ${jam} tepat`, `Pukul ${jam+1} tepat`, `Pukul ${jam+1} setengah`]
-                        : [`Half past ${jam}`, `${jam} o'clock`, `${jam+1} o'clock`, `Half past ${jam+1}`];
-                    explanation = lang === 'ms' 
-                        ? `Jarum panjang di angka 6 bermakna setengah jam (30 minit). Jadi ia adalah Pukul ${jam} setengah.`
-                        : `The long hand at 6 represents 30 minutes (half past). So it is Half past ${jam}.`;
+                    text = `Jarum pendek berada di antara angka ${jam} dan ${jam+1}. Jarum panjang menunjukkan angka 6. Waktu tersebut ialah...`;
+                    answer = `Pukul ${jam} setengah`;
+                    options = [`Pukul ${jam} setengah`, `Pukul ${jam} tepat`, `Pukul ${jam+1} tepat`, `Pukul ${jam+1} setengah`];
+                    explanation = `Jarum panjang di angka 6 bermakna setengah jam (30 minit). Jadi ia adalah Pukul ${jam} setengah.`;
                 } else if (topic === 'pecahan') {
-                    text = lang === 'ms'
-                        ? "Sebiji kek dipotong kepada empat bahagian yang sama besar. Jika satu bahagian diasingkan, pecahan itu juga dikenali sebagai..."
-                        : "A cake is cut into four equal parts. If one part is separated, this fraction is also known as...";
-                    answer = lang === 'ms' ? "Suku" : "One-quarter";
-                    options = lang === 'ms' 
-                        ? ["Suku", "Setengah", "Separuh", "Tiga suku"]
-                        : ["One-quarter", "One-half", "Two-thirds", "Three-quarters"];
-                    explanation = lang === 'ms' 
-                        ? "Satu daripada empat bahagian sama rata (1/4) dikenali sebagai suku."
-                        : "One out of four equal parts (1/4) is called one-quarter.";
+                    let opts = [
+                        { q: "Nyatakan pecahan satu per dua dalam bentuk nombor.", a: "1/2", o: ["1/2", "1/4", "3/4", "2/3"] },
+                        { q: "Apakah bentuk nombor bagi pecahan satu per empat?", a: "1/4", o: ["1/4", "1/2", "3/4", "1/3"] },
+                        { q: "Tiga perdua ditulis dalam bentuk pecahan ialah...", a: "3/2", o: ["3/2", "2/3", "3/4", "1/2"] }
+                    ];
+                    let chosen = opts[randInt(0, opts.length - 1)];
+                    text = chosen.q;
+                    answer = chosen.a;
+                    options = chosen.o;
+                    explanation = `Pecahan ditulis dengan meletakkan pengangka di atas dan penyebut di bawah.`;
                 } else if (topic === 'wang') {
                     let a = randInt(10, 90);
                     let b = randInt(5, a - 2);
                     rawAns = a - b;
-                    text = lang === 'ms' 
-                        ? `Siti mempunyai RM${a}. Dia membelanjakan RM${b}. Hitung baki wang Siti.`
-                        : `Siti has RM${a}. She spends RM${b}. Calculate the remaining amount of her money.`;
+                    text = `Siti mempunyai RM${a} dan berbelanja sebanyak RM${b}. Kira baki wang Siti.`;
                     answer = `RM${rawAns}`;
                     explanation = `RM${a} - RM${b} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else {
-                    let pb = generateProblemSolvingText(2, 'tolak', lang);
+                    let pb = generateProblemSolvingText(2, 'tolak');
                     text = pb.text;
                     answer = pb.answer;
                     rawAns = pb.rawAns;
@@ -1173,75 +943,56 @@
                     let a = randInt(100, 500);
                     let b = randInt(100, 499);
                     rawAns = a + b;
-                    text = `${a} + ${b} = ?`;
+                    text = `${a} + ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Hasil tambah ialah ${rawAns}.` : `The sum is ${rawAns}.`;
+                    explanation = `Pengiraan ${a} tambah ${b} bersamaan dengan ${rawAns}.`;
                 } else if (topic === 'tolak') {
                     let a = randInt(500, 999);
                     let b = randInt(100, a - 50);
                     rawAns = a - b;
-                    text = `${a} - ${b} = ?`;
+                    text = `${a} - ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Hasil tolak ialah ${rawAns}.` : `The difference is ${rawAns}.`;
+                    explanation = `Beza nilai ${a} dikurangkan sebanyak ${b} ialah ${rawAns}.`;
                 } else if (topic === 'darab') {
                     let a = randInt(12, 99);
                     let b = randInt(3, 9);
                     rawAns = a * b;
-                    text = `${a} × ${b} = ?`;
+                    text = `${a} × ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Hasil pendaraban bernilai ${rawAns}.` : `The product is ${rawAns}.`;
+                    explanation = `Hasil pendaraban bernilai ${rawAns}.`;
                 } else if (topic === 'bahagi') {
                     let b = randInt(3, 9);
                     let ans = randInt(11, 99);
                     let prod = ans * b;
                     rawAns = ans;
-                    text = `${prod} ÷ ${b} = ?`;
+                    text = `${prod} ÷ ${b}`;
                     answer = `${rawAns}`;
-                    explanation = lang === 'ms' ? `Hasil bahagi ialah ${rawAns}.` : `The quotient is ${rawAns}.`;
+                    explanation = `Hasil bahagi ${prod} dibahagi ${b} ialah ${rawAns}.`;
                 } else if (topic === 'pecahan') {
                     let b = [3, 4, 5, 6, 8, 10][randInt(0, 5)];
                     let a = randInt(1, b - 1);
-                    text = lang === 'ms'
-                        ? `Nyatakan pecahan bagi ${a} bahagian daripada keseluruhan ${b} bahagian yang sama besar.`
-                        : `State the fraction of ${a} parts out of the total ${b} equal parts.`;
+                    text = `Nyatakan pecahan bagi ${a} bahagian daripada ${b} bahagian sama rata.`;
                     answer = `${a}/${b}`;
-                    explanation = lang === 'ms'
-                        ? `Pecahan ditulis dengan pengangka di atas dan penyebut di bawah: ${a}/${b}.`
-                        : `The fraction is written with the numerator on top and the denominator below: ${a}/${b}.`;
+                    explanation = `Bahagian terpilih ditulis di atas (pengangka) manakala jumlah bahagian di bawah (penyebut): ${a}/${b}.`;
                     options = [`${a}/${b}`, `${b - a}/${b}`, `1/${b}`, `${a}/${b + 1}`];
                 } else if (topic === 'wang') {
                     let a = randInt(50, 150);
                     let b = randInt(10, 49);
                     rawAns = a + b;
-                    text = `RM${a}.60 + RM${b}.30 = ?`;
+                    text = `RM${a}.60 + RM${b}.30`;
                     answer = `RM${rawAns}.90`;
-                    explanation = lang === 'ms' 
-                        ? `Hitung hasil tambah mengikut nilai tempat Ringgit dan sen: RM${rawAns}.90.`
-                        : `Calculate the sum according to the Ringgit and sen place values: RM${rawAns}.90.`;
+                    explanation = `Selesaikan penambahan mengikut nilai tempat sen dan Ringgit: RM${rawAns}.90.`;
                     options = [`RM${rawAns}.90`, `RM${rawAns + 1}.90`, `RM${rawAns - 1}.60`, `RM${rawAns}.30`];
                 } else if (topic === 'masa') {
                     let j = randInt(1, 12);
                     let m = [15, 30, 45][randInt(0, 2)];
                     let mText = { 15: "suku", 30: "setengah", 45: "tiga suku" };
-                    let mTextEn = { 15: "quarter", 30: "half", 45: "quarter" };
-                    
-                    text = lang === 'ms'
-                        ? `Waktu "Pukul ${j}:${m}" ditulis dalam perkataan sebagai...`
-                        : `The time "${j}:${m}" is written in words as...`;
-                    
-                    if (lang === 'ms') {
-                        answer = `Pukul ${j} ${mText[m]}`;
-                        options = [`Pukul ${j} ${mText[m]}`, `Pukul ${j} tepat`, `Pukul ${j+1} tepat`, `Pukul ${j} sepuluh`];
-                    } else {
-                        if (m === 15) answer = `Quarter past ${j}`;
-                        else if (m === 30) answer = `Half past ${j}`;
-                        else answer = `Quarter to ${j === 12 ? 1 : j + 1}`;
-                        
-                        options = [`Quarter past ${j}`, `Half past ${j}`, `Quarter to ${j === 12 ? 1 : j + 1}`, `${j} o'clock`].sort(() => Math.random() - 0.5);
-                    }
-                    explanation = lang === 'ms' ? `Waktu ditukar ke perkataan tradisional.` : `Traditional text representation of time.`;
+                    text = `Bagaimanakah kita menyebut waktu digital "Pukul ${j}:${m}" dalam perkataan?`;
+                    answer = `Pukul ${j} ${mText[m]}`;
+                    options = [`Pukul ${j} ${mText[m]}`, `Pukul ${j} tepat`, `Pukul ${j+1} tepat`, `Pukul ${j} sepuluh`];
+                    explanation = `Dalam jam tradisional, minit ${m} digantikan dengan perkataan ${mText[m]}.`;
                 } else {
-                    let pb = generateProblemSolvingText(3, 'darab', lang);
+                    let pb = generateProblemSolvingText(3, 'darab');
                     text = pb.text;
                     answer = pb.answer;
                     rawAns = pb.rawAns;
@@ -1252,57 +1003,51 @@
                     let a = randInt(15, 99);
                     let b = randInt(11, 29);
                     rawAns = a * b;
-                    text = lang === 'ms' ? `Hitung hasil darab ${a} dengan ${b}.` : `Calculate the product of ${a} and ${b}.`;
+                    text = `${a} × ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `${a} × ${b} = ${rawAns}.`;
+                    explanation = `Lakukan pendaraban 2-digit: ${a} × ${b} = ${rawAns}.`;
                 } else if (topic === 'bahagi') {
                     let b = randInt(4, 9);
                     let ans = randInt(100, 240);
                     let prod = ans * b;
                     rawAns = ans;
-                    text = `${prod} ÷ ${b} = ?`;
+                    text = `${prod} ÷ ${b}`;
                     answer = `${rawAns}`;
-                    explanation = `${prod} ÷ ${b} = ${rawAns}.`;
+                    explanation = `Lakukan pembahagian bentuk lazim: ${prod} ÷ ${b} = ${rawAns}.`;
                 } else if (topic === 'pecahan') {
                     let d = [5, 6, 8, 10][randInt(0, 3)];
                     let a = randInt(1, 2);
                     let b = randInt(1, 2);
-                    text = lang === 'ms' ? `Kira: ${a}/${d} + ${b}/${d}` : `Calculate: ${a}/${d} + ${b}/${d}`;
+                    text = `${a}/${d} + ${b}/${d} = ?`;
                     answer = `${a + b}/${d}`;
                     options = [`${a + b}/${d}`, `${a + b}/${d * 2}`, `${a}/${d}`, `1/${d}`];
-                    explanation = lang === 'ms'
-                        ? `Memandangkan penyebutnya sama, tambahkan pengangka di atas: ${a} + ${b} = ${a + b}.`
-                        : `Since denominators are equal, add numerators only: ${a} + ${b} = ${a + b}.`;
+                    explanation = `Memandangkan penyebutnya sama, tambahkan pengangka sahaja: ${a} + ${b} = ${a + b}. Jawapan: ${a + b}/${d}.`;
                 } else if (topic === 'peratus') {
                     let rates = [10, 20, 25, 50];
                     let prc = rates[randInt(0, 3)];
                     let val = [100, 200, 300, 400][randInt(0, 3)];
                     rawAns = (prc / 100) * val;
-                    text = lang === 'ms' ? `Kira ${prc}% daripada ${val}.` : `Calculate ${prc}% of ${val}.`;
+                    text = `Berapakah nilai bagi ${prc}% daripada ${val}?`;
                     answer = `${rawAns}`;
-                    explanation = `${prc}% = ${prc}/100. ${prc}/100 × ${val} = ${rawAns}.`;
+                    explanation = `${prc}% bersamaan ${prc}/100. Maka, ${prc}/100 × ${val} = ${rawAns}.`;
                 } else if (topic === 'masa') {
                     let mula = randInt(1, 6);
                     let tempoh = randInt(1, 4);
-                    text = lang === 'ms'
-                        ? `Sebuah bas bertolak dari Kuala Lumpur pada pukul ${mula}:15 pagi. Jika perjalanan itu mengambil masa selama ${tempoh} jam, pada pukul berapakah bas itu akan tiba di destinasi?`
-                        : `A bus leaves Kuala Lumpur at ${mula}:15 AM. If the journey takes ${tempoh} hours, at what time will the bus arrive at its destination?`;
-                    answer = lang === 'ms' ? `Pukul ${mula + tempoh}:15 pagi` : `${mula + tempoh}:15 AM`;
-                    options = lang === 'ms'
-                        ? [`Pukul ${mula + tempoh}:15 pagi`, `Pukul ${mula + tempoh}:00 pagi`, `Pukul ${mula + tempoh + 1}:15 pagi`, `Pukul ${mula + tempoh - 1}:45 pagi`]
-                        : [`${mula + tempoh}:15 AM`, `${mula + tempoh}:00 AM`, `${mula + tempoh + 1}:15 AM`, `${mula + tempoh - 1}:45 AM`];
-                    explanation = `${mula}:15 + ${tempoh} jam/hours.`;
+                    text = `Bas memulakan perjalanan dari Kuala Lumpur pada pukul ${mula}:15 pagi. Jika perjalanan mengambil masa selama ${tempoh} jam, pukul berapakah bas itu sampai?`;
+                    answer = `Pukul ${mula + tempoh}:15 pagi`;
+                    options = [`Pukul ${mula + tempoh}:15 pagi`, `Pukul ${mula + tempoh}:00 pagi`, `Pukul ${mula + tempoh + 1}:15 pagi`, `Pukul ${mula + tempoh - 1}:45 pagi`];
+                    explanation = `Waktu mula ditambahkan tempoh perjalanan: ${mula}:15 pagi + ${tempoh} jam = ${mula + tempoh}:15 pagi.`;
                 } else if (topic === 'wang') {
                     let a = randInt(300, 900);
                     let b = randInt(50, 199);
                     rawAns = a - b;
-                    text = lang === 'ms' ? `Hitung beza antara RM${a} dengan RM${b}.` : `Calculate the difference between RM${a} and RM${b}.`;
+                    text = `Kira RM${a} ditolak RM${b}.`;
                     answer = `RM${rawAns}`;
-                    explanation = `RM${a} - RM${b} = RM${rawAns}.`;
+                    explanation = `Selesaikan operasi tolak: RM${a} - RM${b} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else {
-                    let pb = generateProblemSolvingText(4, 'bahagi', lang);
+                    let pb = generateProblemSolvingText(4, 'bahagi');
                     text = pb.text;
                     answer = pb.answer;
                     rawAns = pb.rawAns;
@@ -1312,21 +1057,21 @@
                 if (topic === 'pecahan') {
                     let choice = randInt(1, 2);
                     if (choice === 1) {
-                        text = lang === 'ms' ? `Selesaikan: 1/2 + 1/4 = ?` : `Solve: 1/2 + 1/4 = ?`;
+                        text = `1/2 + 1/4 = ?`;
                         answer = `3/4`;
                         options = [`3/4`, `2/4`, `2/6`, `1/2`];
-                        explanation = `1/2 + 1/4 = 2/4 + 1/4 = 3/4.`;
+                        explanation = `Samakan penyebut terlebih dahulu dengan mendarabkan 1/2 dengan 2: 2/4 + 1/4 = 3/4.`;
                     } else {
-                        text = lang === 'ms' ? `Selesaikan: 3/4 - 1/2 = ?` : `Solve: 3/4 - 1/2 = ?`;
+                        text = `3/4 - 1/2 = ?`;
                         answer = `1/4`;
                         options = [`1/4`, `2/4`, `1/2`, `3/8`];
-                        explanation = `3/4 - 1/2 = 3/4 - 2/4 = 1/4.`;
+                        explanation = `Tukarkan 1/2 kepada penyebut 4: 3/4 - 2/4 = 1/4.`;
                     }
                 } else if (topic === 'peratus') {
                     let prc = [15, 30, 40, 60][randInt(0, 3)];
                     let val = [200, 300, 500][randInt(0, 2)];
                     rawAns = (prc / 100) * val;
-                    text = lang === 'ms' ? `Kira ${prc}% daripada ${val} buah rumah.` : `Calculate ${prc}% of ${val} houses.`;
+                    text = `Hitungkan ${prc}% daripada ${val} buah rumah.`;
                     answer = `${rawAns}`;
                     explanation = `${prc}/100 × ${val} = ${rawAns}.`;
                 } else if (topic === 'wang') {
@@ -1334,15 +1079,13 @@
                     let disc = [10, 20, 30][randInt(0, 2)];
                     let potongan = (disc / 100) * kos;
                     rawAns = kos - potongan;
-                    text = lang === 'ms'
-                        ? `Sebuah beg berharga RM${kos} dijual dengan diskaun sebanyak ${disc}%. Hitung harga baharu beg tersebut.`
-                        : `A bag priced at RM${kos} is sold with a ${disc}% discount. Calculate the new price of the bag.`;
+                    text = `Sebuah peranti berharga RM${kos} diberikan diskaun sebanyak ${disc}%. Berapakah harga jualannya?`;
                     answer = `RM${rawAns}`;
-                    explanation = `Discount: ${disc}% of RM${kos} = RM${potongan}. Price = RM${kos} - RM${potongan} = RM${rawAns}.`;
+                    explanation = `Potongan diskaun: RM${potongan}. Harga baharu: RM${kos} - RM${potongan} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else if (topic === 'penyelesaian') {
-                    let pb = generateProblemSolvingText(5, 'tambah', lang);
+                    let pb = generateProblemSolvingText(5, 'tambah');
                     text = pb.text;
                     answer = pb.answer;
                     rawAns = pb.rawAns;
@@ -1351,61 +1094,51 @@
                     let hari = randInt(2, 5);
                     let jam = randInt(1, 23);
                     rawAns = (hari * 24) + jam;
-                    text = lang === 'ms'
-                        ? `Tukarkan ${hari} hari ${jam} jam kepada unit jam sahaja.`
-                        : `Convert ${hari} days ${jam} hours into hours only.`;
+                    text = `Tukarkan ${hari} hari ${jam} jam kepada unit jam sahaja.`;
                     answer = `${rawAns} jam`;
-                    explanation = `1 day/hari = 24 jam. (${hari} × 24) + ${jam} = ${rawAns} jam.`;
-                    unit = lang === 'ms' ? " jam" : " hours";
+                    explanation = `Satu hari mempunyai 24 jam. (${hari} × 24) + ${jam} = ${rawAns} jam.`;
+                    unit = " jam";
                     unitPosition = "suffix";
                 } else {
                     let a = randInt(25, 99);
                     let b = randInt(15, 30);
                     rawAns = a * b;
-                    text = lang === 'ms'
-                        ? `Sebuah kilang mengedarkan ${a} bungkusan makanan sehari. Hitung jumlah bungkusan makanan yang diedarkan dalam tempoh ${b} hari.`
-                        : `A factory distributes ${a} food packets per day. Calculate the total packets distributed in ${b} days.`;
+                    text = `Syarikat XYZ mengedar ${a} bungkusan makanan sehari. Kira jumlah bungkusan makanan yang diedarkan dalam tempoh ${b} hari.`;
                     answer = `${rawAns}`;
-                    explanation = `${a} × ${b} = ${rawAns}.`;
+                    explanation = `Operasi darab: ${a} × ${b} = ${rawAns}.`;
                 }
             } else if (year === 6) {
                 if (topic === 'pecahan') {
-                    text = lang === 'ms' ? `Selesaikan: 1 1/2 + 1 1/4 = ?` : `Solve: 1 1/2 + 1 1/4 = ?`;
+                    text = `1 1/2 + 1 1/4 = ?`;
                     answer = `2 3/4`;
                     options = [`2 3/4`, `2 1/2`, `3 1/4`, `2 2/3`];
-                    explanation = `1 1/2 + 1 1/4 = 1 2/4 + 1 1/4 = 2 3/4.`;
+                    explanation = `Tambahkan nombor bulat (1 + 1 = 2) dan samakan penyebut pecahan (2/4 + 1/4 = 3/4). Hasil gabungan: 2 3/4.`;
                 } else if (topic === 'peratus') {
                     let kos = [100, 150, 200, 300][randInt(0, 3)];
                     let taxRate = 6;
                     let taxVal = (taxRate / 100) * kos;
                     let total = kos + taxVal;
                     answer = `RM${total.toFixed(2)}`;
-                    text = lang === 'ms'
-                        ? `Harga sebuah meja ialah RM${kos}. Berapakah harga meja tersebut selepas ditambah cukai SST sebanyak ${taxRate}%?`
-                        : `The price of a table is RM${kos}. What is the price of the table after adding ${taxRate}% SST?`;
+                    text = `Harga sebuah kerusi meja ialah RM${kos}. Berapakah harga baharu yang perlu dibayar selepas ditambah cukai SST sebanyak ${taxRate}%?`;
                     options = [`RM${total.toFixed(2)}`, `RM${(total + 5).toFixed(2)}`, `RM${(kos - taxVal).toFixed(2)}`, `RM${(kos + 10).toFixed(2)}`];
-                    explanation = `SST: 6% of/daripada RM${kos} = RM${taxVal.toFixed(2)}. Total/Jumlah = RM${kos} + RM${taxVal.toFixed(2)} = RM${total.toFixed(2)}.`;
+                    explanation = `Nilai Cukai SST: 6% daripada RM${kos} = RM${taxVal.toFixed(2)}. Jumlah bayaran: RM${kos} + RM${taxVal.toFixed(2)} = RM${total.toFixed(2)}.`;
                 } else if (topic === 'wang') {
                     let kos = [600, 800, 1000, 1200][randInt(0, 3)];
                     let untung = [10, 15, 20, 25][randInt(0, 3)];
                     let untungVal = (untung / 100) * kos;
                     rawAns = kos + untungVal;
-                    text = lang === 'ms'
-                        ? `Harga kos bagi sebuah komputer ialah RM${kos}. Peniaga menjualnya semula dengan mendapat untung ${untung}%. Hitung harga jualan komputer tersebut.`
-                        : `The cost price of a computer is RM${kos}. A dealer sells it with a ${untung}% profit. Calculate the selling price of the computer.`;
+                    text = `Harga kos bagi sebuah komputer ialah RM${kos}. Kedai menjualnya semula untuk memperoleh kadar untung sebanyak ${untung}%. Berapakah harga jualannya?`;
                     answer = `RM${rawAns}`;
-                    explanation = `Profit/Untung: ${untung}% = RM${untungVal}. Selling price/Harga jualan = RM${kos} + RM${untungVal} = RM${rawAns}.`;
+                    explanation = `Keuntungan dikira: ${untung}% daripada RM${kos} = RM${untungVal}. Harga jualan: RM${kos} + RM${untungVal} = RM${rawAns}.`;
                     unit = "RM";
                     unitPosition = "prefix";
                 } else if (topic === 'masa') {
                     let novel = randInt(3, 6);
                     let hari = novel * 7;
-                    text = lang === 'ms'
-                        ? `Siti mengambil masa selama ${novel} minggu untuk menamatkan bacaan sebuah novel. Hitung jumlah hari yang diambil oleh Siti.`
-                        : `Siti takes ${novel} weeks to finish reading a novel. Calculate the total number of days taken by Siti.`;
+                    text = `Encik Ahmad meluangkan tempoh masa selama ${novel} minggu untuk menyiapkan latihan fizikalnya. Berapakah jumlah HARI yang telah dilaluinya?`;
                     answer = `${hari} hari`;
-                    explanation = `1 week/minggu = 7 days/hari. ${novel} × 7 = ${hari} days/hari.`;
-                    unit = lang === 'ms' ? " hari" : " days";
+                    explanation = `Kerana 1 minggu = 7 hari, kita lakukan operasi darab: ${novel} × 7 = ${hari} hari.`;
+                    unit = " hari";
                     unitPosition = "suffix";
                 } else if (topic === 'penyelesaian') {
                     let r = 2;
@@ -1413,13 +1146,11 @@
                     let mult = [3, 4, 6, 8][randInt(0, 3)];
                     let redCount = r * mult;
                     let totalCount = (r + b) * mult;
-                    text = lang === 'ms'
-                        ? `Nisbah bilangan belon merah kepada belon biru di sebuah taman permainan ialah 2:5. Jika terdapat ${redCount} biji belon merah, hitung jumlah keseluruhan belon di taman tersebut.`
-                        : `The ratio of red balloons to blue balloons in a playground is 2:5. If there are ${redCount} red balloons, calculate the total number of balloons in the playground.`;
+                    text = `Nisbah belon merah kepada belon biru di taman permainan ialah 2:5. Sekiranya terdapat ${redCount} belon merah, berapakah JUMLAH keseluruhan belon di taman tersebut?`;
                     answer = `${totalCount}`;
-                    explanation = `Ratio/Nisbah 2:5. Merah = ${redCount} (2 × ${mult}). Total/Jumlah = (2 + 5) × ${mult} = ${totalCount}.`;
+                    explanation = `Nisbah Merah : Biru = 2 : 5. Merah = ${redCount} (iaitu 2 × ${mult}). Jadi, gandaan nisbah ialah ${mult}. Jumlah belon = (2 + 5) × ${mult} = ${totalCount}.`;
                 } else {
-                    let pb = generateProblemSolvingText(6, 'darab', lang);
+                    let pb = generateProblemSolvingText(6, 'darab');
                     text = pb.text;
                     answer = pb.answer;
                     rawAns = pb.rawAns;
@@ -1448,8 +1179,6 @@
                 explanation: baseQ.explanation,
                 options: []
             };
-
-            const lang = state.language;
 
             if (formatType === 'mcq') {
                 let optionsSet = new Set();
@@ -1487,7 +1216,7 @@
                 if (!isTrue) {
                     if (baseQ.options) {
                         let wrongOptions = baseQ.options.filter(o => o !== baseQ.answer);
-                        displayAns = wrongOptions[randInt(0, wrongOptions.length - 1)] || (lang === 'ms' ? "Salah" : "Wrong");
+                        displayAns = wrongOptions[randInt(0, wrongOptions.length - 1)] || "Salah";
                     } else {
                         let raw = baseQ.rawAns;
                         let unit = baseQ.unit || "";
@@ -1504,15 +1233,9 @@
                     }
                 }
 
-                q.questionText = lang === 'ms'
-                    ? `Adakah penyataan matematik ini betul?\n\n"${baseQ.text} = ${displayAns}"`
-                    : `Is this mathematical statement correct?\n\n"${baseQ.text} = ${displayAns}"`;
-                
-                q.correctAnswer = isTrue 
-                    ? (lang === 'ms' ? "Benar" : "True") 
-                    : (lang === 'ms' ? "Salah" : "False");
-                
-                q.options = lang === 'ms' ? ["Benar", "Salah"] : ["True", "False"];
+                q.questionText = `Adakah penyataan matematik ini betul?\n\n"${baseQ.text} = ${displayAns}"`;
+                q.correctAnswer = isTrue ? "Benar" : "Salah";
+                q.options = ["Benar", "Salah"];
             } else {
                 q.options = [];
             }
@@ -1528,7 +1251,6 @@
             const year = parseInt(document.getElementById('config-year').value);
             const countRadio = document.querySelector('input[name="config-count"]:checked');
             const totalQs = parseInt(countRadio ? countRadio.value : 10);
-            const lang = state.language;
 
             const selectedTopics = [];
             document.querySelectorAll('input[name="topic"]:checked').forEach(cb => {
@@ -1536,19 +1258,20 @@
             });
 
             if (selectedTopics.length === 0) {
-                alert(translations[lang]['all_topics_alert']);
+                alert("Sila pilih sekurang-kurangnya SATU topik matematik untuk memulakan kuiz!");
                 return;
             }
 
             currentQuestionsList = [];
             let uniqueIds = new Set();
             let attempts = 0;
-            const maxAttempts = 1000;
+            const maxAttempts = 1000; // Had maksimum percubaan bagi mencegah takat lebur gelung tak terhingga
 
+            // Memastikan janaan 100% UNIK tanpa sebarang soalan berulang
             while (currentQuestionsList.length < totalQs && attempts < maxAttempts) {
                 attempts++;
                 let randomTopic = selectedTopics[randInt(0, selectedTopics.length - 1)];
-                let baseQ = getBaseQuestion(year, randomTopic, lang);
+                let baseQ = getBaseQuestion(year, randomTopic);
 
                 if (!uniqueIds.has(baseQ.id)) {
                     uniqueIds.add(baseQ.id);
@@ -1557,16 +1280,15 @@
                     let chosenFormat = formats[randInt(0, formats.length - 1)];
 
                     let formattedQ = formatQuestionToSession(baseQ, chosenFormat);
-                    formattedQ.topic = randomTopic === 'penyelesaian' ? (lang === 'ms' ? 'Penyelesaian Masalah' : 'Problem Solving') : translations[lang][`topic_${randomTopic}`];
+                    formattedQ.topic = randomTopic === 'penyelesaian' ? 'Penyelesaian Masalah' : randomTopic;
                     currentQuestionsList.push(formattedQ);
                 }
             }
 
+            // Sekiranya variasi tidak mencukupi kerana topik yang dipilih terlampau sedikit,
+            // sistem akan melaraskan bilangan soalan secara pintar daripada membenarkan soalan berulang
             if (currentQuestionsList.length < totalQs) {
-                alert(lang === 'ms' 
-                    ? `Sistem melaraskan sesi kuiz ini kepada ${currentQuestionsList.length} soalan unik yang berbeza bagi menghalang soalan berulang.`
-                    : `System adjusted this quiz session to ${currentQuestionsList.length} unique questions to prevent duplicates.`
-                );
+                alert(`Sistem melaraskan sesi kuiz ini kepada ${currentQuestionsList.length} soalan unik yang berbeza bagi menghalang soalan berulang.`);
             }
 
             currentQuestionIndex = 0;
@@ -1575,7 +1297,7 @@
 
             state.quizSession = {
                 year: year,
-                topics: selectedTopics.map(t => t === 'penyelesaian' ? (lang === 'ms' ? 'Penyelesaian Masalah' : 'Problem Solving') : translations[lang][`topic_${t}`]),
+                topics: selectedTopics.map(t => t === 'penyelesaian' ? 'Penyelesaian Masalah' : t),
                 totalQs: currentQuestionsList.length
             };
 
@@ -1586,7 +1308,7 @@
 
         function exitQuizMidway() {
             playSound('click');
-            if (confirm(translations[state.language]['exit_confirm'])) {
+            if (confirm("Adakah anda pasti mahu keluar dari kuiz ini? Kemajuan semasa anda tidak akan disimpan.")) {
                 stopTimer();
                 showDashboard();
             }
@@ -1616,7 +1338,6 @@
            ================================================== */
         function renderQuestion() {
             const currentQ = currentQuestionsList[currentQuestionIndex];
-            const lang = state.language;
             
             const feedbackAlert = document.getElementById('feedback-alert');
             feedbackAlert.classList.add('hidden');
@@ -1653,9 +1374,9 @@
             } else if (currentQ.type === 'fill') {
                 answerContainer.innerHTML = `
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <input type="text" id="fill-answer" class="flex-1 px-5 py-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg font-bold focus:outline-none focus:border-blue-500" placeholder="${translations[lang]['placeholder_ans']}">
+                        <input type="text" id="fill-answer" class="flex-1 px-5 py-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-lg font-bold focus:outline-none focus:border-blue-500" placeholder="Tulis jawapan anda di sini...">
                         <button onclick="checkFillAnswer()" class="btn-playful px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-fun font-bold text-lg rounded-2xl shadow-md">
-                            ${translations[lang]['hantar']}
+                            Hantar 🚀
                         </button>
                     </div>
                 `;
@@ -1683,7 +1404,6 @@
         function checkAnswer(userAnswer, buttonElement) {
             const currentQ = currentQuestionsList[currentQuestionIndex];
             const isCorrect = cleanString(userAnswer) === cleanString(currentQ.correctAnswer);
-            const lang = state.language;
 
             const buttons = document.querySelectorAll('#answer-container button');
             buttons.forEach(btn => btn.disabled = true);
@@ -1699,9 +1419,7 @@
                 playSound('correct');
                 
                 feedbackAlert.className = "p-4 rounded-2xl mb-4 text-center text-lg font-bold animate-bounce bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800";
-                feedbackAlert.innerHTML = lang === 'ms'
-                    ? `🎉 BETUL! Hebat sekali. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`
-                    : `🎉 CORRECT! Amazing job. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
+                feedbackAlert.innerHTML = `🎉 BETUL! Hebat sekali. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
                 
                 if (buttonElement) {
                     buttonElement.className = "btn-playful py-4 px-6 bg-emerald-100 dark:bg-emerald-950/60 border-2 border-emerald-500 text-emerald-700 dark:text-emerald-300 text-left font-semibold text-lg rounded-2xl shadow-sm transition";
@@ -1709,9 +1427,7 @@
             } else {
                 playSound('wrong');
                 feedbackAlert.className = "p-4 rounded-2xl mb-4 text-center text-lg font-bold animate-shake bg-red-100 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800";
-                feedbackAlert.innerHTML = lang === 'ms'
-                    ? `❌ SALAH. Jawapan betul ialah <strong>${currentQ.correctAnswer}</strong>. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`
-                    : `❌ WRONG. The correct answer is <strong>${currentQ.correctAnswer}</strong>. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
+                feedbackAlert.innerHTML = `❌ SALAH. Jawapan betul ialah <strong>${currentQ.correctAnswer}</strong>. <br><span class="text-sm font-normal text-slate-500">${currentQ.explanation}</span>`;
                 
                 if (buttonElement) {
                     buttonElement.className = "btn-playful py-4 px-6 bg-red-100 dark:bg-red-950/60 border-2 border-red-500 text-red-700 dark:text-red-300 text-left font-semibold text-lg rounded-2xl shadow-sm transition";
@@ -1736,7 +1452,6 @@
             
             const totalQs = currentQuestionsList.length;
             const percentage = Math.round((quizScore / totalQs) * 100);
-            const lang = state.language;
             
             let gred = "E";
             let gredColorClass = "text-red-500";
@@ -1747,25 +1462,25 @@
             else if (percentage >= 50) { gred = "D"; gredColorClass = "text-orange-600"; }
 
             let badgeEmoji = "❌";
-            let badgeName = lang === 'ms' ? "Tiada Lencana" : "No Badge";
-            let badgeDesc = lang === 'ms' ? "Belajar lagi untuk dapatkan lencana kelulusan!" : "Keep learning to earn a passing badge!";
+            let badgeName = "Tiada Lencana";
+            let badgeDesc = "Belajar lagi untuk dapatkan lencana kelulusan!";
             
             if (percentage >= 90) {
                 badgeEmoji = "🥇";
-                badgeName = lang === 'ms' ? "Lencana Emas" : "Gold Badge";
-                badgeDesc = lang === 'ms' ? "Sangat Pintar! Anda seorang pakar matematik!" : "Brilliant! You are a mathematics wizard!";
+                badgeName = "Lencana Emas";
+                badgeDesc = "Sangat Pintar! Anda seorang pakar matematik!";
                 playSound('fanfare');
                 triggerConfetti();
             } else if (percentage >= 70) {
                 badgeEmoji = "🥈";
-                badgeName = lang === 'ms' ? "Lencana Perak" : "Silver Badge";
-                badgeDesc = lang === 'ms' ? "Hebat! Teruskan usaha gemilang anda!" : "Superb! Keep up your amazing effort!";
+                badgeName = "Lencana Perak";
+                badgeDesc = "Hebat! Teruskan usaha gemilang anda!";
                 playSound('fanfare');
                 triggerConfetti();
             } else if (percentage >= 50) {
                 badgeEmoji = "🥉";
-                badgeName = lang === 'ms' ? "Lencana Gangsa" : "Bronze Badge";
-                badgeDesc = lang === 'ms' ? "Syabas! Anda berjaya melepasi tahap kelulusan!" : "Well done! You successfully passed the quiz!";
+                badgeName = "Lencana Gangsa";
+                badgeDesc = "Syabas! Anda berjaya melepasi tahap kelulusan!";
                 playSound('correct');
             } else {
                 playSound('wrong');
@@ -1789,16 +1504,16 @@
             state.history.push(record);
             localStorage.setItem('bijak_mat_history', JSON.stringify(state.history));
 
-            document.getElementById('res-score-val').innerText = `${quizScore}/${totalQs}`;
-            document.getElementById('res-percentage-val').innerText = `${percentage}%`;
+            document.getElementById('res-score').innerText = `${quizScore}/${totalQs}`;
+            document.getElementById('res-percentage').innerText = `${percentage}%`;
             document.getElementById('res-grade').innerText = gred;
             document.getElementById('res-grade').className = `text-4xl font-black ${gredColorClass}`;
             document.getElementById('res-time').innerText = timeStr;
             
             document.getElementById('res-username').innerText = state.currentUser;
-            document.getElementById('res-date').innerText = new Date().toLocaleDateString(lang === 'ms' ? 'ms-MY' : 'en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('res-year-val').innerText = `${lang === 'ms' ? 'Tahun' : 'Year'} ${state.quizSession.year}`;
-            document.getElementById('res-topics').innerText = state.quizSession.topics.join(', ');
+            document.getElementById('res-date').innerText = new Date().toLocaleDateString('ms-MY', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('res-year').innerText = state.quizSession.year;
+            document.getElementById('res-topics').innerText = state.quizSession.topics.map(t => t.toUpperCase()).join(', ');
 
             document.getElementById('reward-badge-emoji').innerText = badgeEmoji;
             document.getElementById('reward-badge-name').innerText = badgeName;
@@ -1851,4 +1566,3 @@
     </script>
 </body>
 </html>
-```
