@@ -91,22 +91,17 @@
                 <div class="text-left">
                     <button @click="screen = 'login-selection'" class="text-emerald-600 font-bold text-sm">⬅️ Kembali</button>
                 </div>
-                <div class="bg-slate-100 p-5 rounded-3xl border-2 border-slate-200 shadow-inner">
-                    <h2 class="text-2xl font-black text-slate-700 font-kids">Akaun Ibu Bapa / Guru</h2>
-                    <p class="text-xs text-slate-500 mt-1">Gunakan akaun Google anda untuk log masuk atau mendaftar secara automatik.</p>
+                <div class="bg-slate-100 p-6 rounded-3xl border-2 border-slate-200 space-y-4">
+                    <h2 class="text-2xl font-black text-slate-700 font-kids">Log Masuk Ibu Bapa / Guru</h2>
+                    <p class="text-sm text-slate-500">Gunakan akaun Google anda untuk mengakses dashboard pengurusan keluarga & prestasi anak.</p>
                 </div>
                 
-                <div class="pt-4">
-                    <button @click="loginWithGoogle" :disabled="authLoading" class="w-full bg-white hover:bg-slate-50 disabled:opacity-50 text-slate-700 font-bold text-md py-3.5 px-4 rounded-2xl shadow-md border-2 border-slate-200 transition-all flex justify-center items-center gap-3 transform active:scale-95">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v3.92h6.69a5.74 5.74 0 0 1-2.48 3.77v3.13h4c2.34-2.16 3.68-5.32 3.68-8.75z"/>
-                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-4-3.13c-1.11.75-2.53 1.19-3.93 1.19-2.76 0-5.1-1.86-5.93-4.36H1.92v3.2A11.99 11.99 0 0 0 12 24z"/>
-                            <path fill="#FBBC05" d="M6.07 14.79a7.15 7.15 0 0 1 0-4.58V7.01H1.92a11.99 11.99 0 0 0 0 9.98l4.15-3.2z"/>
-                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.43-3.43A11.94 11.94 0 0 0 12 0 11.99 11.99 0 0 0 1.92 7.01l4.15 3.2c.83-2.5 3.17-4.36 5.93-4.36z"/>
-                        </svg>
-                        {{ authLoading ? 'Menghubungkan...' : 'Log Masuk dengan Google' }}
-                    </button>
-                </div>
+                <button @click="handleGoogleLogin" :disabled="authLoading" class="w-full bg-white hover:bg-slate-50 disabled:opacity-50 text-slate-700 font-bold text-md py-3 px-4 rounded-xl shadow-md border border-slate-300 transition-all flex justify-center items-center gap-3">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.866-3.577-7.866-8s3.536-8 7.866-8c2.46 0 4.105 1.025 5.047 1.926l3.227-3.11C18.281 1.045 15.49 0 12.24 0 5.58 0 0 5.37 0 12s5.58 12 12.24 12c6.96 0 11.57-4.854 11.57-11.79 0-.795-.085-1.4-.195-1.925H12.24z"/>
+                    </svg>
+                    {{ authLoading ? 'Memproses...' : 'Log Masuk Dengan Google' }}
+                </button>
             </div>
 
             <div v-if="parentUser && screen === 'parentDashboard'" class="w-full space-y-6 my-auto">
@@ -438,15 +433,15 @@
         import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getDatabase, ref as dbRef, set, push, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // Firebase Configuration
+        // Firebase Configuration Baharu
         const firebaseConfig = {
-            apiKey: "AIzaSyCWsd4hqL5kPgzh-pjwcBhzVLXyTGJU_Xw",
-            authDomain: "mathpintar-61339.firebaseapp.com",
-            databaseURL: "https://mathpintar-61339-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "mathpintar-61339",
-            storageBucket: "mathpintar-61339.firebasestorage.app",
-            messagingSenderId: "360973475425",
-            appId: "1:360973475425:web:63da6361e7cac39b99d420"
+            apiKey: "AIzaSyC4dHeiYsYgXA3Z936jYp6qZQ8Q-NnX_GM",
+            authDomain: "bijak-matematik-8b3a8.firebaseapp.com",
+            databaseURL: "https://bijak-matematik-8b3a8-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bijak-matematik-8b3a8",
+            storageBucket: "bijak-matematik-8b3a8.firebasestorage.app",
+            messagingSenderId: "815699722160",
+            appId: "1:815699722160:web:ebd68b21b0fcfa80f92075"
         };
 
         const fApp = initializeApp(firebaseConfig);
@@ -585,14 +580,13 @@
                     });
                 };
 
-                const loginWithGoogle = async () => {
+                const handleGoogleLogin = async () => {
                     authLoading.value = true;
                     try {
                         await signInWithPopup(fAuth, googleProvider);
                         user.value = null; 
-                        playSound('correct');
                     } catch (error) {
-                        alert("Ralat Log Masuk Google: " + error.message);
+                        alert("Ralat Pengesahan Google: " + error.message);
                         playSound('wrong');
                     } finally {
                         authLoading.value = false;
@@ -1040,7 +1034,7 @@
                     newChildName, childProfiles, reportList, filteredReportList, parentFilteredReports, selectedChildForReport, config, score, currentQuestionIndex,
                     currentQuestion, maxColumns, answerArray, carryArray, borrowArray, divisionInputs, activeTarget,
                     formattedTime, currentAccuracy, finalTimeDisplay, questions, correctionIndex,
-                    loginWithGoogle, loginAsChild, addChildProfile, regenerateChildPin, deleteChildProfile, getChildStats,
+                    handleGoogleLogin, loginAsChild, addChildProfile, regenerateChildPin, deleteChildProfile, getChildStats,
                     logout, getDigitAt, changeOperation, startSession, triggerBorrow, pressKey, 
                     submitAnswer, retrySession, goToMenu, playSound, openReports, startCorrection, exitCorrection, clearChildReports
                 };
