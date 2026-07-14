@@ -87,30 +87,26 @@
                 </button>
             </div>
 
-            <div v-if="screen === 'login-parent'" class="w-full space-y-4 text-center my-auto">
+            <div v-if="screen === 'login-parent'" class="w-full space-y-6 text-center my-auto">
                 <div class="text-left">
                     <button @click="screen = 'login-selection'" class="text-emerald-600 font-bold text-sm">⬅️ Kembali</button>
                 </div>
-                <div class="bg-slate-100 p-4 rounded-2xl border-2 border-slate-200">
-                    <h2 class="text-xl font-black text-slate-700 font-kids">{{ isRegisterMode ? 'Daftar Akaun Penjaga' : 'Log Masuk Ibu Bapa' }}</h2>
+                <div class="bg-slate-100 p-5 rounded-3xl border-2 border-slate-200 shadow-inner">
+                    <h2 class="text-2xl font-black text-slate-700 font-kids">Akaun Ibu Bapa / Guru</h2>
+                    <p class="text-xs text-slate-500 mt-1">Gunakan akaun Google anda untuk log masuk atau mendaftar secara automatik.</p>
                 </div>
-                <div class="space-y-3 text-left">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 px-1 mb-1">Alamat E-mel:</label>
-                        <input type="email" v-model="parentEmail" placeholder="ibu_bapa@email.com" class="w-full p-3 border-2 border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 px-1 mb-1">Kata Laluan (Min 6 Aksara):</label>
-                        <input type="password" v-model="parentPassword" placeholder="******" class="w-full p-3 border-2 border-slate-300 rounded-xl focus:outline-none focus:border-emerald-500 text-sm">
-                    </div>
+                
+                <div class="pt-4">
+                    <button @click="loginWithGoogle" :disabled="authLoading" class="w-full bg-white hover:bg-slate-50 disabled:opacity-50 text-slate-700 font-bold text-md py-3.5 px-4 rounded-2xl shadow-md border-2 border-slate-200 transition-all flex justify-center items-center gap-3 transform active:scale-95">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v3.92h6.69a5.74 5.74 0 0 1-2.48 3.77v3.13h4c2.34-2.16 3.68-5.32 3.68-8.75z"/>
+                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-4-3.13c-1.11.75-2.53 1.19-3.93 1.19-2.76 0-5.1-1.86-5.93-4.36H1.92v3.2A11.99 11.99 0 0 0 12 24z"/>
+                            <path fill="#FBBC05" d="M6.07 14.79a7.15 7.15 0 0 1 0-4.58V7.01H1.92a11.99 11.99 0 0 0 0 9.98l4.15-3.2z"/>
+                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.43-3.43A11.94 11.94 0 0 0 12 0 11.99 11.99 0 0 0 1.92 7.01l4.15 3.2c.83-2.5 3.17-4.36 5.93-4.36z"/>
+                        </svg>
+                        {{ authLoading ? 'Menghubungkan...' : 'Log Masuk dengan Google' }}
+                    </button>
                 </div>
-                <button @click="handleParentAuth" :disabled="authLoading" class="w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-black text-md py-3 rounded-xl shadow-md transition-all uppercase">
-                    {{ authLoading ? 'Memproses...' : (isRegisterMode ? 'Daftar Akaun Baru' : 'Log Masuk') }}
-                </button>
-                <p class="text-xs text-slate-500 mt-2">
-                    {{ isRegisterMode ? 'Sudah mempunyai akaun?' : 'Belum mempunyai akaun?' }}
-                    <span @click="isRegisterMode = !isRegisterMode" class="text-emerald-600 font-bold underline cursor-pointer">{{ isRegisterMode ? 'Log Masuk Sini' : 'Daftar Sini' }}</span>
-                </p>
             </div>
 
             <div v-if="parentUser && screen === 'parentDashboard'" class="w-full space-y-6 my-auto">
@@ -439,7 +435,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getDatabase, ref as dbRef, set, push, onValue, remove, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         // Firebase Configuration
@@ -456,6 +452,7 @@
         const fApp = initializeApp(firebaseConfig);
         const fAuth = getAuth(fApp);
         const fDatabase = getDatabase(fApp);
+        const googleProvider = new GoogleAuthProvider();
 
         const { createApp, ref, computed, onMounted } = Vue;
 
@@ -466,9 +463,6 @@
                 const screen = ref('login-selection');
                 
                 const childPinInput = ref('');
-                const parentEmail = ref('');
-                const parentPassword = ref('');
-                const isRegisterMode = ref(false);
                 const authLoading = ref(false);
                 const newChildName = ref('');
                 
@@ -591,19 +585,14 @@
                     });
                 };
 
-                const handleParentAuth = async () => {
-                    if (!parentEmail.value || !parentPassword.value) return;
+                const loginWithGoogle = async () => {
                     authLoading.value = true;
                     try {
-                        if (isRegisterMode.value) {
-                            await createUserWithEmailAndPassword(fAuth, parentEmail.value, parentPassword.value);
-                            alert("Akaun berjaya didaftarkan!");
-                        } else {
-                            await signInWithEmailAndPassword(fAuth, parentEmail.value, parentPassword.value);
-                        }
+                        await signInWithPopup(fAuth, googleProvider);
                         user.value = null; 
+                        playSound('correct');
                     } catch (error) {
-                        alert("Ralat Pengesahan: " + error.message);
+                        alert("Ralat Log Masuk Google: " + error.message);
                         playSound('wrong');
                     } finally {
                         authLoading.value = false;
@@ -733,8 +722,6 @@
                     childProfiles.value = [];
                     reportList.value = [];
                     childPinInput.value = '';
-                    parentEmail.value = '';
-                    parentPassword.value = '';
                     selectedChildForReport.value = '';
                     config.value.activeParentId = null;
                     screen.value = 'login-selection';
@@ -1049,11 +1036,11 @@
                 };
 
                 return {
-                    user, parentUser, screen, childPinInput, parentEmail, parentPassword, isRegisterMode, authLoading,
+                    user, parentUser, screen, childPinInput, authLoading,
                     newChildName, childProfiles, reportList, filteredReportList, parentFilteredReports, selectedChildForReport, config, score, currentQuestionIndex,
                     currentQuestion, maxColumns, answerArray, carryArray, borrowArray, divisionInputs, activeTarget,
                     formattedTime, currentAccuracy, finalTimeDisplay, questions, correctionIndex,
-                    handleParentAuth, loginAsChild, addChildProfile, regenerateChildPin, deleteChildProfile, getChildStats,
+                    loginWithGoogle, loginAsChild, addChildProfile, regenerateChildPin, deleteChildProfile, getChildStats,
                     logout, getDigitAt, changeOperation, startSession, triggerBorrow, pressKey, 
                     submitAnswer, retrySession, goToMenu, playSound, openReports, startCorrection, exitCorrection, clearChildReports
                 };
