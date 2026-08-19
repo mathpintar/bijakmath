@@ -55,17 +55,41 @@
 
         <main class="flex-grow p-4 flex flex-col justify-start items-center w-full overflow-y-auto touch-pan-y">
 
-            <div v-if="screen === 'login-selection'" class="w-full space-y-6 text-center my-auto">
-                <div class="bg-gradient-to-b from-emerald-400 to-emerald-500 p-6 rounded-3xl border-4 border-emerald-300 shadow-inner text-white">
-                    <span class="text-6xl block mb-2">🧠</span>
+            <!-- PAPARAN UTAMA (SEBELUM LOG MASUK) -->
+            <div v-if="screen === 'login-selection'" class="w-full space-y-4 text-center my-auto">
+                <div class="bg-gradient-to-b from-emerald-400 to-emerald-500 p-5 rounded-3xl border-4 border-emerald-300 shadow-inner text-white">
+                    <span class="text-5xl block mb-1">🧠</span>
                     <h2 class="text-3xl font-black font-kids">MathPintar</h2>
-                    <p class="text-sm opacity-90 mt-1">Jom jadi bijak Matematik dengan bentuk lazim!</p>
+                    <p class="text-xs opacity-90 mt-1">Jom jadi bijak Matematik dengan bentuk lazim!</p>
                 </div>
-                <div class="space-y-4 pt-4">
-                    <button @click="screen = 'login-child'" class="w-full bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-black text-xl py-4 rounded-2xl shadow-md border-b-4 border-yellow-600 transition-all flex justify-center items-center gap-2">
+
+                <!-- NOTIS KEMAS KINI SISTEM -->
+                <div class="bg-amber-50 border-2 border-amber-300 p-4 rounded-2xl text-left space-y-2 shadow-sm">
+                    <div class="flex items-center gap-1.5 text-amber-800 font-black text-xs uppercase tracking-wide">
+                        <span>📢</span> NOTIS KEMAS KINI SISTEM — 19/8/2026
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Sistem kini telah menukar No. PIN daripada 4 digit kepada 6 digit bagi mengelak berlakunya pertindihan No. PIN antara akaun.
+                    </p>
+                    <div class="text-xs text-slate-800 font-bold pt-1">Tindakan yang perlu dilakukan:</div>
+                    <ol class="list-decimal list-inside text-xs text-slate-700 space-y-1 font-medium pl-1">
+                        <li>Sila log masuk ke akaun Ibu Bapa.</li>
+                        <li>Jana No. PIN baharu untuk anak.</li>
+                        <li>Gunakan No. PIN terkini tersebut untuk log masuk sebagai anak dan menjawab soalan.</li>
+                    </ol>
+                    <p class="text-[11px] text-amber-900 font-semibold pt-1">
+                        Sila pastikan anda menggunakan No. PIN yang baharu untuk mengakses akaun anak.
+                    </p>
+                    <p class="text-[11px] text-slate-600 italic">
+                        Kami memohon maaf atas segala kesulitan yang berlaku dan mengucapkan terima kasih atas kerjasama serta kefahaman ibu ayah. 🙏
+                    </p>
+                </div>
+
+                <div class="space-y-3 pt-1">
+                    <button @click="screen = 'login-child'" class="w-full bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-black text-lg py-3.5 rounded-2xl shadow-md border-b-4 border-yellow-600 transition-all flex justify-center items-center gap-2">
                         👦 MASUK SEBAGAI ANAK (PIN)
                     </button>
-                    <button @click="screen = 'login-parent'" class="w-full bg-slate-700 hover:bg-slate-800 text-white font-black text-lg py-3.5 rounded-2xl shadow-md border-b-4 border-slate-900 transition-all flex justify-center items-center gap-2">
+                    <button @click="screen = 'login-parent'" class="w-full bg-slate-700 hover:bg-slate-800 text-white font-black text-base py-3 rounded-2xl shadow-md border-b-4 border-slate-900 transition-all flex justify-center items-center gap-2">
                         🔑 LOG MASUK IBU BAPA / GURU
                     </button>
                 </div>
@@ -77,12 +101,12 @@
                 </div>
                 <div class="bg-yellow-100 p-5 rounded-3xl border-4 border-yellow-400 shadow-inner">
                     <h2 class="text-2xl font-black text-emerald-600 font-kids">Sila Masukkan No PIN Anda</h2>
-                    <p class="text-xs text-slate-600 mt-1">Dapatkan 4-digit PIN daripada akaun ibu bapa anda.</p>
+                    <p class="text-xs text-slate-600 mt-1">Dapatkan 6-digit PIN daripada akaun ibu bapa anda.</p>
                 </div>
                 <div class="space-y-3">
-                    <input type="text" v-model="childPinInput" placeholder="Contoh: 1234" class="w-full p-4 text-3xl border-4 border-emerald-400 rounded-2xl focus:outline-none focus:border-yellow-400 text-center font-mono font-black tracking-widest transition-colors" maxLength="4" @keyup.enter="loginAsChild">
+                    <input type="text" v-model="childPinInput" placeholder="Contoh: 123456" class="w-full p-4 text-3xl border-4 border-emerald-400 rounded-2xl focus:outline-none focus:border-yellow-400 text-center font-mono font-black tracking-widest transition-colors" maxLength="6" @keyup.enter="loginAsChild">
                 </div>
-                <button @click="loginAsChild" :disabled="childPinInput.trim().length !== 4 || authLoading" class="w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-black text-xl py-4 rounded-2xl shadow-lg border-b-8 border-emerald-700 transition-all uppercase">
+                <button @click="loginAsChild" :disabled="childPinInput.trim().length !== 6 || authLoading" class="w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-black text-xl py-4 rounded-2xl shadow-lg border-b-8 border-emerald-700 transition-all uppercase">
                     {{ authLoading ? 'Menyemak...' : '🚀 MASUK PERMAINAN' }}
                 </button>
             </div>
@@ -130,7 +154,9 @@
                     <h3 class="font-black text-sm text-slate-700 flex items-center gap-1">➕ Tambah Profil Anak</h3>
                     <div class="flex gap-2">
                         <input type="text" v-model="newChildName" placeholder="Nama anak (cth: Alyaa)" class="flex-grow p-2.5 border-2 border-slate-300 rounded-xl text-sm focus:outline-none focus:border-purple-500 uppercase font-bold" maxLength="12">
-                        <button @click="addChildProfile" :disabled="!newChildName.trim()" class="bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-bold text-xs px-4 rounded-xl shadow-sm transition-all">Tambah</button>
+                        <button @click="addChildProfile" :disabled="!newChildName.trim() || isManagingPin" class="bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-bold text-xs px-4 rounded-xl shadow-sm transition-all">
+                            {{ isManagingPin ? 'Menjana PIN...' : 'Tambah' }}
+                        </button>
                     </div>
                 </div>
 
@@ -147,7 +173,7 @@
                                     <span class="ml-2 bg-yellow-100 text-yellow-800 text-[11px] font-mono px-2 py-0.5 rounded-md font-bold">PIN: {{ child.pin }}</span>
                                 </div>
                                 <div class="flex gap-1.5">
-                                    <button @click="regenerateChildPin(child.id)" class="text-[10px] bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-2 py-1 rounded">Jana PIN Baru</button>
+                                    <button @click="regenerateChildPin(child.id)" :disabled="isManagingPin" class="text-[10px] bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-2 py-1 rounded disabled:opacity-50">Jana PIN Baru</button>
                                     <button @click="deleteChildProfile(child.id)" class="text-[10px] bg-red-50 text-red-500 font-bold px-2 py-1 rounded hover:bg-red-100">Padam</button>
                                 </div>
                             </div>
@@ -459,6 +485,7 @@
                 
                 const childPinInput = ref('');
                 const authLoading = ref(false);
+                const isManagingPin = ref(false);
                 const newChildName = ref('');
                 
                 const selectedChildForReport = ref('');
@@ -594,7 +621,7 @@
                 };
 
                 const loginAsChild = async () => {
-                    if (childPinInput.value.trim().length !== 4) return;
+                    if (childPinInput.value.trim().length !== 6) return;
                     authLoading.value = true;
                     try {
                         const globalUsersRef = dbRef(fDatabase, 'users');
@@ -644,10 +671,44 @@
                     }
                 };
 
+                const generateUniquePin = async () => {
+                    const existingPins = new Set();
+                    try {
+                        const globalUsersRef = dbRef(fDatabase, 'users');
+                        const snapshot = await get(globalUsersRef);
+                        if (snapshot.exists()) {
+                            const allUsers = snapshot.val();
+                            for (const pUid in allUsers) {
+                                const profiles = allUsers[pUid].profiles;
+                                if (profiles) {
+                                    for (const profId in profiles) {
+                                        if (profiles[profId].pin) {
+                                            existingPins.add(String(profiles[profId].pin));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Gagal membaca senarai PIN sedia ada: ", e);
+                    }
+
+                    let pin;
+                    let isUnique = false;
+                    while (!isUnique) {
+                        pin = String(Math.floor(100000 + Math.random() * 900000));
+                        if (!existingPins.has(pin)) {
+                            isUnique = true;
+                        }
+                    }
+                    return pin;
+                };
+
                 const addChildProfile = async () => {
                     if (!newChildName.value.trim() || !parentUser.value) return;
+                    isManagingPin.value = true;
                     try {
-                        const pin = Math.floor(1000 + Math.random() * 9000); 
+                        const pin = await generateUniquePin(); 
                         const profilesRef = dbRef(fDatabase, `users/${parentUser.value}/profiles`);
                         const newProfile = {
                             name: newChildName.value.trim().toLowerCase(),
@@ -658,17 +719,23 @@
                         playSound('correct');
                     } catch (e) {
                         alert("Gagal menambah profil: " + e.message);
+                    } finally {
+                        isManagingPin.value = false;
                     }
                 };
 
                 const regenerateChildPin = async (profileId) => {
                     if (!parentUser.value) return;
+                    isManagingPin.value = true;
                     try {
-                        const newPin = Math.floor(1000 + Math.random() * 9000);
+                        const newPin = await generateUniquePin();
                         await set(dbRef(fDatabase, `users/${parentUser.value}/profiles/${profileId}/pin`), newPin);
                         playSound('correct');
+                        alert("PIN 6-digit baharu berjaya dijana!");
                     } catch (e) {
                         alert("Gagal menukar PIN: " + e.message);
+                    } finally {
+                        isManagingPin.value = false;
                     }
                 };
 
@@ -1030,7 +1097,7 @@
                 };
 
                 return {
-                    user, parentUser, screen, childPinInput, authLoading,
+                    user, parentUser, screen, childPinInput, authLoading, isManagingPin,
                     newChildName, childProfiles, reportList, filteredReportList, parentFilteredReports, selectedChildForReport, config, score, currentQuestionIndex,
                     currentQuestion, maxColumns, answerArray, carryArray, borrowArray, divisionInputs, activeTarget,
                     formattedTime, currentAccuracy, finalTimeDisplay, questions, correctionIndex,
